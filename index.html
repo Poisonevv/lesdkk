@@ -23,8 +23,9 @@ position:sticky;
 top:0;
 }
 
+/* LOGO BIGGER */
 .logo img{
-height:40px;
+height:60px;   /* increased from 40px */
 }
 
 nav a{
@@ -34,34 +35,13 @@ color:#6c757d;
 font-weight:500;
 }
 
-/* HERO SECTION */
+/* HERO (NO IMAGE NOW) */
 .hero{
-height:90vh;
-background-image:url('https://images.unsplash.com/photo-1551288049-bebda4e38f71');
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-padding:0 8%;
-position:relative;
+padding:120px 8%;
+background:#f7f7f7;
 }
 
-.hero::after{
-content:'';
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(255,255,255,0.85);
-}
-
-/* HERO CONTENT */
-.hero-content{
-position:relative;
-max-width:700px;
-}
-
+/* HERO TEXT */
 .hero h1{
 font-size:52px;
 color:#2c2c2c;
@@ -70,6 +50,7 @@ color:#2c2c2c;
 .hero p{
 font-size:20px;
 margin-top:20px;
+max-width:700px;
 }
 
 .btn{
@@ -131,12 +112,10 @@ margin-top:50px;
 
 <section class="hero">
 
-<div class="hero-content">
 <h1>AI Transformation & Automation</h1>
 <p>LESDK helps enterprises automate operations and scale using AI, cloud engineering and global IT talent.</p>
 
 <a class="btn" href="services.html">Explore Services</a>
-</div>
 
 </section>
 
