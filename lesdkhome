@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LESDK | Digital Consulting, Talent, and Technology Services</title>
+  <meta name="description" content="LESDK helps enterprises modernize operations with digital consulting, technology delivery, and high-impact talent solutions.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.lesdk.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LESDK | Digital Consulting, Talent, and Technology Services">
+  <meta property="og:description" content="LESDK helps enterprises modernize operations with digital consulting, technology delivery, and high-impact talent solutions.">
+  <meta property="og:url" content="https://www.lesdk.com/">
+  <meta property="og:site_name" content="LESDK">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "LESDK",
+    "url": "https://www.lesdk.com",
+    "logo": "https://www.lesdk.com/assets/logo-lesdk.png",
+    "description": "LESDK is a consulting and technology services partner focused on digital transformation and workforce solutions.",
+    "sameAs": [
+      "https://www.linkedin.com/company/lesdk",
+      "https://www.facebook.com/lesdk",
+      "https://x.com/lesdk"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-soft: #0c1128;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --line: rgba(148, 163, 184, 0.2);
+      --primary: #3b82f6;
+      --primary-2: #06b6d4;
+      --card: #111933;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+
+    .container {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(5, 8, 22, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 16px;
+    }
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+    }
+    .logo-wrap img { height: 42px; width: auto; }
+    .menu {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: #dbeafe;
+    }
+    .menu a:hover { color: #67e8f9; }
+
+    .btn {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      padding: 11px 18px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      color: #fff;
+    }
+    .btn-outline {
+      border-color: var(--line);
+      color: #dbeafe;
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    .hero {
+      min-height: 74vh;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(120deg, rgba(0,0,0,0.6), rgba(0,0,0,0.45)),
+        url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-content {
+      width: min(900px, 100%);
+      text-align: left;
+      padding: 48px 0;
+    }
+    .eyebrow {
+      color: #7dd3fc;
+      font-weight: 600;
+      letter-spacing: 0.7px;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 5vw, 3.9rem);
+      line-height: 1.1;
+      max-width: 900px;
+    }
+    .hero p {
+      margin: 0 0 24px;
+      max-width: 760px;
+      color: #d1d5db;
+      font-size: clamp(1rem, 1.8vw, 1.18rem);
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--line);
+      background: var(--bg);
+    }
+
+    .section-head {
+      max-width: 850px;
+      margin-bottom: 28px;
+    }
+    .section-head h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      margin: 0 0 8px;
+    }
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .service-card {
+      background: linear-gradient(180deg, var(--card), rgba(17, 25, 51, 0.84));
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .service-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+    .service-card-body {
+      padding: 18px;
+    }
+    .service-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+    }
+    .service-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+    .service-card a {
+      text-decoration: none;
+      color: #67e8f9;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .help-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .help-content p { color: var(--muted); }
+    .help-image img {
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+    }
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .case-item {
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .case-item h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+    }
+    .case-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .partners {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 14px;
+      align-items: center;
+    }
+    .partner {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px;
+      min-height: 76px;
+      display: grid;
+      place-items: center;
+      background: #0b1025;
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+
+    .cta-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 36px 22px;
+      text-align: center;
+      background:
+        linear-gradient(120deg, rgba(59,130,246,0.18), rgba(6,182,212,0.12)),
+        #0a1025;
+    }
+    .cta-box h2 { margin: 0 0 8px; }
+    .cta-box p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    footer {
+      background: #030611;
+      padding: 28px 0;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      text-decoration: none;
+      color: var(--muted);
+    }
+    .footer-links a:hover { color: #67e8f9; }
+
+    @media (max-width: 980px) {
+      .menu { display: none; }
+      .services-grid, .case-grid { grid-template-columns: 1fr; }
+      .help-grid { grid-template-columns: 1fr; }
+      .partners { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="logo-wrap" href="/">
+        <img src="assets/logo-lesdk.png" alt="LESDK logo">
+        <span>LESDK</span>
+      </a>
+      <nav class="menu" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#talent">Talent</a>
+        <a href="#industries">Industries</a>
+        <a href="#insights">Insights</a>
+        <a href="#about">About</a>
+        <a href="#careers">Careers</a>
+      </nav>
+      <a class="btn btn-primary" href="#contact">Contact Us</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="container hero-content">
+        <div class="eyebrow">LESDK CONSULTING AND TECHNOLOGY</div>
+        <h1>Future-ready solutions for modern enterprises.</h1>
+        <p>LESDK helps organizations solve complex business challenges through digital consulting, engineering delivery, and strategic workforce solutions that create measurable impact.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#services">Explore Services</a>
+          <a class="btn btn-outline" href="#about">About LESDK</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <h2>What We Do</h2>
+          <p>Your platform for success. We combine domain expertise, technology execution, and talent strategy to drive transformation from idea to outcome.</p>
+        </div>
+
+        <div class="services-grid">
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1000&q=80" alt="Digital transformation">
+            <div class="service-card-body">
+              <h3>Digital Technology Services</h3>
+              <p>Cloud modernization, data engineering, AI enablement, and product development tailored to your business goals.</p>
+              <a href="#">Discover Our Digital Services</a>
+            </div>
+          </article>
+
+          <article class="service-card" id="talent">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80" alt="Talent solutions">
+            <div class="service-card-body">
+              <h3>Staffing and Talent Management</h3>
+              <p>Specialized hiring and workforce planning for enterprise IT, data, cybersecurity, and platform teams.</p>
+              <a href="#">Learn About Talent Expertise</a>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1000&q=80" alt="Managed services">
+            <div class="service-card-body">
+              <h3>Business Process and Managed Services</h3>
+              <p>Outcome-driven managed delivery models that improve operational performance and accelerate growth.</p>
+              <a href="#">Explore Managed Solutions</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="industries">
+      <div class="container">
+        <div class="section-head">
+          <h2>How We Can Help You</h2>
+          <p>We connect people, process, and technology to build solutions for current priorities and long-term growth.</p>
+        </div>
+        <div class="help-grid">
+          <div class="help-content">
+            <p>LESDK partners with organizations across banking, healthcare, telecom, manufacturing, mobility, and energy. From strategic roadmaps to delivery execution, our teams drive innovation while managing risk and complexity.</p>
+            <p>Whether you are scaling digital products, modernizing legacy systems, or improving hiring velocity, we bring practical expertise and execution discipline to every engagement.</p>
+            <a class="btn btn-primary" href="#contact">Talk to Our Team</a>
+          </div>
+          <div class="help-image">
+            <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=1300&q=80" alt="Enterprise strategy meeting">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <h2>Trusted By Global Teams</h2>
+          <p>Representative partner ecosystem and enterprise collaboration network.</p>
+        </div>
+        <div class="partners">
+          <div class="partner">AERONEX</div>
+          <div class="partner">TELCO ONE</div>
+          <div class="partner">DELTALINK</div>
+          <div class="partner">NEXA BANK</div>
+          <div class="partner">MOBILIA</div>
+          <div class="partner">VERDANT</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insights">
+      <div class="container">
+        <div class="section-head">
+          <h2>Case Studies</h2>
+          <p>Proven outcomes delivered through focused strategy, scalable execution, and collaborative delivery models.</p>
+        </div>
+        <div class="case-grid">
+          <article class="case-item">
+            <h4>Reduced ERP hiring cycle by 42%</h4>
+            <p>Built a targeted sourcing engine and talent benchmark framework for a multi-country enterprise rollout.</p>
+          </article>
+          <article class="case-item">
+            <h4>Exceeded SLA goals for support operations</h4>
+            <p>Designed a tiered support model and automation-first workflows that improved service quality and speed.</p>
+          </article>
+          <article class="case-item">
+            <h4>Scaled analytics platform in 16 weeks</h4>
+            <p>Delivered cloud-native data pipelines and executive dashboards to accelerate strategic decision-making.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta-box">
+          <h2>Ready to Build the Future with LESDK?</h2>
+          <p>Share your goals with our team and we will help you define the right transformation path.</p>
+          <a class="btn btn-primary" href="mailto:info@lesdk.com">Let's Talk</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <div>&copy; LESDK 2026. All Rights Reserved.</div>
+      <div class="footer-links">
+        <a href="#">Contact Us</a>
+        <a href="#">Disclaimer</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
