@@ -50,12 +50,12 @@ a { color: inherit; }
   margin-left: -6px;
 }
 .brand img { height: 52px; width: auto; }
-.nav { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; position: relative; }
+.nav { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; position: relative; }
 .nav a {
   text-decoration: none;
   color: #444444;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   line-height: 1;
 }
 .nav a.active, .nav a:hover { color: #111111; }
@@ -68,8 +68,8 @@ a { color: inherit; }
 
 .dropdown > a::after {
   content: " \25BE";
-  font-size: 10px;
-  margin-left: 4px;
+  font-size: 11px;
+  margin-left: 5px;
 }
 
 .mega-menu {
