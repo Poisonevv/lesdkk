@@ -579,13 +579,13 @@ input, textarea, select {
 }
 .contact-form textarea { resize: vertical; min-height: 140px; }
 .contact-form .btn-primary {
-  background: #0f3bff;
+  background: #111;
   color: #fff;
   padding: 12px 26px;
   border-radius: 4px;
   font-weight: 600;
 }
-.contact-form .btn-primary:hover { background: #0a2fd6; }
+.contact-form .btn-primary:hover { background: #000; }
 
 /* Desks (General Queries + Consultant Queries) — below the form, 2-col flat layout */
 .contact-desks-section { padding: 16px 0 80px; }
@@ -613,7 +613,7 @@ input, textarea, select {
 .contact-desk .desk-label { margin: 0; color: #111; }
 .contact-desk .desk-text { margin: 0; color: #333; }
 .contact-desk strong { color: #111; font-weight: 700; }
-.contact-desk a { color: #0f3bff; text-decoration: none; }
+.contact-desk a { color: #111; text-decoration: none; }
 .contact-desk a:hover { text-decoration: underline; }
 .contact-desk .req { color: #d83a3a; margin-left: 2px; }
 
@@ -635,7 +635,7 @@ input, textarea, select {
 .loc-col p { margin: 0 0 10px; color: #333; }
 .loc-col .loc-region { font-weight: 700; color: #111; font-size: 15px; margin: 6px 0; letter-spacing: .2px; }
 .loc-col .loc-name { font-weight: 700; color: #111; margin: 0 0 14px; font-size: 16px; }
-.loc-col a { color: #0f3bff; text-decoration: none; }
+.loc-col a { color: #111; text-decoration: none; }
 .loc-col a:hover { text-decoration: underline; }
 .loc-heading {
   margin: 0 0 16px;
@@ -644,7 +644,7 @@ input, textarea, select {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
-.office-link { color: #0f3bff; text-decoration: none; font-weight: 600; font-size: 14px; }
+.office-link { color: #111; text-decoration: none; font-weight: 600; font-size: 14px; }
 .office-link:hover { text-decoration: underline; }
 
 @media (max-width: 760px) {
