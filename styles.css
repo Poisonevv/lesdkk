@@ -92,7 +92,7 @@ a.top-link[target="_blank"]:hover { text-decoration-color: #ffffff; }
   text-decoration: none;
   color: #000000;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1;
   position: relative;
   transition: color .2s ease;
