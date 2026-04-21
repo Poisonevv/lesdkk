@@ -1129,7 +1129,7 @@ AI_CASES = [
     ("https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1000&q=80",
      "Market Basket Intelligence",
      "Association mining surfaced unseen cross-sell affinities across 180M transactions and boosted average basket size by 8%."),
-    ("https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1000&q=80",
+    ("https://images.unsplash.com/photo-1697316052164-6b832d49516c?auto=format&fit=crop&w=1000&q=80",
      "Driver Coaching for Fuel Efficiency",
      "Telematics + NLP coaching hybrid cut fuel burn 12% across a 3,000-vehicle European fleet and paid back in under six months."),
     ("https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1000&q=80",
