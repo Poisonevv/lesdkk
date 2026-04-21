@@ -264,6 +264,7 @@ def page(title, active, body):
   <title>LESDK | {title}</title>
   <meta name="description" content="LESDK — digital consulting, hyperautomation, and talent. France-focused services delivered from India.">
   <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
 </head>
 <body>
   {header(active)}
@@ -283,8 +284,13 @@ def page(title, active, body):
 HOME_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=80')">
       <div class="container">
         <p class="kicker">DIGITAL CONSULTING, HYPERAUTOMATION AND TALENT</p>
-        <h1>Moving your future forward.</h1>
-        <p class="lead">LESDK helps organizations modernize operations, scale intelligent automation, and build high-performing teams for long-term growth — France-focused services delivered from India.</p>
+        <div class="hero-rotator" aria-live="polite">
+          <h1>Engineering enterprise transformation that scales.</h1>
+          <h1>Intelligent automation, delivered end-to-end.</h1>
+          <h1>Digital, data and AI &mdash; built for measurable outcomes.</h1>
+          <h1>Future-ready operations for French enterprises.</h1>
+        </div>
+        <p class="lead">LESDK is a consulting and technology partner for ambitious organizations &mdash; modernizing operations, scaling agentic AI and hyperautomation, and building world-class delivery teams. France-focused services, engineered in India.</p>
         <div class="actions">
           <a class="btn" href="services.html">Explore Services</a>
           <a class="btn btn-outline" href="industries.html">Industries We Serve</a>
@@ -293,10 +299,10 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
     </section>
 
     <section class="section">
-      <div class="container">
+      <div class="container reveal">
         <h2>What We Do</h2>
         <p class="sub">Strategy, engineering, automation and talent — designed for measurable outcomes.</p>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           <article class="card">
             <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1000&q=80" alt="Digital technology">
             <h3>Digital Technology Services</h3>
@@ -320,10 +326,10 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
     </section>
 
     <section class="section alt">
-      <div class="container">
+      <div class="container reveal">
         <h2>Industries, with automation built-in</h2>
         <p class="sub">Every LESDK industry practice has an automation-first operating model — not a bolt-on.</p>
-        <div class="grid grid-4">
+        <div class="grid grid-4 reveal-stagger">
           <a class="tile tile-link" href="industry-healthcare.html"><h3>Healthcare &amp; Life Sciences</h3><p>Clinical ops, claims and intake automation.</p></a>
           <a class="tile tile-link" href="industry-bfsi.html"><h3>Banking, Finance &amp; Insurance</h3><p>Underwriting, KYC and servicing automation.</p></a>
           <a class="tile tile-link" href="industry-manufacturing.html"><h3>Manufacturing</h3><p>Smart factory, vision AI and MES automation.</p></a>
@@ -337,7 +343,7 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
     </section>
 
     <section class="section">
-      <div class="container split">
+      <div class="container split reveal">
         <div>
           <h2>How We Can Help You</h2>
           <p class="sub">We connect people, process, and technology to solve current challenges and prepare your business for what is next.</p>
@@ -349,10 +355,10 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
     </section>
 
     <section class="section alt">
-      <div class="container">
+      <div class="container reveal">
         <h2>Platforms and Accelerators</h2>
         <p class="sub">Reusable IP that shortens transformation timelines.</p>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           <article class="tile"><h3>VGO</h3><p>Mobility and fleet management platform for connected operations.</p><a href="products.html#vgo">Learn more</a></article>
           <article class="tile"><h3>V-Validate</h3><p>AI-driven document authentication and KYC automation.</p><a href="products.html#vvalidate">Learn more</a></article>
           <article class="tile"><h3>TestSamurAI</h3><p>Generative-AI quality engineering and test automation.</p><a href="products.html#testsamurai">Learn more</a></article>
@@ -364,9 +370,9 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
     </section>
 
     <section class="section">
-      <div class="container">
+      <div class="container reveal">
         <h2>Case Studies</h2>
-        <div class="grid grid-3">
+        <div class="grid grid-3 reveal-stagger">
           <article class="tile"><h3>ERP Hiring Cycle Reduced by 42%</h3><p>Built a focused talent pipeline for a global rollout and accelerated project onboarding timelines.</p></article>
           <article class="tile"><h3>Service Levels Exceeded Across Programs</h3><p>Designed a managed support model with automation and proactive monitoring for consistent SLA performance.</p></article>
           <article class="tile"><h3>Cloud Data Platform in 16 Weeks</h3><p>Delivered scalable architecture, data governance, and analytics dashboards for executive visibility.</p></article>
@@ -375,7 +381,7 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
     </section>
 
     <section class="section cta">
-      <div class="container center">
+      <div class="container center reveal">
         <h2>Ready to build with LESDK?</h2>
         <p class="sub">Let&rsquo;s design a transformation roadmap tailored to your goals.</p>
         <a class="btn" href="contact.html">Let's Talk</a>
