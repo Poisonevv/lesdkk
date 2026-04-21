@@ -1235,7 +1235,7 @@ SERVICES_CV_BODY = """    <section class="hero hero-dark">
           </ul>
         </div>
         <div class="hero-illustration">
-          <img src="https://images.unsplash.com/photo-1625014618427-fbc980b974f5?auto=format&fit=crop&w=1200&q=80" alt="Computer vision illustration">
+          <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?auto=format&fit=crop&w=1200&q=80" alt="Computer vision illustration">
         </div>
       </div>
     </section>
