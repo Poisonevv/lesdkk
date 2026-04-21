@@ -1235,7 +1235,7 @@ SERVICES_CV_BODY = """    <section class="hero hero-dark">
           </ul>
         </div>
         <div class="hero-illustration">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80" alt="Computer vision illustration">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80" alt="Computer vision illustration">
         </div>
       </div>
     </section>
@@ -1293,19 +1293,19 @@ SERVICES_CV_BODY = """    <section class="hero hero-dark">
         <p class="sub center">Vision deployments where LESDK moved real operational metrics.</p>
         <div class="grid grid-3">
           <article class="card">
-            <img src="https://images.unsplash.com/photo-1581091870622-b91c58f77291?auto=format&fit=crop&w=1000&q=80" alt="Factory inspection">
+            <img src="https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=1000&q=80" alt="Factory inspection">
             <h3>Line-Side Defect Inspection</h3>
             <p>Vision-based inspection on a European automotive line lifted defect-capture rate from 88% to 99.3% and cut rework cost by 22%.</p>
             <a href="contact.html">Read more &rsaquo;</a>
           </article>
           <article class="card">
-            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1000&q=80" alt="Worker safety monitoring">
+            <img src="https://images.unsplash.com/photo-1574717025058-2f8737d2e2b7?auto=format&fit=crop&w=1000&q=80" alt="Worker safety monitoring">
             <h3>Worksite Safety Monitor</h3>
             <p>Real-time PPE and hazard detection across 40 sites cut reportable incidents by 35% in the first quarter of deployment.</p>
             <a href="contact.html">Read more &rsaquo;</a>
           </article>
           <article class="card">
-            <img src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?auto=format&fit=crop&w=1000&q=80" alt="Document OCR pipeline">
+            <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1000&q=80" alt="Document OCR pipeline">
             <h3>Intelligent Document Intake</h3>
             <p>OCR + NLP pipeline turned 1.2M scanned supplier invoices into structured data with 98.7% accuracy and 5&times; faster straight-through processing.</p>
             <a href="contact.html">Read more &rsaquo;</a>
