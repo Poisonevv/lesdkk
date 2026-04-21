@@ -3,16 +3,30 @@
 (function () {
   "use strict";
 
-  // --- Top-bar reveal on scroll-down -----------------------------------
+  // --- Top-bar: visible at top, hide on scroll-down, show on scroll-up --
   var topBar = document.querySelector("[data-top-bar]");
   if (topBar) {
-    var SCROLL_THRESHOLD = 80;
+    var lastY = window.scrollY;
+    var ticking = false;
     function syncTopBar() {
-      if (window.scrollY > SCROLL_THRESHOLD) topBar.classList.add("is-visible");
-      else topBar.classList.remove("is-visible");
+      var y = window.scrollY;
+      if (y <= 4) {
+        topBar.classList.add("is-visible");
+      } else if (y > lastY + 2) {
+        topBar.classList.remove("is-visible");
+      } else if (y < lastY - 2) {
+        topBar.classList.add("is-visible");
+      }
+      lastY = y;
+      ticking = false;
     }
-    syncTopBar();
-    window.addEventListener("scroll", syncTopBar, { passive: true });
+    topBar.classList.add("is-visible");
+    window.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(syncTopBar);
+        ticking = true;
+      }
+    }, { passive: true });
   }
 
   // --- Mobile nav toggle -------------------------------------------------
