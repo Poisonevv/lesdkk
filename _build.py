@@ -17,7 +17,7 @@ PAGE_SLUGS = {
     "industry-healthcare", "industry-bfsi", "industry-manufacturing",
     "industry-automotive", "industry-energy", "industry-aec",
     "industry-logistics", "industry-retail",
-    "services-ai-nlp",
+    "services-ai-nlp", "services-computer-vision",
 }
 
 # Asset filenames that should be served from the site root with an absolute
@@ -96,7 +96,7 @@ SERVICES_CATEGORIES = [
     ("ai", "AI & Agentic AI",
      "Next-Gen AI & Agentic Intelligence",
      "Intelligent, adaptive, & scalable AI solutions for smarter decision-making.",
-     [("AI, NLP", "services-ai-nlp.html"), "Computer Vision", "Speech", "ML, MLOps"]),
+     [("AI, NLP", "services-ai-nlp.html"), ("Computer Vision", "services-computer-vision.html"), "Speech", "ML, MLOps"]),
     ("digital", "Digital Services",
      "Upskill Imperative Digital Transformation",
      "Boost your online visibility with creative solutions and strategies designed for web, mobile, front-end, back-end, and beyond.",
@@ -1219,6 +1219,112 @@ SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
 
 
 # --------------------------------------------------------------------------------------
+# SERVICES → AI & AGENTIC AI → COMPUTER VISION
+# --------------------------------------------------------------------------------------
+
+SERVICES_CV_BODY = """    <section class="hero hero-dark">
+      <div class="container hero-split">
+        <div class="hero-copy">
+          <p class="crumbs"><a href="index.html">Home</a> &raquo; <a href="services.html">Services</a> &raquo; <a href="services.html#ai">AI &amp; Agentic AI</a> &raquo; Computer Vision</p>
+          <h1>Power Your Operations With Next-Gen Computer Vision</h1>
+          <p class="lead">Turn every camera into a real-time sensor &mdash; safer sites, flawless products and faster quality cycles, powered by pixel-level intelligence.</p>
+          <ul class="feature-ticks">
+            <li>Document &amp; OCR extraction</li>
+            <li>Edge and real-time inference</li>
+            <li>Automated safety &amp; surveillance</li>
+          </ul>
+        </div>
+        <div class="hero-illustration">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80" alt="Computer vision illustration">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container center narrow">
+        <h2>See more, act faster &mdash; with vision models you can trust in production.</h2>
+        <p class="sub">LESDK&rsquo;s Computer Vision practice lets enterprises analyse video, imagery and documents at scale &mdash; unlocking facial and object recognition, OCR-driven document intake, quality inspection, worker-safety monitoring and medical imaging workflows. We ship domain-tuned models that integrate with your existing CCTV, MES, ERP and cloud stack, with strict data-privacy controls and clear responsible-AI guardrails baked in.</p>
+        <p><a class="btn btn-outline" href="contact.html">Schedule a Consultation</a></p>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2 class="center">Support Features</h2>
+        <p class="sub center">Production-grade vision components you can deploy independently or combine into a full detection-to-action pipeline.</p>
+        <div class="grid feature-grid">
+          <article class="feature-card">
+            <div class="feature-ico">&#128202;</div>
+            <h3>Curated Datasets &amp; Augmentation</h3>
+            <p>We assemble high-quality training data for your exact use case, with synthetic augmentation to cover rare events and long-tail conditions.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#127760;</div>
+            <h3>Real-World Variability</h3>
+            <p>Models are validated across lighting, weather, angles and demographic variance so they perform on the shop floor &mdash; not just the lab.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#9201;</div>
+            <h3>Real-Time &amp; Edge Inference</h3>
+            <p>Lightweight model variants run on edge hardware, factory gateways and mobile devices so decisions happen in milliseconds, not minutes.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128293;</div>
+            <h3>Flexible Model Footprints</h3>
+            <p>Pick the right accuracy/latency trade-off: compact on-device models, mid-tier GPU stacks or full server clusters &mdash; same API.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128260;</div>
+            <h3>Continuous Updates &amp; Monitoring</h3>
+            <p>Structured MLOps pipelines retrain on fresh data, monitor drift in production and surface anomalies before they hit your KPIs.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128736;</div>
+            <h3>Resilience to Edge Cases</h3>
+            <p>Feedback loops from operators and field incidents feed directly into the next training cycle &mdash; shrinking blind spots over time.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="center">Data &amp; Analytics Case Studies</h2>
+        <p class="sub center">Vision deployments where LESDK moved real operational metrics.</p>
+        <div class="grid grid-3">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1581091870622-b91c58f77291?auto=format&fit=crop&w=1000&q=80" alt="Factory inspection">
+            <h3>Line-Side Defect Inspection</h3>
+            <p>Vision-based inspection on a European automotive line lifted defect-capture rate from 88% to 99.3% and cut rework cost by 22%.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1000&q=80" alt="Worker safety monitoring">
+            <h3>Worksite Safety Monitor</h3>
+            <p>Real-time PPE and hazard detection across 40 sites cut reportable incidents by 35% in the first quarter of deployment.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?auto=format&fit=crop&w=1000&q=80" alt="Document OCR pipeline">
+            <h3>Intelligent Document Intake</h3>
+            <p>OCR + NLP pipeline turned 1.2M scanned supplier invoices into structured data with 98.7% accuracy and 5&times; faster straight-through processing.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-band">
+      <div class="container center">
+        <h2>Ready to put cameras to work?</h2>
+        <p class="sub">Tell us the operational metric you want to move &mdash; defects, safety incidents, intake cycle time &mdash; and we&rsquo;ll scope a vision pilot in days, not months.</p>
+        <p><a class="btn" href="contact.html">Talk to our vision team</a></p>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
 # CAREERS
 # --------------------------------------------------------------------------------------
 
@@ -1475,7 +1581,8 @@ def main():
     wp("insights.html",          "Insights",                "insights.html",         INSIGHTS_BODY)
     wp("careers.html",           "Careers",                 "careers.html",          CAREERS_BODY)
     wp("contact.html",           "Contact",                 "contact.html",          CONTACT_BODY)
-    wp("services-ai-nlp.html",   "AI & NLP | Services",     "services.html",         SERVICES_AI_NLP_BODY)
+    wp("services-ai-nlp.html",          "AI & NLP | Services",          "services.html", SERVICES_AI_NLP_BODY)
+    wp("services-computer-vision.html", "Computer Vision | Services",   "services.html", SERVICES_CV_BODY)
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)
