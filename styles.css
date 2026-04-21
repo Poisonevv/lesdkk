@@ -52,6 +52,13 @@ a { color: inherit; }
   transition: color .2s ease;
 }
 .top-link:hover { color: #ffffff; text-decoration: underline; }
+a.top-link[target="_blank"] {
+  text-decoration: underline;
+  text-decoration-color: rgba(255,255,255,.5);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+a.top-link[target="_blank"]:hover { text-decoration-color: #ffffff; }
 .top-sep { color: #666; }
 
 .site-header {
