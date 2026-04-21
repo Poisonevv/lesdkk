@@ -201,9 +201,16 @@ def header(active=""):
         '      <a class="top-link" href="https://www.google.com/maps/place/10%C2%B044\'35.9%22N+78%C2%B041\'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener">Trichy</a>\n'
         '      <span class="top-sep">|</span>\n'
         '      <a class="top-link" href="https://in.linkedin.com/company/lesdk" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>\n'
+        '      <span class="top-sep">|</span>\n'
+        '      <span class="lang-switch" role="group" aria-label="Language">\n'
+        '        <button type="button" class="lang-btn" data-lang="fr" aria-label="Français">FR</button>\n'
+        '        <span class="lang-sep">|</span>\n'
+        '        <button type="button" class="lang-btn is-active" data-lang="en" aria-label="English">EN</button>\n'
+        '      </span>\n'
         '    </div>\n'
         '  </div>\n'
         '</div>\n'
+        '<div id="google_translate_element" aria-hidden="true"></div>\n'
         '<header class="site-header">\n'
         '  <div class="container nav-row">\n'
         '    <a class="brand" href="index.html"><img src="logo.png" alt="LESDK logo"></a>\n'
@@ -291,6 +298,17 @@ def page(title, active, body):
   <meta name="theme-color" content="#000000">
   <link rel="stylesheet" href="styles.css">
   <script src="scripts.js" defer></script>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {{
+      new google.translate.TranslateElement({{
+        pageLanguage: 'en',
+        includedLanguages: 'en,fr',
+        autoDisplay: false,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }}, 'google_translate_element');
+    }}
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" defer></script>
 </head>
 <body>
   {header(active)}

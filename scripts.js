@@ -104,6 +104,41 @@
     });
   });
 
+  // --- FR | EN language switch (Google Translate) ----------------------
+  function setLangCookie(lang) {
+    var value = lang === "en" ? "/en/en" : "/en/" + lang;
+    var hostname = location.hostname;
+    var parts = hostname.split(".");
+    var domains = ["", hostname];
+    if (parts.length >= 2) domains.push("." + parts.slice(-2).join("."));
+    domains.forEach(function (d) {
+      var suffix = d ? "; domain=" + d : "";
+      document.cookie = "googtrans=" + value + "; path=/" + suffix;
+    });
+  }
+  function applyLang(lang) {
+    setLangCookie(lang);
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-lang") === lang);
+    });
+    try { localStorage.setItem("lesdk_lang", lang); } catch (e) {}
+    location.reload();
+  }
+  var savedLang = null;
+  try { savedLang = localStorage.getItem("lesdk_lang"); } catch (e) {}
+  if (savedLang === "fr" || savedLang === "en") {
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-lang") === savedLang);
+    });
+  }
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var lang = btn.getAttribute("data-lang");
+      if (!lang) return;
+      applyLang(lang);
+    });
+  });
+
   // --- Hero tagline rotator ---------------------------------------------
   var rotator = document.querySelector(".hero-rotator");
   if (rotator) {
