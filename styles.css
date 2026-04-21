@@ -609,8 +609,8 @@ input, textarea, select {
   color: #111;
   line-height: 1.3;
 }
-.contact-desk .desk-sub { color: #333; margin: 0 0 14px; }
-.contact-desk .desk-label { margin: 8px 0 0; color: #111; }
+.contact-desk .desk-sub { color: #333; margin: 0; }
+.contact-desk .desk-label { margin: 0; color: #111; }
 .contact-desk .desk-text { margin: 0; color: #333; }
 .contact-desk strong { color: #111; font-weight: 700; }
 .contact-desk a { color: #0f3bff; text-decoration: none; }

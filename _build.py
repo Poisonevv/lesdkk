@@ -1162,6 +1162,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
         <div class="contact-desks">
           <div class="contact-desk">
             <h3>For General Queries, Escalations &amp; Business Enquiries <span class="req">*</span></h3>
+            <p class="desk-sub">Speak with our Customer Service Associate</p>
             <p class="desk-label"><strong>Hours of Operations <span class="req">*</span></strong></p>
             <p class="desk-text">Monday to Friday</p>
             <p class="desk-text">9:00 AM CET to 6:00 PM CET</p>
