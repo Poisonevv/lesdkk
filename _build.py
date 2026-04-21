@@ -17,7 +17,7 @@ PAGE_SLUGS = {
     "industry-healthcare", "industry-bfsi", "industry-manufacturing",
     "industry-automotive", "industry-energy", "industry-aec",
     "industry-logistics", "industry-retail",
-    "services-ai-nlp", "services-computer-vision", "services-speech",
+    "services-ai-nlp", "services-computer-vision", "services-speech", "services-ml-mlops",
 }
 
 # Asset filenames that should be served from the site root with an absolute
@@ -96,7 +96,7 @@ SERVICES_CATEGORIES = [
     ("ai", "AI & Agentic AI",
      "Next-Gen AI & Agentic Intelligence",
      "Intelligent, adaptive, & scalable AI solutions for smarter decision-making.",
-     [("AI, NLP", "services-ai-nlp.html"), ("Computer Vision", "services-computer-vision.html"), ("Speech", "services-speech.html"), "ML, MLOps"]),
+     [("AI, NLP", "services-ai-nlp.html"), ("Computer Vision", "services-computer-vision.html"), ("Speech", "services-speech.html"), ("ML, MLOps", "services-ml-mlops.html")]),
     ("digital", "Digital Services",
      "Upskill Imperative Digital Transformation",
      "Boost your online visibility with creative solutions and strategies designed for web, mobile, front-end, back-end, and beyond.",
@@ -1174,6 +1174,7 @@ def _ai_cases_carousel_html(lead_copy: str) -> str:
 AI_CASES_NLP      = _ai_cases_carousel_html("Real engagements where AI and NLP moved enterprise KPIs.")
 AI_CASES_VISION   = _ai_cases_carousel_html("Vision deployments where LESDK moved real operational metrics.")
 AI_CASES_SPEECH   = _ai_cases_carousel_html("Speech deployments where LESDK moved real enterprise KPIs.")
+AI_CASES_MLOPS    = _ai_cases_carousel_html("ML and MLOps programs where LESDK moved real enterprise KPIs.")
 
 
 SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
@@ -1406,6 +1407,83 @@ __AI_CASES_SPEECH__
         <h2>Ready to hear what your customers are really telling you?</h2>
         <p class="sub">Tell us the voice-data problem you want to solve &mdash; customer churn, sales coaching, compliance audit &mdash; and we&rsquo;ll scope a speech pilot in days, not months.</p>
         <p><a class="btn" href="contact.html">Talk to our speech team</a></p>
+      </div>
+    </section>
+"""
+
+
+SERVICES_ML_MLOPS_BODY = """    <section class="hero hero-dark">
+      <div class="container hero-split">
+        <div class="hero-copy">
+          <p class="crumbs"><a href="index.html">Home</a> &raquo; <a href="services.html">Services</a> &raquo; <a href="services.html#ai">AI &amp; Agentic AI</a> &raquo; ML, MLOps</p>
+          <h1>Operationalise Machine Learning With Confidence</h1>
+          <p class="lead">Move models from notebook to production fast &mdash; and keep them accurate, governed and cost-efficient once they are live.</p>
+          <ul class="feature-ticks">
+            <li>Shorter time to value</li>
+            <li>Higher model accuracy in production</li>
+            <li>Continuous governance &amp; control</li>
+          </ul>
+        </div>
+        <div class="hero-illustration">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80" alt="Abstract neural-network visualization on a dark backdrop">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container center narrow">
+        <h2>From model experiments to reliable, audit-ready AI platforms.</h2>
+        <p class="sub">LESDK&rsquo;s ML &amp; MLOps practice helps teams industrialise machine learning &mdash; standardising the path from data prep and training through deployment, monitoring and retraining. We pair ML engineers and data scientists with a proven MLOps toolchain (feature stores, CI/CD for models, drift detection, policy guardrails) so your predictions stay sharp, explainable and compliant long after go-live.</p>
+        <p><a class="btn btn-outline" href="contact.html">Schedule a Consultation</a></p>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2 class="center">Support Features</h2>
+        <p class="sub center">End-to-end capabilities that turn bespoke models into governed, production-grade services.</p>
+        <div class="grid feature-grid">
+          <article class="feature-card">
+            <div class="feature-ico">&#128101;</div>
+            <h3>Domain-Expert Collaboration</h3>
+            <p>Data scientists work shoulder-to-shoulder with your SMEs to frame the right problem, surface the right signals and assemble the datasets that actually matter.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128640;</div>
+            <h3>Accelerated Model Training</h3>
+            <p>Distributed GPU training, managed notebooks and pre-built accelerators cut experimentation cycles from weeks to days on both cloud and on-prem.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128295;</div>
+            <h3>Automated Hyperparameter Tuning</h3>
+            <p>Bayesian search, grid search and multi-objective optimisation run as a managed service &mdash; surfacing the best candidate models without manual babysitting.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128230;</div>
+            <h3>Deployment &amp; Version Control</h3>
+            <p>Containerised model serving, Git-based versioning and canary rollouts give every model a clear lineage and a safe, reversible path to production.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128202;</div>
+            <h3>Real-Time Performance Monitoring</h3>
+            <p>Live dashboards track latency, accuracy, drift and cost per prediction &mdash; flagging issues before they reach the business user.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128260;</div>
+            <h3>Continuous Retraining &amp; Updates</h3>
+            <p>Automated retraining pipelines refresh models on new data and route approvals through governance controls so accuracy holds as the world changes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+__AI_CASES_MLOPS__
+
+    <section class="section cta-band">
+      <div class="container center">
+        <h2>Ready to scale your AI with confidence?</h2>
+        <p class="sub">Tell us the model or use case you want to industrialise &mdash; forecasting, recommendation, risk scoring, vision inspection &mdash; and we&rsquo;ll shape an ML &amp; MLOps roadmap aligned to your platforms and controls.</p>
+        <p><a class="btn" href="contact.html">Talk to our ML team</a></p>
       </div>
     </section>
 """
@@ -1674,6 +1752,8 @@ def main():
        SERVICES_CV_BODY.replace("__AI_CASES_VISION__", AI_CASES_VISION))
     wp("services-speech.html",          "Speech Analytics | Services",  "services.html",
        SERVICES_SPEECH_BODY.replace("__AI_CASES_SPEECH__", AI_CASES_SPEECH))
+    wp("services-ml-mlops.html",        "ML & MLOps | Services",        "services.html",
+       SERVICES_ML_MLOPS_BODY.replace("__AI_CASES_MLOPS__", AI_CASES_MLOPS))
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)
