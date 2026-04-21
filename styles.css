@@ -83,9 +83,10 @@ a.top-link[target="_blank"]:hover { text-decoration-color: #ffffff; }
 .lang-sep { color: #666; }
 
 #google_translate_element { display: none !important; }
-.goog-te-banner-frame.skiptranslate, .goog-te-gadget { display: none !important; }
-body { top: 0 !important; }
-font[style*="vertical-align"] { vertical-align: baseline !important; }
+.skiptranslate, .goog-te-banner-frame, .goog-te-gadget, iframe.goog-te-banner-frame { display: none !important; visibility: hidden !important; height: 0 !important; }
+html, body { top: 0 !important; position: static !important; margin-top: 0 !important; }
+.goog-logo-link, .goog-te-gadget-simple .goog-te-menu-value span { display: none !important; }
+font[style*="vertical-align"], font[style*="background-color"] { vertical-align: baseline !important; background: transparent !important; box-shadow: none !important; }
 
 .site-header {
   position: sticky;
