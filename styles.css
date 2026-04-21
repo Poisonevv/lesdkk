@@ -120,11 +120,20 @@ a { color: inherit; }
   min-height: 72px;
 }
 
-.dropdown > .dd-top::after {
-  content: " \25BE";
-  font-size: 11px;
-  margin-left: 5px;
+.dropdown > .dd-top::before {
+  content: "";
+  order: 2;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 6px;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid currentColor;
+  transform: translateY(1px);
+  transition: transform .25s ease;
 }
+.dropdown:hover > .dd-top::before { transform: translateY(1px) rotate(180deg); }
 
 .mega-menu {
   position: absolute;
