@@ -53,13 +53,14 @@ a { color: inherit; }
 .nav { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; position: relative; }
 .nav a {
   text-decoration: none;
-  color: #444444;
+  color: #000000;
   font-size: 15px;
   font-weight: 600;
   line-height: 1;
 }
 .nav .dd-top { display: inline-flex; align-items: center; }
-.nav a.active, .nav a:hover { color: #111111; }
+.nav a.active, .nav a:hover { color: #000000; }
+.nav a.btn, .nav a.btn:hover { color: #ffffff; }
 .nav-item {
   position: relative;
   display: flex;
