@@ -127,6 +127,7 @@
   var savedLang = null;
   try { savedLang = localStorage.getItem("lesdk_lang"); } catch (e) {}
   if (savedLang === "fr" || savedLang === "en") {
+    setLangCookie(savedLang);
     document.querySelectorAll(".lang-btn").forEach(function (b) {
       b.classList.toggle("is-active", b.getAttribute("data-lang") === savedLang);
     });
