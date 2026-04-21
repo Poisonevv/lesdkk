@@ -104,7 +104,7 @@
     });
   });
 
-  // --- Language switch (EN button + dropdown, Google Translate) --------
+  // --- FR | EN language switch (Google Translate) ----------------------
   function setLangCookie(lang) {
     var value = lang === "en" ? "/en/en" : "/en/" + lang;
     var hostname = location.hostname;
@@ -116,45 +116,22 @@
       document.cookie = "googtrans=" + value + "; path=/" + suffix;
     });
   }
-  function updateLangUI(lang) {
-    var label = document.querySelector("[data-lang-current]");
-    if (label) label.textContent = lang.toUpperCase();
-    document.querySelectorAll(".lang-option").forEach(function (o) {
-      o.setAttribute("aria-selected", o.getAttribute("data-lang") === lang ? "true" : "false");
-    });
-  }
   function applyLang(lang) {
     setLangCookie(lang);
-    updateLangUI(lang);
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-lang") === lang);
+    });
     try { localStorage.setItem("lesdk_lang", lang); } catch (e) {}
     location.reload();
   }
   var savedLang = null;
   try { savedLang = localStorage.getItem("lesdk_lang"); } catch (e) {}
-  if (savedLang === "fr" || savedLang === "en") updateLangUI(savedLang);
-
-  var langSwitch = document.querySelector("[data-lang-switch]");
-  var langToggle = document.querySelector("[data-lang-toggle]");
-  if (langSwitch && langToggle) {
-    langToggle.addEventListener("click", function (e) {
-      e.stopPropagation();
-      var open = langSwitch.classList.toggle("is-open");
-      langToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    document.addEventListener("click", function (e) {
-      if (!langSwitch.contains(e.target)) {
-        langSwitch.classList.remove("is-open");
-        langToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-    document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        langSwitch.classList.remove("is-open");
-        langToggle.setAttribute("aria-expanded", "false");
-      }
+  if (savedLang === "fr" || savedLang === "en") {
+    document.querySelectorAll(".lang-btn").forEach(function (b) {
+      b.classList.toggle("is-active", b.getAttribute("data-lang") === savedLang);
     });
   }
-  document.querySelectorAll(".lang-option").forEach(function (btn) {
+  document.querySelectorAll(".lang-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
       var lang = btn.getAttribute("data-lang");
       if (!lang) return;
