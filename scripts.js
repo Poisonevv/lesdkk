@@ -24,6 +24,33 @@
     });
   }
 
+  // --- Services mega-menu: hover a category to swap right-side panel ----
+  var servicesDD = document.querySelector(".services-dd");
+  if (servicesDD) {
+    var cats = servicesDD.querySelectorAll(".mega-cat");
+    var panels = servicesDD.querySelectorAll(".mega-panel");
+    function activateCat(slug) {
+      cats.forEach(function (c) {
+        c.classList.toggle("is-active", c.getAttribute("data-cat") === slug);
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle("is-active", p.getAttribute("data-panel") === slug);
+      });
+    }
+    cats.forEach(function (c) {
+      c.addEventListener("mouseenter", function () {
+        activateCat(c.getAttribute("data-cat"));
+      });
+      c.addEventListener("focus", function () {
+        activateCat(c.getAttribute("data-cat"));
+      });
+    });
+    // Reset to first category when dropdown closes
+    servicesDD.addEventListener("mouseleave", function () {
+      if (cats.length) activateCat(cats[0].getAttribute("data-cat"));
+    });
+  }
+
   // --- Scroll reveal -----------------------------------------------------
   var revealables = document.querySelectorAll(".reveal, .reveal-stagger");
   if ("IntersectionObserver" in window && revealables.length) {

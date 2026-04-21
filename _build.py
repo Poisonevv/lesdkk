@@ -78,14 +78,72 @@ INDUSTRIES = [
 ]
 
 SERVICES_SUB = [
-    ("services.html#ai",          "AI and Agentic AI"),
-    ("services.html#data",        "Data and Analytics"),
-    ("services.html#cloud",       "Cloud"),
-    ("services.html#automation",  "Hyperautomation"),
-    ("services.html#managed",     "Managed Services"),
-    ("services.html#cyber",       "Cybersecurity"),
+    ("services.html#ai",          "AI & Agentic AI"),
     ("services.html#digital",     "Digital Services"),
+    ("services.html#data",        "Data & Analytics"),
+    ("services.html#cloud",       "Cloud"),
+    ("services.html#cyber",       "Cybersecurity"),
+    ("services.html#platforms",   "Enterprise & SaaS Solutions"),
+    ("services.html#managed",     "Managed Services"),
     ("services.html#qe",          "Quality Engineering"),
+    ("services.html#supply",      "Supply Chain"),
+    ("services.html#blockchain",  "Blockchain"),
+]
+
+# (slug, label, headline, description, [sub-item labels])
+SERVICES_CATEGORIES = [
+    ("ai", "AI & Agentic AI",
+     "Next-Gen AI & Agentic Intelligence",
+     "Intelligent, adaptive, & scalable AI solutions for smarter decision-making.",
+     ["AI, NLP", "Computer Vision", "Speech", "ML, MLOps"]),
+    ("digital", "Digital Services",
+     "Upskill Imperative Digital Transformation",
+     "Boost your online visibility with creative solutions and strategies designed for web, mobile, front-end, back-end, and beyond.",
+     ["Full Stack \u2013 Web", "Mobile App Development", "Apps Support & Maintenance",
+      "Hyperautomation", "DevSecOps & Automation", "SRE & Chaos Engineering",
+      "Back-End Development", "Design & Architecture", "UI/UX & Front-End Dev",
+      "Quality Engineering & Assurance"]),
+    ("data", "Data & Analytics",
+     "Drive Growth United by Data",
+     "Turn data into actionable insights, and drive smarter decisions for strategic growth, keeping you ahead of your competition.",
+     ["Internet of Things (IoT)", "Data Science", "Analytics", "Reports",
+      "Big Data, Data Lake", "Data Fabric"]),
+    ("cloud", "Cloud",
+     "Seamless Cloud Solutions",
+     "Cost-effective, flexible, & seamless cloud management for uninterrupted access.",
+     ["Cloud Migration", "Mainframe Modernization", "SAP on Cloud", "Cloud FinOps",
+      "Cloud Security", "Platform Engineering", "Cloud Managed Services",
+      "Cloud Advisory & SME Services"]),
+    ("cyber", "Cybersecurity",
+     "Boost Your Digital Defense",
+     "Reliable, resilient cybersecurity solutions tailored to keep your system data safe & secure from advanced threats.",
+     ["CIAM", "Workforce Identity", "Security Engineering", "Zero Trust Architecture",
+      "Governance, Risk Management & Compliance", "Cyber Defense & Investigation",
+      "Cyber Advisory", "Cyber Resilience"]),
+    ("platforms", "Enterprise & SaaS Solutions",
+     "Digitize Your Core Success",
+     "Streamline operations, enhance collaboration, and drive innovation through integration and unmatched scalability.",
+     ["SAP", "ServiceNow", "Salesforce", "Workday", "Oracle", "Adobe", "Sitecore"]),
+    ("managed", "Managed Services",
+     "Strategic IT, Seamless Execution",
+     "Drive business continuity with end-to-end managed IT and infrastructure services tailored to your industry.",
+     ["Network & Security Management", "Strategic IT Consulting & Continuous Improvement",
+      "Infrastructure & Data Center Management", "End-User Support & Device Management",
+      "Cloud & Application Management", "IT Operations & Service Management"]),
+    ("qe", "Quality Engineering",
+     "Reinvent Quality, Reshape Workforce",
+     "Powerful performance optimization services to ensure all products meet high-quality standards.",
+     ["QA Consulting & Strategy", "Agile Testing", "Independent Certification",
+      "Managed Testing Services"]),
+    ("supply", "Supply Chain",
+     "AI-Orchestrated. Cloud-Agnostic. Enterprise-Ready",
+     "End-to-end, AI-driven supply chain execution with modular functional depth and differentiated technology.",
+     ["End-to-End AI-Driven Supply Chain Execution", "Core Functional Modules",
+      "Technology Stack Differentiators", "Operational Intelligence in Action"]),
+    ("blockchain", "Blockchain",
+     "Drive Resilience & Security",
+     "Drive resiliency & facilitate trust across complex networks through biometrics and tokenization with a future-proof collaborative ecosystem.",
+     ["Distributed Trust", "Ethereum", "Hyperledger", "dApps", "NFT", "IPFS"]),
 ]
 
 PRODUCTS_SUB = [
@@ -227,8 +285,41 @@ def build_nav(active=""):
             f'</div>'
         )
 
+    def services_dd():
+        active_cls = " active" if active == "services.html" else ""
+        cats_html = ""
+        panels_html = ""
+        for i, (slug, label, head, desc, items) in enumerate(SERVICES_CATEGORIES):
+            sel = " is-active" if i == 0 else ""
+            cats_html += (
+                f'<a class="mega-cat{sel}" data-cat="{slug}" '
+                f'href="services.html#{slug}">{label}'
+                f'<span class="mega-cat-arrow">&rsaquo;</span></a>'
+            )
+            items_html = "".join(
+                f'<li><a href="services.html#{slug}">{it}</a></li>' for it in items
+            )
+            panels_html += (
+                f'<div class="mega-panel{sel}" data-panel="{slug}">'
+                f'<div class="mega-panel-body">'
+                f'<h4>{head}</h4>'
+                f'<ul class="mega-panel-list">{items_html}</ul>'
+                f'</div>'
+                f'<p class="mega-panel-desc">{desc}</p>'
+                f'</div>'
+            )
+        return (
+            f'<div class="nav-item dropdown services-dd">'
+            f'<a class="dd-top{active_cls}" href="services.html">Services</a>'
+            f'<div class="mega-menu mega-services">'
+            f'<div class="mega-cats">{cats_html}</div>'
+            f'<div class="mega-panels">{panels_html}</div>'
+            f'</div>'
+            f'</div>'
+        )
+
     parts = [
-        dd("services.html",  "Services",          "services.html",           SERVICES_SUB,   SERVICES_HIGHLIGHT),
+        services_dd(),
         a("talentmanagement.html", "Talent Management"),
         dd("products.html",  "Products",          "products.html",           PRODUCTS_SUB,   PRODUCTS_HIGHLIGHT),
         dd("industries.html","Industries",        "industries.html",         INDUSTRIES,     INDUSTRIES_HIGHLIGHT),
@@ -627,15 +718,16 @@ SERVICES_BODY = """    <section class="hero" style="background-image:linear-grad
         <h2>Service Portfolio</h2>
         <p class="sub">Every capability is automation-aware and outcome-driven.</p>
         <div class="grid grid-3">
-          <article id="ai" class="tile"><h3>AI and Agentic AI</h3><p>AI and NLP, Computer Vision, Speech, ML and MLOps, Agentic AI workflows and responsible AI guardrails.</p></article>
-          <article id="data" class="tile"><h3>Data and Analytics</h3><p>Data Science, Analytics, Reports, Big Data and Data Lake, Data Fabric and modern lakehouse.</p></article>
-          <article id="cloud" class="tile"><h3>Cloud</h3><p>Cloud Migration, Mainframe Modernization, SAP on Cloud, FinOps, Cloud Security and Platform Engineering.</p></article>
-          <article id="automation" class="tile"><h3>Hyperautomation</h3><p>RPA, intelligent document processing, DevSecOps automation, SRE and chaos engineering — wrapped with agentic AI.</p></article>
-          <article id="managed" class="tile"><h3>Managed Services</h3><p>Cloud Managed Services, Cloud Advisory, Network and Security Management, IT Operations and Service Management.</p></article>
-          <article id="cyber" class="tile"><h3>Cybersecurity</h3><p>CIAM, Workforce Identity, Security Engineering, Zero Trust Architecture, GRC, Cyber Defense and Resilience.</p></article>
-          <article id="digital" class="tile"><h3>Digital Services</h3><p>Full Stack Web, Mobile App Development, Apps Support, Back-End Development, Design and Architecture, UI/UX.</p></article>
-          <article id="qe" class="tile"><h3>Quality Engineering</h3><p>QA Consulting and Strategy, Agile Testing, Independent Certification, Managed Testing Services with AI-driven test automation.</p></article>
-          <article id="platforms" class="tile"><h3>Enterprise Platforms</h3><p>SAP, ServiceNow, Salesforce, Workday, Oracle, Adobe and Sitecore — implementation, integration and automation.</p></article>
+          <article id="ai" class="tile"><h3>AI &amp; Agentic AI</h3><p>AI, NLP, Computer Vision, Speech, ML &amp; MLOps — intelligent, adaptive, &amp; scalable AI solutions for smarter decision-making.</p></article>
+          <article id="digital" class="tile"><h3>Digital Services</h3><p>Full Stack &ndash; Web, Mobile App Development, Apps Support &amp; Maintenance, Hyperautomation, DevSecOps &amp; Automation, SRE &amp; Chaos Engineering, Back-End Development, Design &amp; Architecture, UI/UX &amp; Front-End Dev, Quality Engineering &amp; Assurance.</p></article>
+          <article id="data" class="tile"><h3>Data &amp; Analytics</h3><p>Internet of Things (IoT), Data Science, Analytics, Reports, Big Data &amp; Data Lake, Data Fabric — turning data into actionable insights for strategic growth.</p></article>
+          <article id="cloud" class="tile"><h3>Cloud</h3><p>Cloud Migration, Mainframe Modernization, SAP on Cloud, Cloud FinOps, Cloud Security, Platform Engineering, Cloud Managed Services, Cloud Advisory &amp; SME Services.</p></article>
+          <article id="cyber" class="tile"><h3>Cybersecurity</h3><p>CIAM, Workforce Identity, Security Engineering, Zero Trust Architecture, Governance Risk Management &amp; Compliance, Cyber Defense &amp; Investigation, Cyber Advisory, Cyber Resilience.</p></article>
+          <article id="platforms" class="tile"><h3>Enterprise &amp; SaaS Solutions</h3><p>SAP, ServiceNow, Salesforce, Workday, Oracle, Adobe and Sitecore — implementation, integration and automation.</p></article>
+          <article id="managed" class="tile"><h3>Managed Services</h3><p>Network &amp; Security Management, Strategic IT Consulting &amp; Continuous Improvement, Infrastructure &amp; Data Center Management, End-User Support &amp; Device Management, Cloud &amp; Application Management, IT Operations &amp; Service Management.</p></article>
+          <article id="qe" class="tile"><h3>Quality Engineering</h3><p>QA Consulting &amp; Strategy, Agile Testing, Independent Certification, Managed Testing Services with AI-driven test automation.</p></article>
+          <article id="supply" class="tile"><h3>Supply Chain</h3><p>End-to-End AI-Driven Supply Chain Execution, Core Functional Modules, Technology Stack Differentiators, Operational Intelligence in Action.</p></article>
+          <article id="blockchain" class="tile"><h3>Blockchain</h3><p>Distributed Trust, Ethereum, Hyperledger, dApps, NFT, IPFS — drive resiliency and facilitate trust across complex networks.</p></article>
         </div>
       </div>
     </section>
