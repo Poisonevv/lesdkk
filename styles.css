@@ -49,10 +49,9 @@ a { color: inherit; }
 .top-link {
   color: #ffffff;
   text-decoration: none;
-  opacity: .92;
-  transition: opacity .2s ease;
+  transition: color .2s ease;
 }
-.top-link:hover { opacity: 1; text-decoration: underline; }
+.top-link:hover { color: #ffffff; text-decoration: underline; }
 .top-sep { color: #666; }
 
 .site-header {
@@ -105,8 +104,8 @@ a { color: inherit; }
 }
 .nav a:not(.btn):hover::after,
 .nav a.active:not(.btn)::after { transform: scaleX(1); }
-.nav a.btn { transition: background .2s ease, transform .2s ease; }
-.nav a.btn:hover { background: #222; transform: translateY(-1px); }
+.nav a.btn { transition: background .2s ease, transform .2s ease; color: #ffffff; }
+.nav a.btn:hover { background: #000000; color: #ffffff; transform: translateY(-1px); }
 .nav .dd-top { display: inline-flex; align-items: center; }
 .nav a.active, .nav a:hover { color: #000000; }
 .nav a.btn, .nav a.btn:hover { color: #ffffff; }
@@ -198,8 +197,8 @@ a { color: inherit; }
   padding: 11px 18px;
   font-weight: 600;
   border: 1px solid transparent;
-  background: var(--primary);
-  color: #fff;
+  background: #000000;
+  color: #ffffff;
 }
 .btn-outline {
   background: transparent;
