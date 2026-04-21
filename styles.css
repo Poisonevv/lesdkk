@@ -315,7 +315,11 @@ font[style*="vertical-align"], font[style*="background-color"] { vertical-align:
   pointer-events: none;
   animation: none;
 }
-.hero-rotator h1.is-active,
+.hero-rotator h1.is-active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 .hero-rotator:not(:has(.is-active)) h1:first-child {
   opacity: 1;
   transform: translateY(0);
