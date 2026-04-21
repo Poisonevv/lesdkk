@@ -294,7 +294,8 @@ font[style*="vertical-align"], font[style*="background-color"] { vertical-align:
   pointer-events: none;
   animation: none;
 }
-.hero-rotator h1.is-active {
+.hero-rotator h1.is-active,
+.hero-rotator h1:first-child:not(.is-active) {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -679,8 +680,10 @@ input, textarea, select {
   .footer-grid { grid-template-columns: 1fr; }
   .brand { margin-left: 0; }
   .slide { flex: 0 0 88%; }
-  .top-bar-row { justify-content: center; }
-  .top-bar-right { display: none; }
+  .top-bar-row { justify-content: space-between; gap: 10px; flex-wrap: nowrap; }
+  .top-bar-right > a.top-link,
+  .top-bar-right > .top-sep { display: none; }
+  .top-bar-right { gap: 6px; }
   .brand img { height: 44px; }
 
   .nav-toggle { display: block; margin-left: auto; }
