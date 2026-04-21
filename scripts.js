@@ -97,7 +97,7 @@
         "Email: " + email + "\n" +
         "Area of Interest: " + service + "\n\n" +
         "Message:\n" + msg + "\n";
-      var url = "mailto:" + encodeURIComponent(to) +
+      var url = "mailto:" + to +
         "?subject=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
       window.location.href = url;
