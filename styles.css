@@ -1058,6 +1058,17 @@ input, textarea, select {
   gap: 48px;
   padding: 32px 0 16px !important;
 }
+.hero-illustration-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-illustration-art svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+}
 .hero-illustration img {
   width: 100%;
   height: auto;

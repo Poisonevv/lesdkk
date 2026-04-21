@@ -1424,8 +1424,72 @@ SERVICES_ML_MLOPS_BODY = """    <section class="hero hero-dark">
             <li>Continuous governance &amp; control</li>
           </ul>
         </div>
-        <div class="hero-illustration">
-          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Laptop displaying a clean analytics dashboard with line charts">
+        <div class="hero-illustration hero-illustration-art" aria-hidden="true">
+          <svg viewBox="0 0 520 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Minimal line illustration of an ML dashboard with chart, gears and data points">
+            <defs>
+              <style>
+                .ln { fill: none; stroke: #ffffff; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+                .ln-soft { fill: none; stroke: #ffffff; stroke-opacity: .55; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+                .dot { fill: #8fe3b0; }
+                .dot-alt { fill: #ffffff; }
+              </style>
+            </defs>
+            <!-- Dashboard frame -->
+            <rect class="ln" x="60" y="70" width="340" height="220" rx="10"/>
+            <line class="ln-soft" x1="60" y1="100" x2="400" y2="100"/>
+            <circle class="dot-alt" cx="74" cy="85" r="2.4"/>
+            <circle class="dot-alt" cx="84" cy="85" r="2.4"/>
+            <circle class="dot-alt" cx="94" cy="85" r="2.4"/>
+            <!-- Chart grid -->
+            <line class="ln-soft" x1="80"  y1="260" x2="380" y2="260"/>
+            <line class="ln-soft" x1="80"  y1="220" x2="380" y2="220"/>
+            <line class="ln-soft" x1="80"  y1="180" x2="380" y2="180"/>
+            <line class="ln-soft" x1="80"  y1="140" x2="380" y2="140"/>
+            <!-- Trend line -->
+            <polyline class="ln" points="85,245 130,235 170,210 210,215 250,180 290,165 330,135 375,120"/>
+            <!-- Data points -->
+            <circle class="dot" cx="85"  cy="245" r="4"/>
+            <circle class="dot" cx="130" cy="235" r="4"/>
+            <circle class="dot" cx="170" cy="210" r="4"/>
+            <circle class="dot" cx="210" cy="215" r="4"/>
+            <circle class="dot" cx="250" cy="180" r="4"/>
+            <circle class="dot" cx="290" cy="165" r="4"/>
+            <circle class="dot" cx="330" cy="135" r="4"/>
+            <circle class="dot" cx="375" cy="120" r="4"/>
+            <!-- Gear top-right -->
+            <g transform="translate(440,95)">
+              <circle class="ln" cx="0" cy="0" r="28"/>
+              <circle class="ln" cx="0" cy="0" r="12"/>
+              <g class="ln" stroke-width="1.6">
+                <line x1="0"   y1="-34" x2="0"   y2="-22"/>
+                <line x1="0"   y1="22"  x2="0"   y2="34"/>
+                <line x1="-34" y1="0"   x2="-22" y2="0"/>
+                <line x1="22"  y1="0"   x2="34"  y2="0"/>
+                <line x1="-24" y1="-24" x2="-16" y2="-16"/>
+                <line x1="16"  y1="16"  x2="24"  y2="24"/>
+                <line x1="-24" y1="24"  x2="-16" y2="16"/>
+                <line x1="16"  y1="-16" x2="24"  y2="-24"/>
+              </g>
+            </g>
+            <!-- Small gear bottom-right -->
+            <g transform="translate(450,250)">
+              <circle class="ln-soft" cx="0" cy="0" r="18"/>
+              <circle class="ln-soft" cx="0" cy="0" r="7"/>
+              <g class="ln-soft">
+                <line x1="0"   y1="-22" x2="0"   y2="-14"/>
+                <line x1="0"   y1="14"  x2="0"   y2="22"/>
+                <line x1="-22" y1="0"   x2="-14" y2="0"/>
+                <line x1="14"  y1="0"   x2="22"  y2="0"/>
+              </g>
+            </g>
+            <!-- Floating nodes -->
+            <circle class="dot-alt" cx="40"  cy="320" r="2.4"/>
+            <circle class="dot-alt" cx="55"  cy="335" r="2.4"/>
+            <circle class="dot-alt" cx="470" cy="330" r="2.4"/>
+            <circle class="dot-alt" cx="485" cy="345" r="2.4"/>
+            <!-- Paper-plane flourish -->
+            <polyline class="ln-soft" points="30,60 90,40 80,65 110,55 95,90"/>
+          </svg>
         </div>
       </div>
     </section>
