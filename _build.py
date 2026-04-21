@@ -1014,14 +1014,14 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
 
     <section class="section">
       <div class="container split">
-        <form>
+        <form data-contact-form data-contact-to="lesdkofficial@gmail.com">
           <h2>Send Us a Message</h2>
           <label for="name">Name</label>
-          <input id="name" type="text" placeholder="Your name">
+          <input id="name" name="name" type="text" placeholder="Your name" required>
           <label for="email">Email</label>
-          <input id="email" type="email" placeholder="you@company.com">
+          <input id="email" name="email" type="email" placeholder="you@company.com" required>
           <label for="service">Area of Interest</label>
-          <select id="service">
+          <select id="service" name="service">
             <option>Digital Transformation</option>
             <option>Hyperautomation &amp; Agentic AI</option>
             <option>Talent Solutions</option>
@@ -1029,8 +1029,8 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
             <option>Industry-Specific Programs</option>
           </select>
           <label for="msg">Message</label>
-          <textarea id="msg" rows="5" placeholder="Tell us about your requirement"></textarea>
-          <p><a class="btn" href="mailto:lesdkofficial@gmail.com">Submit via Email</a></p>
+          <textarea id="msg" name="msg" rows="5" placeholder="Tell us about your requirement" required></textarea>
+          <p><button type="submit" class="btn">Submit via Email</button></p>
         </form>
         <div>
           <h2>Contact Details</h2>

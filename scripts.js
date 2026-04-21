@@ -82,6 +82,28 @@
     }
   });
 
+  // --- Contact form → mailto with captured fields -----------------------
+  document.querySelectorAll("[data-contact-form]").forEach(function (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var to = form.getAttribute("data-contact-to") || "lesdkofficial@gmail.com";
+      var name = (form.querySelector("#name") || {}).value || "";
+      var email = (form.querySelector("#email") || {}).value || "";
+      var service = (form.querySelector("#service") || {}).value || "";
+      var msg = (form.querySelector("#msg") || {}).value || "";
+      var subject = "LESDK inquiry — " + (service || "General") + (name ? " (" + name + ")" : "");
+      var body =
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n" +
+        "Area of Interest: " + service + "\n\n" +
+        "Message:\n" + msg + "\n";
+      var url = "mailto:" + encodeURIComponent(to) +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+      window.location.href = url;
+    });
+  });
+
   // --- Hero tagline rotator ---------------------------------------------
   var rotator = document.querySelector(".hero-rotator");
   if (rotator) {
