@@ -1186,19 +1186,17 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
         <p class="kicker">Locations</p>
         <h2 class="loc-heading">Headquarters</h2>
         <div class="loc-block">
-          <p class="loc-name"><strong>LESDK</strong></p>
+          <p class="loc-name"><a href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener"><strong>LESDK FR</strong></a></p>
           <p>45 Avenue de Centre<br>Montigny-le-Bretonneux, 78180<br>France</p>
-          <p><a class="office-link" href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Open in Google Maps ›</a></p>
         </div>
 
         <h2 class="loc-heading">Global offices</h2>
         <div class="loc-grid">
           <div class="loc-block">
             <p class="loc-region">India</p>
-            <p class="loc-name"><strong>LESDK India Office</strong></p>
+            <p class="loc-name"><a href="https://www.google.com/maps/place/10%C2%B044'35.9%22N+78%C2%B041'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener"><strong>LESDK IN</strong></a></p>
             <p>75, Thendral Nagar,<br>near SBIOA School, Airport Post,<br>Trichy — 620007</p>
             <p>For general enquiries: <a href="tel:+919894845222">+91 98948 45222</a><br>Email: <a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
-            <p><a class="office-link" href="https://www.google.com/maps/place/10%C2%B044'35.9%22N+78%C2%B041'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener">Open in Google Maps ›</a></p>
           </div>
         </div>
       </div>
