@@ -200,7 +200,7 @@ def header(active=""):
         '      <span class="top-sep">&bull;</span>\n'
         '      <a class="top-link" href="https://www.google.com/maps/place/10%C2%B044\'35.9%22N+78%C2%B041\'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener">Trichy</a>\n'
         '      <span class="top-sep">|</span>\n'
-        '      <a class="top-link" href="https://www.linkedin.com" aria-label="LinkedIn">LinkedIn</a>\n'
+        '      <a class="top-link" href="https://in.linkedin.com/company/lesdk" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>\n'
         '    </div>\n'
         '  </div>\n'
         '</div>\n'
