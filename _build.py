@@ -1116,6 +1116,66 @@ INSIGHTS_BODY = """    <section class="hero" style="background-image:linear-grad
 # SERVICES → AI & AGENTIC AI → AI, NLP
 # --------------------------------------------------------------------------------------
 
+AI_CASES = [
+    ("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
+     "Data-Centre Sunset Planning",
+     "Agentic workflows mapped 14,000 legacy workloads to target cloud regions in 9 weeks, cutting plan-cycle time by 60%."),
+    ("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+     "SAP Lift-and-Shift to Cloud",
+     "Migration copilot rewrote 2,400 custom ABAP objects and moved a Tier-1 SAP estate to hyperscale cloud with 40% lower run-rate."),
+    ("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=80",
+     "Data-Driven Churn Prevention",
+     "Transformer-based propensity models flagged at-risk customers 6 weeks earlier and lifted retention 14% on a 9M-account portfolio."),
+    ("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80",
+     "Market Basket Intelligence",
+     "Association mining surfaced unseen cross-sell affinities across 180M transactions and boosted average basket size by 8%."),
+    ("https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1000&q=80",
+     "Driver Coaching for Fuel Efficiency",
+     "Telematics + NLP coaching hybrid cut fuel burn 12% across a 3,000-vehicle European fleet and paid back in under six months."),
+    ("https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1000&q=80",
+     "Real-Time Vehicle Diagnostics",
+     "Sensor fusion + vision models predicted component failures 72h early, shrinking unplanned workshop time by 28%."),
+    ("https://images.unsplash.com/photo-1565688527174-775059ac429c?auto=format&fit=crop&w=1000&q=80",
+     "Voice-of-Customer Analytics",
+     "Sentiment, intent and topic models on 4M support calls cut average handle time 18% and lifted CSAT 11 points in six months."),
+    ("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80",
+     "Intelligent Document Intake",
+     "OCR + NLP turned 1.2M scanned supplier invoices into structured data with 98.7% accuracy and 5\u00d7 faster straight-through processing."),
+]
+
+
+def _ai_cases_carousel_html(lead_copy: str) -> str:
+    cards = []
+    for img, title, body in AI_CASES:
+        cards.append(
+            f'          <article class="card case-slide">\n'
+            f'            <img src="{img}" alt="{title}">\n'
+            f'            <h3>{title}</h3>\n'
+            f'            <p>{body}</p>\n'
+            f'            <a href="contact.html">Read more &rsaquo;</a>\n'
+            f'          </article>'
+        )
+    return (
+        '    <section class="section">\n'
+        '      <div class="container">\n'
+        '        <h2 class="center">Data &amp; Analytics Case Studies</h2>\n'
+        f'        <p class="sub center">{lead_copy}</p>\n'
+        '        <div class="case-carousel" data-case-carousel>\n'
+        '          <div class="case-track">\n'
+        + "\n".join(cards) + "\n"
+        '          </div>\n'
+        '          <div class="case-dots" aria-hidden="true"></div>\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>'
+    )
+
+
+AI_CASES_NLP      = _ai_cases_carousel_html("Real engagements where AI and NLP moved enterprise KPIs.")
+AI_CASES_VISION   = _ai_cases_carousel_html("Vision deployments where LESDK moved real operational metrics.")
+AI_CASES_SPEECH   = _ai_cases_carousel_html("Speech deployments where LESDK moved real enterprise KPIs.")
+
+
 SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
       <div class="container hero-split">
         <div class="hero-copy">
@@ -1181,32 +1241,7 @@ SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="center">Data &amp; Analytics Case Studies</h2>
-        <p class="sub center">Real engagements where AI and NLP moved enterprise KPIs.</p>
-        <div class="grid grid-3">
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1000&q=80" alt="Fleet coaching">
-            <h3>Driver Coaching Copilot</h3>
-            <p>Fleet-wide telematics paired with an NLP coaching assistant reduced fuel burn by 12% across a 3,000-vehicle European operator.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&w=1000&q=80" alt="Connected garage diagnostics">
-            <h3>Connected Garage Diagnostics</h3>
-            <p>Vision + LLM pairing turned mechanic notes and dash-cam feeds into a live fault-detection service for a Tier-1 auto supplier.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80" alt="Data center sunset">
-            <h3>Data-Centre Sunset Planning</h3>
-            <p>Agentic workflows mapped 14,000 legacy workloads to target cloud regions in 9 weeks, cutting plan-cycle time by 60%.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-        </div>
-      </div>
-    </section>
+__AI_CASES_NLP__
 
     <section class="section cta-band">
       <div class="container center">
@@ -1287,32 +1322,7 @@ SERVICES_CV_BODY = """    <section class="hero hero-dark">
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="center">Data &amp; Analytics Case Studies</h2>
-        <p class="sub center">Vision deployments where LESDK moved real operational metrics.</p>
-        <div class="grid grid-3">
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1616788494672-ec7ca25fdda9?auto=format&fit=crop&w=1000&q=80" alt="Automotive line inspection">
-            <h3>Line-Side Defect Inspection</h3>
-            <p>Vision-based inspection on a European automotive line lifted defect-capture rate from 88% to 99.3% and cut rework cost by 22%.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1000&q=80" alt="Worker safety monitoring">
-            <h3>Worksite Safety Monitor</h3>
-            <p>Real-time PPE and hazard detection across 40 sites cut reportable incidents by 35% in the first quarter of deployment.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1000&q=80" alt="Document OCR pipeline">
-            <h3>Intelligent Document Intake</h3>
-            <p>OCR + NLP pipeline turned 1.2M scanned supplier invoices into structured data with 98.7% accuracy and 5&times; faster straight-through processing.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-        </div>
-      </div>
-    </section>
+__AI_CASES_VISION__
 
     <section class="section cta-band">
       <div class="container center">
@@ -1389,32 +1399,7 @@ SERVICES_SPEECH_BODY = """    <section class="hero hero-dark">
       </div>
     </section>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="center">Data &amp; Analytics Case Studies</h2>
-        <p class="sub center">Speech deployments where LESDK moved real enterprise KPIs.</p>
-        <div class="grid grid-3">
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1565688527174-775059ac429c?auto=format&fit=crop&w=1000&q=80" alt="Voice of customer intelligence">
-            <h3>Voice-of-Customer Intelligence</h3>
-            <p>Analysing 4M+ support calls with sentiment and intent models cut average handle time by 18% and lifted CSAT by 11 points in six months.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1000&q=80" alt="Sales call coaching">
-            <h3>Sales Call Coaching Copilot</h3>
-            <p>Post-call scoring and just-in-time coaching nudges lifted conversion rates 22% for an EU SaaS sales team across three regions.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-          <article class="card">
-            <img src="https://images.unsplash.com/photo-1612831455359-970e23a1e4e9?auto=format&fit=crop&w=1000&q=80" alt="Multilingual contact-centre">
-            <h3>Multilingual Contact-Centre Copilot</h3>
-            <p>Real-time translation, summarisation and compliance cues let a 1,200-seat contact centre serve 14 languages with the same staffing plan.</p>
-            <a href="contact.html">Read more &rsaquo;</a>
-          </article>
-        </div>
-      </div>
-    </section>
+__AI_CASES_SPEECH__
 
     <section class="section cta-band">
       <div class="container center">
@@ -1683,9 +1668,12 @@ def main():
     wp("insights.html",          "Insights",                "insights.html",         INSIGHTS_BODY)
     wp("careers.html",           "Careers",                 "careers.html",          CAREERS_BODY)
     wp("contact.html",           "Contact",                 "contact.html",          CONTACT_BODY)
-    wp("services-ai-nlp.html",          "AI & NLP | Services",          "services.html", SERVICES_AI_NLP_BODY)
-    wp("services-computer-vision.html", "Computer Vision | Services",   "services.html", SERVICES_CV_BODY)
-    wp("services-speech.html",          "Speech Analytics | Services",  "services.html", SERVICES_SPEECH_BODY)
+    wp("services-ai-nlp.html",          "AI & NLP | Services",          "services.html",
+       SERVICES_AI_NLP_BODY.replace("__AI_CASES_NLP__", AI_CASES_NLP))
+    wp("services-computer-vision.html", "Computer Vision | Services",   "services.html",
+       SERVICES_CV_BODY.replace("__AI_CASES_VISION__", AI_CASES_VISION))
+    wp("services-speech.html",          "Speech Analytics | Services",  "services.html",
+       SERVICES_SPEECH_BODY.replace("__AI_CASES_SPEECH__", AI_CASES_SPEECH))
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)

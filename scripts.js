@@ -68,6 +68,84 @@
     revealables.forEach(function (el) { el.classList.add("in-view"); });
   }
 
+  // --- AI case-study rotating carousel -----------------------------------
+  document.querySelectorAll("[data-case-carousel]").forEach(function (root) {
+    var track = root.querySelector(".case-track");
+    var dotsHost = root.querySelector(".case-dots");
+    if (!track || !track.children.length) return;
+    var slides = track.children;
+    var total = slides.length;
+    var idx = 0;
+    var timer = null;
+
+    function perView() {
+      if (window.matchMedia("(max-width: 620px)").matches) return 1;
+      if (window.matchMedia("(max-width: 980px)").matches) return 2;
+      return 3;
+    }
+
+    function pageCount() {
+      return Math.max(1, total - perView() + 1);
+    }
+
+    function slideWidth() {
+      var s = slides[0];
+      if (!s) return 0;
+      var gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return s.getBoundingClientRect().width + gap;
+    }
+
+    function renderDots() {
+      if (!dotsHost) return;
+      dotsHost.innerHTML = "";
+      var pages = pageCount();
+      for (var i = 0; i < pages; i++) {
+        var d = document.createElement("button");
+        d.type = "button";
+        d.setAttribute("aria-label", "Go to slide " + (i + 1));
+        if (i === idx) d.classList.add("is-active");
+        (function (n) {
+          d.addEventListener("click", function () { go(n, true); });
+        })(i);
+        dotsHost.appendChild(d);
+      }
+    }
+
+    function go(i, fromUser) {
+      var pages = pageCount();
+      idx = ((i % pages) + pages) % pages;
+      track.style.transform = "translateX(" + (-idx * slideWidth()) + "px)";
+      if (dotsHost) {
+        var btns = dotsHost.children;
+        for (var j = 0; j < btns.length; j++) {
+          btns[j].classList.toggle("is-active", j === idx);
+        }
+      }
+      if (fromUser) restart();
+    }
+
+    function tick() { go(idx + 1); }
+    function start() { timer = setInterval(tick, 5000); }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function restart() { stop(); start(); }
+
+    renderDots();
+    go(0);
+    start();
+
+    root.addEventListener("mouseenter", stop);
+    root.addEventListener("mouseleave", start);
+
+    var resizeRaf = null;
+    window.addEventListener("resize", function () {
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(function () {
+        renderDots();
+        go(Math.min(idx, pageCount() - 1));
+      });
+    });
+  });
+
   // --- Case-study slider -------------------------------------------------
   document.querySelectorAll("[data-slider]").forEach(function (slider) {
     var track = slider.querySelector(".slider-track");
