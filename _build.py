@@ -174,7 +174,6 @@ def build_nav(active=""):
         )
 
     parts = [
-        a("index.html", "Home"),
         dd("about.html",     "About",             "about.html",              ABOUT_SUB,      ABOUT_HIGHLIGHT),
         dd("services.html",  "Services",          "services.html",           SERVICES_SUB,   SERVICES_HIGHLIGHT),
         a("talentmanagement.html", "Talent Management"),
