@@ -1079,7 +1079,15 @@ CAREERS_BODY = """    <section class="hero" style="background-image:linear-gradi
 # CONTACT
 # --------------------------------------------------------------------------------------
 
-CONTACT_BODY = """    <section class="section contact-section">
+CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">CONTACT</p>
+        <h1>Let's build your next transformation.</h1>
+        <p class="lead">Tell us your goals and our team will get back with a tailored approach.</p>
+      </div>
+    </section>
+
+    <section class="section contact-section">
       <div class="container contact-grid">
         <div class="contact-form-col">
           <p class="kicker">Let's Talk</p>
