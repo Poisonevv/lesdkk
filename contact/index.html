@@ -70,44 +70,83 @@
   </div>
 </header>
   <main>
-    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1800&q=80')">
-      <div class="container">
-        <p class="kicker">CONTACT</p>
-        <h1>Let's build your next transformation.</h1>
-        <p class="lead">Tell us your goals and our team will get back with a tailored approach.</p>
-      </div>
-    </section>
+    <section class="section contact-section">
+      <div class="container contact-grid">
+        <div class="contact-form-col">
+          <p class="kicker">Let's Talk</p>
+          <h1 class="contact-title">Ready to elevate your business? Connect with us!</h1>
+          <p class="lead contact-lead">We appreciate your interest in LESDK. Please fill out the form and we'll respond to you as soon as possible.</p>
 
-    <section class="section">
-      <div class="container split">
-        <form data-contact-form action="https://api.web3forms.com/submit" method="POST" novalidate>
-          <h2>Send Us a Message</h2>
-          <input type="hidden" name="access_key" value="dc58c222-fb77-4f64-9fa8-4d0e7852b5e7">
-          <input type="hidden" name="subject" value="New enquiry from lesdk.com">
-          <input type="hidden" name="from_name" value="LESDK website">
-          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-          <label for="name">Name</label>
-          <input id="name" name="name" type="text" placeholder="Your name" required>
-          <label for="email">Email</label>
-          <input id="email" name="email" type="email" placeholder="you@company.com" required>
-          <label for="service">Area of Interest</label>
-          <select id="service" name="service">
-            <option>Digital Transformation</option>
-            <option>Hyperautomation &amp; Agentic AI</option>
-            <option>Talent Solutions</option>
-            <option>Managed Services</option>
-            <option>Industry-Specific Programs</option>
-          </select>
-          <label for="msg">Message</label>
-          <textarea id="msg" name="message" rows="5" placeholder="Tell us about your requirement" required></textarea>
-          <p><button type="submit" class="btn" data-submit-label="Send Message">Send Message</button></p>
-          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-        </form>
-        <div>
-          <h2>Contact Details</h2>
-          <p class="sub">Email: lesdkofficial@gmail.com<br>India: +91 9894845222<br>France: +33 7 66 55 01 23<br>Operating Model: France-focused services delivered from India.</p>
-          <img class="rounded" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80" alt="Office workspace">
+          <form class="contact-form" data-contact-form action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="dc58c222-fb77-4f64-9fa8-4d0e7852b5e7">
+            <input type="hidden" name="subject" value="New enquiry from lesdk.com">
+            <input type="hidden" name="from_name" value="LESDK website">
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+            <div class="field">
+              <label>Name <span class="req">*</span></label>
+              <div class="field-grid field-grid-2">
+                <div>
+                  <input id="first-name" name="first_name" type="text" required>
+                  <span class="field-hint">First</span>
+                </div>
+                <div>
+                  <input id="last-name" name="last_name" type="text" required>
+                  <span class="field-hint">Last</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-grid field-grid-2">
+              <div class="field">
+                <label for="email">Business Email <span class="req">*</span></label>
+                <input id="email" name="email" type="email" required>
+              </div>
+              <div class="field">
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" placeholder="+33 ...">
+              </div>
+            </div>
+
+            <div class="field-grid field-grid-2">
+              <div class="field">
+                <label for="country">Country <span class="req">*</span></label>
+                <input id="country" name="country" type="text" required>
+              </div>
+              <div class="field">
+                <label for="service">I am looking for <span class="req">*</span></label>
+                <select id="service" name="service" required>
+                  <option value="">Select</option>
+                  <option>Digital Transformation</option>
+                  <option>Hyperautomation &amp; Agentic AI</option>
+                  <option>Talent Solutions</option>
+                  <option>Managed Services</option>
+                  <option>Industry-Specific Programs</option>
+                  <option>Careers &amp; Opportunities</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="msg">Please provide a brief overview of your requirements <span class="req">*</span></label>
+              <textarea id="msg" name="message" rows="5" required></textarea>
+            </div>
+
+            <p><button type="submit" class="btn btn-primary" data-submit-label="Submit">Submit</button></p>
+            <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          </form>
         </div>
+
+        <aside class="contact-side">
+          <a class="contact-cta" href="/careers/">Job Seekers Click Here!</a>
+          <div class="contact-info">
+            <h3>Contact details</h3>
+            <p><strong>Email</strong><br><a href="mailto:lesdkofficial@gmail.com">lesdkofficial@gmail.com</a></p>
+            <p><strong>France</strong><br>+33 7 66 55 01 23<br><a href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Paris, France</a></p>
+            <p><strong>India</strong><br>+91 9894845222<br><a href="https://www.google.com/maps/place/10%C2%B044'35.9%22N+78%C2%B041'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener">Trichy, India</a></p>
+          </div>
+        </aside>
       </div>
     </section>
 
