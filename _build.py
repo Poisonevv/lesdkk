@@ -247,7 +247,7 @@ def header(active=""):
         '    <div class="top-bar-left">\n'
         '      <a href="mailto:contact@lesdk.com" class="top-link">contact@lesdk.com</a>\n'
         '      <span class="top-sep">|</span>\n'
-        '      <a href="tel:+33766550123" class="top-link">+33 7 66 55 01 23</a>\n'
+        '      <a href="tel:+33766550123" class="top-link">07 66 55 01 23</a>\n'
         '    </div>\n'
         '    <div class="top-bar-right">\n'
         '      <a class="top-link" href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Paris</a>\n'
@@ -1121,7 +1121,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
               </div>
               <div class="field">
                 <label for="phone">Phone Number</label>
-                <input id="phone" name="phone" type="tel" placeholder="+33 ...">
+                <input id="phone" name="phone" type="tel" placeholder="07 ...">
               </div>
             </div>
 
@@ -1166,7 +1166,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
             <p class="desk-label"><strong>Hours of Operations <span class="req">*</span></strong></p>
             <p class="desk-text">Monday to Friday</p>
             <p class="desk-text">9:00 AM CET to 6:00 PM CET</p>
-            <p class="desk-text">Phone Number: <a href="tel:+33766550123">(+33) 07 66 55 01 23</a></p>
+            <p class="desk-text">Phone Number: <a href="tel:+33766550123">07 66 55 01 23</a></p>
             <p class="desk-text">Email: <a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
           </div>
           <div class="contact-desk">
@@ -1174,7 +1174,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
             <p class="desk-label"><strong>Hours of Operations <span class="req">*</span></strong></p>
             <p class="desk-text">Monday to Friday</p>
             <p class="desk-text">9:00 AM CET to 6:00 PM CET</p>
-            <p class="desk-text">Phone Number: <a href="tel:+33745239760">(+33) 07 45 23 97 60</a></p>
+            <p class="desk-text">Phone Number: <a href="tel:+33745239760">07 45 23 97 60</a></p>
             <p class="desk-text">Email: <a href="mailto:support@lesdk.com">support@lesdk.com</a></p>
           </div>
         </div>
@@ -1190,7 +1190,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
             <p class="loc-region">France</p>
             <p class="loc-name"><a href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener"><strong>LESDK</strong></a></p>
             <p>45 Avenue de Centre<br>Montigny-le-Bretonneux, 78180<br>France</p>
-            <p>For general enquiries: <a href="tel:+33766550123">(+33) 07 66 55 01 23</a><br>Email: <a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
+            <p>For general enquiries: <a href="tel:+33766550123">07 66 55 01 23</a><br>Email: <a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
           </div>
           <div class="loc-col">
             <h2 class="loc-heading">Offices</h2>
