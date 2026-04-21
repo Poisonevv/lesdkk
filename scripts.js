@@ -82,25 +82,55 @@
     }
   });
 
-  // --- Contact form → mailto with captured fields -----------------------
+  // --- Contact form → Web3Forms (AJAX, inline success/error) -----------
   document.querySelectorAll("[data-contact-form]").forEach(function (form) {
+    var status = form.querySelector("[data-form-status]");
+    var submit = form.querySelector("button[type=submit]");
+    var originalLabel = submit ? (submit.getAttribute("data-submit-label") || submit.textContent) : "";
+
+    function setStatus(msg, kind) {
+      if (!status) return;
+      status.textContent = msg;
+      status.setAttribute("data-state", kind || "");
+    }
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      var to = form.getAttribute("data-contact-to") || "lesdkofficial@gmail.com";
-      var name = (form.querySelector("#name") || {}).value || "";
-      var email = (form.querySelector("#email") || {}).value || "";
-      var service = (form.querySelector("#service") || {}).value || "";
-      var msg = (form.querySelector("#msg") || {}).value || "";
-      var subject = "LESDK inquiry — " + (service || "General") + (name ? " (" + name + ")" : "");
-      var body =
-        "Name: " + name + "\n" +
-        "Email: " + email + "\n" +
-        "Area of Interest: " + service + "\n\n" +
-        "Message:\n" + msg + "\n";
-      var url = "mailto:" + to +
-        "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(body);
-      window.location.href = url;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      if (submit) {
+        submit.disabled = true;
+        submit.textContent = "Sending...";
+      }
+      setStatus("", "");
+
+      var data = new FormData(form);
+      fetch(form.action, {
+        method: "POST",
+        body: data,
+        headers: { "Accept": "application/json" }
+      })
+        .then(function (res) { return res.json().then(function (json) { return { ok: res.ok, json: json }; }); })
+        .then(function (result) {
+          if (result.ok && result.json && result.json.success) {
+            setStatus("Thanks — your message has been sent. We'll get back to you shortly.", "success");
+            form.reset();
+          } else {
+            var msg = (result.json && result.json.message) || "Something went wrong. Please try again or email contact@lesdk.com.";
+            setStatus(msg, "error");
+          }
+        })
+        .catch(function () {
+          setStatus("Network error. Please try again or email contact@lesdk.com.", "error");
+        })
+        .then(function () {
+          if (submit) {
+            submit.disabled = false;
+            submit.textContent = originalLabel;
+          }
+        });
     });
   });
 

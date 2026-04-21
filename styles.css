@@ -82,6 +82,27 @@ a.top-link[target="_blank"]:hover { text-decoration-color: #ffffff; }
 .lang-btn.is-active { opacity: 1; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .lang-sep { color: #666; }
 
+.form-status {
+  margin-top: 10px;
+  font-size: 14px;
+  min-height: 1.2em;
+}
+.form-status[data-state="success"] {
+  color: #0a7a3b;
+  background: #e7f7ee;
+  border: 1px solid #b6e3c6;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+.form-status[data-state="error"] {
+  color: #a11d1d;
+  background: #fdecec;
+  border: 1px solid #f5bfbf;
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+button[type=submit][disabled] { opacity: .6; cursor: wait; }
+
 #google_translate_element { display: none !important; }
 .skiptranslate, .goog-te-banner-frame, .goog-te-gadget, iframe.goog-te-banner-frame { display: none !important; visibility: hidden !important; height: 0 !important; }
 html, body { top: 0 !important; position: static !important; margin-top: 0 !important; }
