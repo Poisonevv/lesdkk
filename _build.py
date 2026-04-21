@@ -1425,7 +1425,7 @@ SERVICES_ML_MLOPS_BODY = """    <section class="hero hero-dark">
           </ul>
         </div>
         <div class="hero-illustration">
-          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1200&q=80" alt="Abstract neural-network visualization on a dark backdrop">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Laptop displaying a clean analytics dashboard with line charts">
         </div>
       </div>
     </section>
