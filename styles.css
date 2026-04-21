@@ -321,11 +321,22 @@ h1 {
 .reveal-stagger.in-view > *:nth-child(8) { transition-delay: .61s; }
 @media (prefers-reduced-motion: reduce) {
   .reveal, .reveal-stagger > *,
-  .hero .kicker, .hero h1, .hero .lead, .hero .actions {
+  .hero .kicker, .hero .lead, .hero .actions {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
     animation: none !important;
+  }
+  .hero h1 {
+    transition: none !important;
+    animation: none !important;
+  }
+  .hero-rotator h1 {
+    opacity: 0;
+    transform: none !important;
+  }
+  .hero-rotator h1.is-active {
+    opacity: 1 !important;
   }
 }
 .alt { background: var(--bg-soft); }
