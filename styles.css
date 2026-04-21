@@ -63,24 +63,61 @@ a.top-link[target="_blank"]:hover { text-decoration-color: #ffffff; }
 .top-sep { color: #666; }
 
 .lang-switch {
+  position: relative;
+  display: inline-block;
+}
+.lang-current {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.25);
+  color: #ffffff;
+  font: inherit;
+  letter-spacing: .4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+  line-height: 1;
+  transition: border-color .2s ease, background .2s ease;
 }
-.lang-btn {
+.lang-current:hover { border-color: #ffffff; background: rgba(255,255,255,.06); }
+.lang-caret { font-size: 10px; transition: transform .2s ease; }
+.lang-current[aria-expanded="true"] .lang-caret { transform: rotate(180deg); }
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 120px;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: #000000;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 4px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  display: none;
+  z-index: 1000;
+}
+.lang-switch.is-open .lang-menu { display: block; }
+.lang-menu li { list-style: none; }
+.lang-option {
+  width: 100%;
+  text-align: left;
   background: transparent;
   border: 0;
   color: #ffffff;
   font: inherit;
-  letter-spacing: .4px;
-  padding: 2px 4px;
+  padding: 7px 10px;
   cursor: pointer;
-  opacity: .65;
-  transition: opacity .2s ease;
+  border-radius: 3px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
-.lang-btn:hover { opacity: 1; }
-.lang-btn.is-active { opacity: 1; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-.lang-sep { color: #666; }
+.lang-option span { color: rgba(255,255,255,.6); font-size: 11.5px; }
+.lang-option:hover { background: rgba(255,255,255,.08); }
+.lang-option[aria-selected="true"] { background: rgba(255,255,255,.12); }
 
 #google_translate_element { display: none !important; }
 .skiptranslate, .goog-te-banner-frame, .goog-te-gadget, iframe.goog-te-banner-frame { display: none !important; visibility: hidden !important; height: 0 !important; }
