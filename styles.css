@@ -672,7 +672,7 @@ input, textarea, select {
   .nav > .nav-item { display: block; }
   .nav > a { display: block; }
   .nav > a.btn { margin-top: 14px; border-bottom: 0; text-align: center; }
-  .nav > .nav-item > .dd-top { display: block; }
+  .nav > .nav-item > .dd-top { display: flex; }
   .nav > .nav-item > .dd-top::after { display: none; }
   .dropdown > .dd-top::after { content: ""; }
   .mega-menu {

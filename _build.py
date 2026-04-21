@@ -443,7 +443,7 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
           </div>
           <div class="presence-card">
             <div class="presence-num">Delivery</div>
-            <div class="presence-label">Bengaluru, India</div>
+            <div class="presence-label">Trichy, India</div>
             <p>Engineering, automation, QE and 24&times;7 managed services.</p>
           </div>
           <div class="presence-card">
