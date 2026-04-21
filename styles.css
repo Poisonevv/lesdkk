@@ -596,6 +596,12 @@ input, textarea, select {
   text-transform: uppercase;
   margin-bottom: 8px;
 }
+.presence-map {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+.presence-map:hover { color: #ffffff; text-decoration: underline; }
 .presence-card p {
   margin: 0;
   color: #9c9c9c;
