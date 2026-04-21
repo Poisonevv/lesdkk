@@ -85,7 +85,7 @@ a.top-link[target="_blank"]:hover { text-decoration-color: #ffffff; }
   letter-spacing: 0.6px;
   margin-left: -6px;
 }
-.brand img { height: 72px; width: auto; transition: transform .25s ease; }
+.brand img { height: 52px; width: auto; transition: transform .25s ease; }
 .brand:hover img { transform: scale(1.04); }
 .nav { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; position: relative; }
 .nav a {
@@ -654,7 +654,7 @@ input, textarea, select {
   .slide { flex: 0 0 88%; }
   .top-bar-row { justify-content: center; }
   .top-bar-right { display: none; }
-  .brand img { height: 56px; }
+  .brand img { height: 44px; }
 
   .nav-toggle { display: block; margin-left: auto; }
   .nav {
