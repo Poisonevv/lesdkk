@@ -189,6 +189,21 @@ def build_nav(active=""):
 
 def header(active=""):
     return (
+        '<div class="top-bar">\n'
+        '  <div class="container top-bar-row">\n'
+        '    <div class="top-bar-left">\n'
+        '      <a href="mailto:contact@lesdk.com" class="top-link">contact@lesdk.com</a>\n'
+        '      <span class="top-sep">|</span>\n'
+        '      <a href="tel:+33000000000" class="top-link">+33 0 00 00 00 00</a>\n'
+        '    </div>\n'
+        '    <div class="top-bar-right">\n'
+        '      <span class="top-link">Paris &bull; Bengaluru</span>\n'
+        '      <span class="top-sep">|</span>\n'
+        '      <a class="top-link" href="https://www.linkedin.com" aria-label="LinkedIn">LinkedIn</a>\n'
+        '      <a class="top-link" href="careers.html">Careers</a>\n'
+        '    </div>\n'
+        '  </div>\n'
+        '</div>\n'
         '<header class="site-header">\n'
         '  <div class="container nav-row">\n'
         '    <a class="brand" href="index.html"><img src="logo.png" alt="LESDK logo"></a>\n'
@@ -298,6 +313,32 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
       </div>
     </section>
 
+    <section class="logos-strip">
+      <div class="container">
+        <p class="logos-kicker">TRUSTED BY ENTERPRISE CLIENTS IN FRANCE AND GLOBALLY</p>
+        <div class="logos-marquee" aria-hidden="true">
+          <div class="logos-track">
+            <span class="logo-item">Aerospace Group</span>
+            <span class="logo-item">GlobalBank</span>
+            <span class="logo-item">HealthAlliance</span>
+            <span class="logo-item">EnergiaCo</span>
+            <span class="logo-item">Logix</span>
+            <span class="logo-item">RetailOne</span>
+            <span class="logo-item">ManufactuRx</span>
+            <span class="logo-item">Mobility&amp;Co</span>
+            <span class="logo-item">Aerospace Group</span>
+            <span class="logo-item">GlobalBank</span>
+            <span class="logo-item">HealthAlliance</span>
+            <span class="logo-item">EnergiaCo</span>
+            <span class="logo-item">Logix</span>
+            <span class="logo-item">RetailOne</span>
+            <span class="logo-item">ManufactuRx</span>
+            <span class="logo-item">Mobility&amp;Co</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section">
       <div class="container reveal">
         <h2>What We Do</h2>
@@ -372,10 +413,48 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
     <section class="section">
       <div class="container reveal">
         <h2>Case Studies</h2>
-        <div class="grid grid-3 reveal-stagger">
-          <article class="tile"><h3>ERP Hiring Cycle Reduced by 42%</h3><p>Built a focused talent pipeline for a global rollout and accelerated project onboarding timelines.</p></article>
-          <article class="tile"><h3>Service Levels Exceeded Across Programs</h3><p>Designed a managed support model with automation and proactive monitoring for consistent SLA performance.</p></article>
-          <article class="tile"><h3>Cloud Data Platform in 16 Weeks</h3><p>Delivered scalable architecture, data governance, and analytics dashboards for executive visibility.</p></article>
+        <p class="sub">Outcomes we have shipped with enterprise clients.</p>
+        <div class="slider" data-slider>
+          <button class="slider-arrow slider-prev" aria-label="Previous">&lsaquo;</button>
+          <div class="slider-track">
+            <article class="slide tile"><p class="slide-kicker">BFSI</p><h3>ERP Hiring Cycle Reduced by 42%</h3><p>Built a focused talent pipeline for a global rollout and accelerated project onboarding timelines.</p></article>
+            <article class="slide tile"><p class="slide-kicker">MANAGED SERVICES</p><h3>Service Levels Exceeded Across Programs</h3><p>Designed a managed support model with automation and proactive monitoring for consistent SLA performance.</p></article>
+            <article class="slide tile"><p class="slide-kicker">DATA &amp; CLOUD</p><h3>Cloud Data Platform in 16 Weeks</h3><p>Delivered scalable architecture, data governance, and analytics dashboards for executive visibility.</p></article>
+            <article class="slide tile"><p class="slide-kicker">HEALTHCARE</p><h3>Prior-Auth Backlog Cleared in 8 Weeks</h3><p>Document AI plus agentic workflows cut manual review by 71% and eliminated a 12-week intake backlog.</p></article>
+            <article class="slide tile"><p class="slide-kicker">MANUFACTURING</p><h3>Line Quality Lifted 18 Points</h3><p>Vision-AI inspection on shop-floor lines drove measurable OEE gains across three plants.</p></article>
+            <article class="slide tile"><p class="slide-kicker">LOGISTICS</p><h3>Control Tower for a European 3PL</h3><p>Agentic AI control tower triaged disruptions and automated carrier playbooks across 140 lanes.</p></article>
+          </div>
+          <button class="slider-arrow slider-next" aria-label="Next">&rsaquo;</button>
+        </div>
+        <div class="slider-dots" data-slider-dots></div>
+      </div>
+    </section>
+
+    <section class="section presence-band">
+      <div class="container reveal">
+        <p class="kicker">GLOBAL PRESENCE</p>
+        <h2>France-focused, India-engineered, globally connected.</h2>
+        <div class="grid grid-4 reveal-stagger presence-grid">
+          <div class="presence-card">
+            <div class="presence-num">HQ</div>
+            <div class="presence-label">Paris, France</div>
+            <p>Client-facing strategy, advisory and program leadership.</p>
+          </div>
+          <div class="presence-card">
+            <div class="presence-num">Delivery</div>
+            <div class="presence-label">Bengaluru, India</div>
+            <p>Engineering, automation, QE and 24&times;7 managed services.</p>
+          </div>
+          <div class="presence-card">
+            <div class="presence-num">8</div>
+            <div class="presence-label">Industries</div>
+            <p>Dedicated practices, each with an automation-first operating model.</p>
+          </div>
+          <div class="presence-card">
+            <div class="presence-num">500+</div>
+            <div class="presence-label">Specialists</div>
+            <p>Consultants and engineers across AI, data, cloud, cyber and platforms.</p>
+          </div>
         </div>
       </div>
     </section>

@@ -20,6 +20,47 @@
     revealables.forEach(function (el) { el.classList.add("in-view"); });
   }
 
+  // --- Case-study slider -------------------------------------------------
+  document.querySelectorAll("[data-slider]").forEach(function (slider) {
+    var track = slider.querySelector(".slider-track");
+    var prev = slider.querySelector(".slider-prev");
+    var next = slider.querySelector(".slider-next");
+    var dotsHost = slider.parentElement.querySelector("[data-slider-dots]");
+    if (!track) return;
+
+    function slideWidth() {
+      var slide = track.querySelector(".slide");
+      if (!slide) return 300;
+      var gap = parseFloat(getComputedStyle(track).gap) || 0;
+      return slide.getBoundingClientRect().width + gap;
+    }
+
+    if (next) next.addEventListener("click", function () {
+      track.scrollBy({ left: slideWidth(), behavior: "smooth" });
+    });
+    if (prev) prev.addEventListener("click", function () {
+      track.scrollBy({ left: -slideWidth(), behavior: "smooth" });
+    });
+
+    if (dotsHost) {
+      var slides = track.querySelectorAll(".slide");
+      slides.forEach(function (_, i) {
+        var dot = document.createElement("button");
+        dot.setAttribute("aria-label", "Go to slide " + (i + 1));
+        dot.addEventListener("click", function () {
+          track.scrollTo({ left: slideWidth() * i, behavior: "smooth" });
+        });
+        dotsHost.appendChild(dot);
+      });
+      var dots = dotsHost.querySelectorAll("button");
+      if (dots.length) dots[0].classList.add("is-active");
+      track.addEventListener("scroll", function () {
+        var i = Math.round(track.scrollLeft / slideWidth());
+        dots.forEach(function (d, di) { d.classList.toggle("is-active", di === i); });
+      });
+    }
+  });
+
   // --- Hero tagline rotator ---------------------------------------------
   var rotator = document.querySelector(".hero-rotator");
   if (rotator) {
