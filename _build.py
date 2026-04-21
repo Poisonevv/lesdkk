@@ -1192,7 +1192,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
             <p>45 Avenue de Centre<br>Montigny-le-Bretonneux, 78180<br>France</p>
           </div>
           <div class="loc-col">
-            <h2 class="loc-heading">Office</h2>
+            <h2 class="loc-heading">Offices</h2>
             <p class="loc-region">India</p>
             <p class="loc-name"><a href="https://www.google.com/maps/place/10%C2%B044'35.9%22N+78%C2%B041'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener"><strong>LESDK</strong></a></p>
             <p>75, Thendral Nagar,<br>near SBIOA School, Airport Post,<br>Trichy — 620007</p>
