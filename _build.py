@@ -1156,14 +1156,39 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
         </div>
 
         <aside class="contact-side">
-          <a class="contact-cta" href="/careers/">Job Seekers Click Here!</a>
-          <div class="contact-info">
-            <h3>Contact details</h3>
-            <p><strong>Email</strong><br><a href="mailto:lesdkofficial@gmail.com">lesdkofficial@gmail.com</a></p>
-            <p><strong>France</strong><br>+33 7 66 55 01 23<br><a href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Paris, France</a></p>
-            <p><strong>India</strong><br>+91 9894845222<br><a href="https://www.google.com/maps/place/10%C2%B044'35.9%22N+78%C2%B041'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener">Trichy, India</a></p>
+          <div class="contact-desk">
+            <h3>For General Queries, Escalations &amp; Business Enquiries</h3>
+            <p class="desk-sub">Speak with our Customer Service Associate</p>
+            <p class="desk-hours"><strong>Hours of Operations</strong><br>Monday to Friday<br>9:00 AM CET to 6:00 PM CET</p>
+            <p><strong>Phone</strong><br><a href="tel:+33766550123">+33 07 66 55 01 23</a></p>
+            <p><strong>Email</strong><br><a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
+          </div>
+          <div class="contact-desk">
+            <h3>Consultant Related Queries</h3>
+            <p class="desk-hours"><strong>Hours of Operations</strong><br>Monday to Friday<br>9:00 AM CET to 6:00 PM CET</p>
+            <p><strong>Phone</strong><br><a href="tel:+33745239760">+33 07 45 23 97 60</a></p>
+            <p><strong>Email</strong><br><a href="mailto:support@lesdk.com">support@lesdk.com</a></p>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <section class="section contact-offices">
+      <div class="container">
+        <p class="kicker">Our Offices</p>
+        <h2>Where to find us</h2>
+        <div class="offices-grid">
+          <article class="office-card">
+            <h3>Headquarters — France</h3>
+            <p>45 Avenue de Centre,<br>Montigny-le-Bretonneux, 78180</p>
+            <p><a class="office-link" href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Open in Google Maps ›</a></p>
+          </article>
+          <article class="office-card">
+            <h3>Office — India</h3>
+            <p>75, Thendral Nagar,<br>near SBIOA School, Airport Post,<br>Trichy — 620007</p>
+            <p><a class="office-link" href="https://www.google.com/maps/place/10%C2%B044'35.9%22N+78%C2%B041'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener">Open in Google Maps ›</a></p>
+          </article>
+        </div>
       </div>
     </section>
 """
