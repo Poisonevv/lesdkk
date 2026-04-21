@@ -954,7 +954,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
 # --------------------------------------------------------------------------------------
 
 def write(filename, title, active, body):
-    (ROOT / filename).write_text(page(title, active, body))
+    (ROOT / filename).write_text(page(title, active, body), encoding="utf-8")
 
 
 def main():
