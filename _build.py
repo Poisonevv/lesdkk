@@ -1053,19 +1053,55 @@ def write(filename, title, active, body):
     (ROOT / filename).write_text(page(title, active, body), encoding="utf-8")
 
 
+SITE_URL = "https://www.lesdk.com"
+
+
+def write_sitemap(pages):
+    from datetime import date
+    today = date.today().isoformat()
+    urls = "\n".join(
+        f"  <url><loc>{SITE_URL}/{p}</loc><lastmod>{today}</lastmod>"
+        f"<changefreq>weekly</changefreq><priority>{'1.0' if p == 'index.html' else '0.7'}</priority></url>"
+        for p in pages
+    )
+    xml = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls}\n"
+        "</urlset>\n"
+    )
+    (ROOT / "sitemap.xml").write_text(xml, encoding="utf-8")
+
+
+def write_robots():
+    txt = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        f"Sitemap: {SITE_URL}/sitemap.xml\n"
+    )
+    (ROOT / "robots.txt").write_text(txt, encoding="utf-8")
+
+
 def main():
-    write("index.html",            "Home",                    "index.html",            HOME_BODY)
-    write("about.html",             "About",                   "about.html",            ABOUT_BODY)
-    write("services.html",          "Services",                "services.html",         SERVICES_BODY)
-    write("talentmanagement.html",  "Talent Management",       "talentmanagement.html", TALENT_BODY)
-    write("industries.html",        "Industries",              "industries.html",       INDUSTRIES_BODY)
-    write("products.html",          "Products",                "products.html",         PRODUCTS_BODY)
-    write("insights.html",          "Insights",                "insights.html",         INSIGHTS_BODY)
-    write("careers.html",           "Careers",                 "careers.html",          CAREERS_BODY)
-    write("contact.html",           "Contact",                 "contact.html",          CONTACT_BODY)
+    pages = []
+    def wp(filename, title, active, body):
+        write(filename, title, active, body)
+        pages.append(filename)
+    wp("index.html",            "Home",                    "index.html",            HOME_BODY)
+    wp("about.html",             "About",                   "about.html",            ABOUT_BODY)
+    wp("services.html",          "Services",                "services.html",         SERVICES_BODY)
+    wp("talentmanagement.html",  "Talent Management",       "talentmanagement.html", TALENT_BODY)
+    wp("industries.html",        "Industries",              "industries.html",       INDUSTRIES_BODY)
+    wp("products.html",          "Products",                "products.html",         PRODUCTS_BODY)
+    wp("insights.html",          "Insights",                "insights.html",         INSIGHTS_BODY)
+    wp("careers.html",           "Careers",                 "careers.html",          CAREERS_BODY)
+    wp("contact.html",           "Contact",                 "contact.html",          CONTACT_BODY)
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
-    print("OK — wrote", 9 + len(INDUSTRY_PAGES), "pages")
+        pages.append(fn)
+    write_sitemap(pages)
+    write_robots()
+    print("OK — wrote", len(pages), "pages + sitemap.xml + robots.txt")
 
 
 if __name__ == "__main__":
