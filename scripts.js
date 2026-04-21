@@ -3,32 +3,6 @@
 (function () {
   "use strict";
 
-  // --- Top-bar: visible at top, hide on scroll-down, show on scroll-up --
-  var topBar = document.querySelector("[data-top-bar]");
-  if (topBar) {
-    var lastY = window.scrollY;
-    var ticking = false;
-    function syncTopBar() {
-      var y = window.scrollY;
-      if (y <= 4) {
-        topBar.classList.add("is-visible");
-      } else if (y > lastY + 2) {
-        topBar.classList.remove("is-visible");
-      } else if (y < lastY - 2) {
-        topBar.classList.add("is-visible");
-      }
-      lastY = y;
-      ticking = false;
-    }
-    topBar.classList.add("is-visible");
-    window.addEventListener("scroll", function () {
-      if (!ticking) {
-        window.requestAnimationFrame(syncTopBar);
-        ticking = true;
-      }
-    }, { passive: true });
-  }
-
   // --- Mobile nav toggle -------------------------------------------------
   var toggle = document.querySelector("[data-nav-toggle]");
   var nav = document.getElementById("primary-nav");
