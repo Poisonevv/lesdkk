@@ -145,12 +145,12 @@
             setStatus("Thanks — your message has been sent. We'll get back to you shortly.", "success");
             form.reset();
           } else {
-            var msg = (result.json && result.json.message) || "Something went wrong. Please try again or email contact@lesdk.com.";
+            var msg = (result.json && result.json.message) || "Something went wrong. Please try again or email info@lesdk.com.";
             setStatus(msg, "error");
           }
         })
         .catch(function () {
-          setStatus("Network error. Please try again or email contact@lesdk.com.", "error");
+          setStatus("Network error. Please try again or email info@lesdk.com.", "error");
         })
         .then(function () {
           if (submit) {

@@ -17,6 +17,7 @@ PAGE_SLUGS = {
     "industry-healthcare", "industry-bfsi", "industry-manufacturing",
     "industry-automotive", "industry-energy", "industry-aec",
     "industry-logistics", "industry-retail",
+    "services-ai-nlp",
 }
 
 # Asset filenames that should be served from the site root with an absolute
@@ -95,7 +96,7 @@ SERVICES_CATEGORIES = [
     ("ai", "AI & Agentic AI",
      "Next-Gen AI & Agentic Intelligence",
      "Intelligent, adaptive, & scalable AI solutions for smarter decision-making.",
-     ["AI, NLP", "Computer Vision", "Speech", "ML, MLOps"]),
+     [("AI, NLP", "services-ai-nlp.html"), "Computer Vision", "Speech", "ML, MLOps"]),
     ("digital", "Digital Services",
      "Upskill Imperative Digital Transformation",
      "Boost your online visibility with creative solutions and strategies designed for web, mobile, front-end, back-end, and beyond.",
@@ -296,9 +297,12 @@ def build_nav(active=""):
                 f'href="services.html#{slug}">{label}'
                 f'<span class="mega-cat-arrow">&rsaquo;</span></a>'
             )
-            items_html = "".join(
-                f'<li><a href="services.html#{slug}">{it}</a></li>' for it in items
-            )
+            def _item_link(it):
+                if isinstance(it, tuple):
+                    lbl, href = it
+                    return f'<li><a href="{href}">{lbl}</a></li>'
+                return f'<li><a href="services.html#{slug}">{it}</a></li>'
+            items_html = "".join(_item_link(it) for it in items)
             panels_html += (
                 f'<div class="mega-panel{sel}" data-panel="{slug}">'
                 f'<div class="mega-panel-body">'
@@ -371,14 +375,16 @@ FOOTER = """<footer class="site-footer">
     <div>
       <h4>Services</h4>
       <ul>
-        <li><a href="services.html#ai">AI and Agentic AI</a></li>
-        <li><a href="services.html#data">Data and Analytics</a></li>
-        <li><a href="services.html#cloud">Cloud</a></li>
-        <li><a href="services.html#automation">Hyperautomation</a></li>
-        <li><a href="services.html#managed">Managed Services</a></li>
-        <li><a href="services.html#cyber">Cybersecurity</a></li>
+        <li><a href="services.html#ai">AI &amp; Agentic AI</a></li>
         <li><a href="services.html#digital">Digital Services</a></li>
+        <li><a href="services.html#data">Data &amp; Analytics</a></li>
+        <li><a href="services.html#cloud">Cloud</a></li>
+        <li><a href="services.html#cyber">Cybersecurity</a></li>
+        <li><a href="services.html#platforms">Enterprise &amp; SaaS Solutions</a></li>
+        <li><a href="services.html#managed">Managed Services</a></li>
         <li><a href="services.html#qe">Quality Engineering</a></li>
+        <li><a href="services.html#supply">Supply Chain</a></li>
+        <li><a href="services.html#blockchain">Blockchain</a></li>
       </ul>
     </div>
     <div>
@@ -520,7 +526,7 @@ HOME_BODY = """    <section class="hero" style="background-image:linear-gradient
             <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80" alt="Hyperautomation">
             <h3>Hyperautomation and Agentic AI</h3>
             <p>Industry-specific automation accelerators that cut cycle time and operating cost.</p>
-            <a href="services.html#automation">Automation Practice</a>
+            <a href="services.html#digital">Automation Practice</a>
           </article>
           <article class="card">
             <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80" alt="Talent management">
@@ -815,7 +821,7 @@ INDUSTRIES_BODY = """    <section class="hero" style="background-image:linear-gr
       <div class="container center">
         <h2>Automation in every industry</h2>
         <p class="sub">We embed automation accelerators, agentic AI workflows and measurable KPIs into every industry engagement.</p>
-        <a class="btn" href="services.html#automation">Explore our Hyperautomation practice</a>
+        <a class="btn" href="services.html#digital">Explore our Hyperautomation practice</a>
       </div>
     </section>
 """
@@ -1107,6 +1113,112 @@ INSIGHTS_BODY = """    <section class="hero" style="background-image:linear-grad
 
 
 # --------------------------------------------------------------------------------------
+# SERVICES → AI & AGENTIC AI → AI, NLP
+# --------------------------------------------------------------------------------------
+
+SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
+      <div class="container hero-split">
+        <div class="hero-copy">
+          <p class="crumbs"><a href="index.html">Home</a> &raquo; <a href="services.html">Services</a> &raquo; <a href="services.html#ai">AI &amp; Agentic AI</a> &raquo; AI / NLP</p>
+          <h1>Transform Your Enterprise With Advanced AI &amp; NLP Capabilities</h1>
+          <p class="lead">Turn natural language into operational leverage &mdash; automate understanding, unlock insights, and scale intelligent decisions across every function.</p>
+          <ul class="feature-ticks">
+            <li>Enterprise-grade APIs &amp; SDKs</li>
+            <li>Generative &amp; domain-tuned language models</li>
+            <li>Adaptive cognitive workflows</li>
+          </ul>
+        </div>
+        <div class="hero-illustration">
+          <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80" alt="AI and NLP illustration">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container center narrow">
+        <h2>Unlock the full value of language, at enterprise scale.</h2>
+        <p class="sub">LESDK&rsquo;s AI &amp; NLP practice helps enterprises cut through unstructured data, accelerate analysis, and ship intelligent automation that reads, writes and reasons in French, English and Indic languages. Production-grade language models, domain-tuned NLP pipelines and strict data-privacy controls keep your AI trustworthy &mdash; and moving the KPIs that matter: accuracy, throughput, customer satisfaction and responsible-AI compliance.</p>
+        <p><a class="btn btn-outline" href="contact.html">Book a Meeting</a></p>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2 class="center">Support Features</h2>
+        <p class="sub center">Modular capabilities you can plug into existing platforms &mdash; or compose into a full cognitive stack.</p>
+        <div class="grid feature-grid">
+          <article class="feature-card">
+            <div class="feature-ico">&#128172;</div>
+            <h3>Multilingual Conversational AI</h3>
+            <p>Chatbots and voice assistants tuned for French, English and Indic languages, with domain grounding, memory and human-agent fallback.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128225;</div>
+            <h3>Brand &amp; Channel Monitoring</h3>
+            <p>Track mentions, sentiment and emerging risks across your owned and earned channels, with real-time alerts for the teams who need to act.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128065;</div>
+            <h3>Visual Intelligence</h3>
+            <p>Computer-vision modules for quality inspection, worker safety and site monitoring, integrated with your existing CCTV, MES or fleet stack.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128737;</div>
+            <h3>Fraud &amp; Abuse Detection</h3>
+            <p>Behavioural AI that flags synthetic content, account-takeover patterns and coordinated misuse before they scale across your platform.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128221;</div>
+            <h3>Content Moderation &amp; Response</h3>
+            <p>Policy-aware pipelines that classify, redact and respond across email, chat and social channels &mdash; with full audit trails.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128274;</div>
+            <h3>Privacy-First AI</h3>
+            <p>Private deployments, tokenisation and strict data boundaries so your models stay compliant with GDPR, CCPA and internal data policies.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="center">Data &amp; Analytics Case Studies</h2>
+        <p class="sub center">Real engagements where AI and NLP moved enterprise KPIs.</p>
+        <div class="grid grid-3">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1000&q=80" alt="Fleet coaching">
+            <h3>Driver Coaching Copilot</h3>
+            <p>Fleet-wide telematics paired with an NLP coaching assistant reduced fuel burn by 12% across a 3,000-vehicle European operator.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1000&q=80" alt="Connected garage diagnostics">
+            <h3>Connected Garage Diagnostics</h3>
+            <p>Vision + LLM pairing turned mechanic notes and dash-cam feeds into a live fault-detection service for a Tier-1 auto supplier.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1581091870622-b91c58f77291?auto=format&fit=crop&w=1000&q=80" alt="Data center sunset">
+            <h3>Data-Centre Sunset Planning</h3>
+            <p>Agentic workflows mapped 14,000 legacy workloads to target cloud regions in 9 weeks, cutting plan-cycle time by 60%.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-band">
+      <div class="container center">
+        <h2>Ready to put AI to work?</h2>
+        <p class="sub">Tell us about the workflows you want to automate or the data you want to unlock. We&rsquo;ll come back with a scoped pilot in days, not months.</p>
+        <p><a class="btn" href="contact.html">Talk to our AI team</a></p>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
 # CAREERS
 # --------------------------------------------------------------------------------------
 
@@ -1363,6 +1475,7 @@ def main():
     wp("insights.html",          "Insights",                "insights.html",         INSIGHTS_BODY)
     wp("careers.html",           "Careers",                 "careers.html",          CAREERS_BODY)
     wp("contact.html",           "Contact",                 "contact.html",          CONTACT_BODY)
+    wp("services-ai-nlp.html",   "AI & NLP | Services",     "services.html",         SERVICES_AI_NLP_BODY)
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)
