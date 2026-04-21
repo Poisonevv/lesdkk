@@ -1190,6 +1190,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
             <p class="loc-region">France</p>
             <p class="loc-name"><a href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener"><strong>LESDK</strong></a></p>
             <p>45 Avenue de Centre<br>Montigny-le-Bretonneux, 78180<br>France</p>
+            <p>For general enquiries: <a href="tel:+33766550123">(+33) 07 66 55 01 23</a><br>Email: <a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
           </div>
           <div class="loc-col">
             <h2 class="loc-heading">Offices</h2>
