@@ -125,7 +125,7 @@
     }
 
     function tick() { go(idx + 1); }
-    function start() { timer = setInterval(tick, 8000); }
+    function start() { timer = setInterval(tick, 12000); }
     function stop() { if (timer) { clearInterval(timer); timer = null; } }
     function restart() { stop(); start(); }
 
