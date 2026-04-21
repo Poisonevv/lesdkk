@@ -1347,7 +1347,7 @@ SERVICES_SPEECH_BODY = """    <section class="hero hero-dark">
           </ul>
         </div>
         <div class="hero-illustration">
-          <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=1200&q=80" alt="Speech analytics studio microphone">
+          <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=1200&q=80" alt="AI voice assistant silhouette on a glowing blue orb">
         </div>
       </div>
     </section>
