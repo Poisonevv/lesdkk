@@ -244,11 +244,7 @@ def header(active=""):
     return (
         '<div class="top-bar" data-top-bar>\n'
         '  <div class="container top-bar-row">\n'
-        '    <div class="top-bar-left">\n'
-        '      <a href="mailto:contact@lesdk.com" class="top-link">contact@lesdk.com</a>\n'
-        '      <span class="top-sep">|</span>\n'
-        '      <a href="tel:+33766550123" class="top-link">07 66 55 01 23</a>\n'
-        '    </div>\n'
+        '    <div class="top-bar-left"></div>\n'
         '    <div class="top-bar-right">\n'
         '      <a class="top-link" href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Paris</a>\n'
         '      <span class="top-sep">&bull;</span>\n'
