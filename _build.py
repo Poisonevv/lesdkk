@@ -17,7 +17,7 @@ PAGE_SLUGS = {
     "industry-healthcare", "industry-bfsi", "industry-manufacturing",
     "industry-automotive", "industry-energy", "industry-aec",
     "industry-logistics", "industry-retail",
-    "services-ai-nlp", "services-computer-vision",
+    "services-ai-nlp", "services-computer-vision", "services-speech",
 }
 
 # Asset filenames that should be served from the site root with an absolute
@@ -96,7 +96,7 @@ SERVICES_CATEGORIES = [
     ("ai", "AI & Agentic AI",
      "Next-Gen AI & Agentic Intelligence",
      "Intelligent, adaptive, & scalable AI solutions for smarter decision-making.",
-     [("AI, NLP", "services-ai-nlp.html"), ("Computer Vision", "services-computer-vision.html"), "Speech", "ML, MLOps"]),
+     [("AI, NLP", "services-ai-nlp.html"), ("Computer Vision", "services-computer-vision.html"), ("Speech", "services-speech.html"), "ML, MLOps"]),
     ("digital", "Digital Services",
      "Upskill Imperative Digital Transformation",
      "Boost your online visibility with creative solutions and strategies designed for web, mobile, front-end, back-end, and beyond.",
@@ -1324,6 +1324,108 @@ SERVICES_CV_BODY = """    <section class="hero hero-dark">
 """
 
 
+SERVICES_SPEECH_BODY = """    <section class="hero hero-dark">
+      <div class="container hero-split">
+        <div class="hero-copy">
+          <p class="crumbs"><a href="index.html">Home</a> &raquo; <a href="services.html">Services</a> &raquo; <a href="services.html#ai">AI &amp; Agentic AI</a> &raquo; Speech</p>
+          <h1>Listen To What Your Customers Really Mean</h1>
+          <p class="lead">Harness AI-driven speech analytics to surface patterns, measure sentiment and turn every recorded conversation into an enterprise-grade signal.</p>
+          <ul class="feature-ticks">
+            <li>Elevated customer experience</li>
+            <li>Sharper operational efficiency</li>
+            <li>Evidence-based decisions</li>
+          </ul>
+        </div>
+        <div class="hero-illustration">
+          <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=1200&q=80" alt="Speech analytics studio microphone">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container center narrow">
+        <h2>Turn every call, interview and voice note into structured intelligence.</h2>
+        <p class="sub">LESDK&rsquo;s Speech practice decodes natural conversation with next-gen NLP &mdash; extracting meaning, sentiment and intent from live calls, recordings and voice archives. We help enterprises cut service cost, lift CSAT, and mine unstructured audio for the signals that drive product, sales and compliance decisions. The stack plugs into your CCaaS, CRM and data platform with strict data-privacy controls baked in.</p>
+        <p><a class="btn btn-outline" href="contact.html">Talk to Our Experts</a></p>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2 class="center">Support Features</h2>
+        <p class="sub center">Production-ready speech components you can deploy on their own or combine into an end-to-end voice intelligence pipeline.</p>
+        <div class="grid feature-grid">
+          <article class="feature-card">
+            <div class="feature-ico">&#9201;</div>
+            <h3>Real-Time Processing</h3>
+            <p>Low-latency streaming transcription and analytics deliver insight while the call is still live &mdash; not hours later.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128274;</div>
+            <h3>Privacy &amp; Security</h3>
+            <p>PII redaction, encryption at rest and in transit, and transparent data-handling workflows designed for regulated industries.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128200;</div>
+            <h3>Scalability &amp; Performance</h3>
+            <p>Cloud-native, auto-scaling architecture keeps latency flat and cost predictable whether you run 10 or 10,000 concurrent streams.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#127760;</div>
+            <h3>Multilingual &amp; Accent Coverage</h3>
+            <p>Domain-tuned models handle 40+ languages, regional accents and code-switching so your global customer base is understood equally well.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128172;</div>
+            <h3>Sentiment &amp; Intent Detection</h3>
+            <p>Classify churn risk, upsell triggers and compliance breaches in real time with tunable scoring models trained on your own taxonomy.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-ico">&#128230;</div>
+            <h3>Seamless CRM &amp; CCaaS Integration</h3>
+            <p>Drop-in connectors for Salesforce, ServiceNow, Genesys, Amazon Connect and custom contact-centre stacks &mdash; no rip-and-replace required.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="center">Data &amp; Analytics Case Studies</h2>
+        <p class="sub center">Speech deployments where LESDK moved real enterprise KPIs.</p>
+        <div class="grid grid-3">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1565688527174-775059ac429c?auto=format&fit=crop&w=1000&q=80" alt="Voice of customer intelligence">
+            <h3>Voice-of-Customer Intelligence</h3>
+            <p>Analysing 4M+ support calls with sentiment and intent models cut average handle time by 18% and lifted CSAT by 11 points in six months.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1000&q=80" alt="Sales call coaching">
+            <h3>Sales Call Coaching Copilot</h3>
+            <p>Post-call scoring and just-in-time coaching nudges lifted conversion rates 22% for an EU SaaS sales team across three regions.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1612831455359-970e23a1e4e9?auto=format&fit=crop&w=1000&q=80" alt="Multilingual contact-centre">
+            <h3>Multilingual Contact-Centre Copilot</h3>
+            <p>Real-time translation, summarisation and compliance cues let a 1,200-seat contact centre serve 14 languages with the same staffing plan.</p>
+            <a href="contact.html">Read more &rsaquo;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta-band">
+      <div class="container center">
+        <h2>Ready to hear what your customers are really telling you?</h2>
+        <p class="sub">Tell us the voice-data problem you want to solve &mdash; customer churn, sales coaching, compliance audit &mdash; and we&rsquo;ll scope a speech pilot in days, not months.</p>
+        <p><a class="btn" href="contact.html">Talk to our speech team</a></p>
+      </div>
+    </section>
+"""
+
+
 # --------------------------------------------------------------------------------------
 # CAREERS
 # --------------------------------------------------------------------------------------
@@ -1583,6 +1685,7 @@ def main():
     wp("contact.html",           "Contact",                 "contact.html",          CONTACT_BODY)
     wp("services-ai-nlp.html",          "AI & NLP | Services",          "services.html", SERVICES_AI_NLP_BODY)
     wp("services-computer-vision.html", "Computer Vision | Services",   "services.html", SERVICES_CV_BODY)
+    wp("services-speech.html",          "Speech Analytics | Services",  "services.html", SERVICES_SPEECH_BODY)
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)
