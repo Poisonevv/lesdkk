@@ -3,26 +3,16 @@
 (function () {
   "use strict";
 
-  // --- Top-bar peek on cursor near top ----------------------------------
+  // --- Top-bar reveal on scroll-down -----------------------------------
   var topBar = document.querySelector("[data-top-bar]");
   if (topBar) {
-    var hideTimer = null;
-    function show() {
-      clearTimeout(hideTimer);
-      topBar.classList.add("is-visible");
+    var SCROLL_THRESHOLD = 80;
+    function syncTopBar() {
+      if (window.scrollY > SCROLL_THRESHOLD) topBar.classList.add("is-visible");
+      else topBar.classList.remove("is-visible");
     }
-    function scheduleHide() {
-      clearTimeout(hideTimer);
-      hideTimer = setTimeout(function () {
-        topBar.classList.remove("is-visible");
-      }, 250);
-    }
-    document.addEventListener("mousemove", function (e) {
-      if (e.clientY <= 10) show();
-      else if (e.clientY > (topBar.offsetHeight + 20)) scheduleHide();
-    });
-    topBar.addEventListener("mouseenter", show);
-    topBar.addEventListener("mouseleave", scheduleHide);
+    syncTopBar();
+    window.addEventListener("scroll", syncTopBar, { passive: true });
   }
 
   // --- Mobile nav toggle -------------------------------------------------
