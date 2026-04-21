@@ -1,0 +1,976 @@
+"""Static site generator for LESDK (vdart.com / vdartdigital.com inspired layout).
+
+Run: python3 _build.py
+Writes HTML files in-place. Not shipped with the site — delete after run if desired,
+but it's harmless to keep in-repo as documentation of structure.
+"""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+
+# --------------------------------------------------------------------------------------
+# NAV + HEADER + FOOTER
+# --------------------------------------------------------------------------------------
+
+INDUSTRIES = [
+    ("industry-healthcare.html",  "Healthcare and Life Sciences"),
+    ("industry-bfsi.html",        "Banking, Financial Services and Insurance"),
+    ("industry-manufacturing.html","Manufacturing"),
+    ("industry-automotive.html",  "Automotive and Mobility"),
+    ("industry-energy.html",      "Energy and Utilities"),
+    ("industry-aec.html",         "Architecture, Engineering and Construction"),
+    ("industry-logistics.html",   "Logistics and Supply Chain"),
+    ("industry-retail.html",      "Retail and Consumer"),
+]
+
+SERVICES_SUB = [
+    ("services.html#ai",          "AI and Agentic AI"),
+    ("services.html#data",        "Data and Analytics"),
+    ("services.html#cloud",       "Cloud"),
+    ("services.html#automation",  "Hyperautomation"),
+    ("services.html#managed",     "Managed Services"),
+    ("services.html#cyber",       "Cybersecurity"),
+    ("services.html#digital",     "Digital Services"),
+    ("services.html#qe",          "Quality Engineering"),
+]
+
+PRODUCTS_SUB = [
+    ("products.html#vgo",         "VGO — Mobility and Fleet"),
+    ("products.html#vvalidate",   "V-Validate — Document AI"),
+    ("products.html#testsamurai", "TestSamurAI — QE Automation"),
+    ("products.html#lendsmart",   "LendSmart AI — Lending"),
+    ("products.html#idoclens",    "IDocLens — Doc Intelligence"),
+    ("products.html#vaartax",     "VaartaX — Conversational AI"),
+    ("products.html#forecai",     "ForeC.AI — Forecasting"),
+    ("products.html#vengage",     "VEngage — Workforce Engagement"),
+]
+
+INSIGHTS_SUB = [
+    ("insights.html#blog",     "Blog"),
+    ("insights.html#media",    "Our Media"),
+    ("insights.html#events",   "Events"),
+    ("insights.html#partners", "Partners"),
+]
+
+ABOUT_SUB = [
+    ("about.html#origin",        "Our Origin Story"),
+    ("about.html#culture",       "Our Culture"),
+    ("about.html#people",        "Our People"),
+    ("about.html#sustainability","Sustainability and ESG"),
+    ("about.html#global",        "Global Connections"),
+]
+
+CAREERS_SUB = [
+    ("careers.html#openings",   "Open Positions"),
+    ("careers.html#internship", "Internship Program"),
+    ("careers.html#referral",   "Referral Program"),
+    ("careers.html#life",       "Life at LESDK"),
+]
+
+
+def _li(items, active_page=""):
+    return "".join(
+        f'<a href="{href}">{label}</a>'
+        for href, label in items
+    )
+
+
+def dropdown(page_key, label, href, subitems, highlight=None, active=""):
+    cls = "dropdown"
+    active_cls = " active" if active == page_key else ""
+    top = f'<a class="dd-top{active_cls}" href="{href}">{label}</a>'
+    if not subitems:
+        return f'<div class="nav-item{" active" if active_cls else ""}">{top}</div>'
+    left = "".join(
+        f'<a href="{h}">{l} <span>&rsaquo;</span></a>' for h, l in subitems
+    )
+    right_html = highlight or ""
+    return (
+        f'<div class="nav-item dropdown">'
+        f'{top}'
+        f'<div class="mega-menu">'
+        f'<div class="mega-left">{left}</div>'
+        f'<div class="mega-right">{right_html}</div>'
+        f'</div>'
+        f'</div>'
+    )
+
+
+SERVICES_HIGHLIGHT = (
+    '<h4>Next-Gen AI, Agentic Intelligence and Hyperautomation</h4>'
+    '<ul><li>AI, NLP and Computer Vision</li>'
+    '<li>ML, MLOps and Speech</li>'
+    '<li>Hyperautomation and RPA</li>'
+    '<li>Agentic AI workflows</li></ul>'
+    '<p>Intelligent, adaptive and scalable AI solutions for smarter decision-making.</p>'
+    '<img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=900&q=80" alt="AI services">'
+)
+
+INDUSTRIES_HIGHLIGHT = (
+    '<h4>Automation-first across every industry</h4>'
+    '<ul><li>Industry-specific AI and RPA accelerators</li>'
+    '<li>Intelligent document processing</li>'
+    '<li>Predictive and generative use cases</li>'
+    '<li>Measurable cost and cycle-time reductions</li></ul>'
+    '<p>Every LESDK industry practice is designed with an automation-first operating model.</p>'
+    '<img src="https://images.unsplash.com/photo-1581091215367-59ab6b6e6e0a?auto=format&fit=crop&w=900&q=80" alt="Industry automation">'
+)
+
+PRODUCTS_HIGHLIGHT = (
+    '<h4>Platforms and accelerators</h4>'
+    '<ul><li>Productized automation accelerators</li>'
+    '<li>AI-first document and decisioning tools</li>'
+    '<li>Industry-tuned intelligent agents</li></ul>'
+    '<p>Reusable IP that shortens transformation timelines and lifts ROI.</p>'
+    '<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80" alt="Products">'
+)
+
+ABOUT_HIGHLIGHT = (
+    '<h4>Global delivery, local insight</h4>'
+    '<ul><li>Founded to pair France-focused consulting with India-based delivery</li>'
+    '<li>Culture built around ownership and craft</li>'
+    '<li>Sustainability and ESG embedded into delivery</li></ul>'
+    '<p>We combine strategy, engineering and talent into one accountable partnership.</p>'
+    '<img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80" alt="About LESDK">'
+)
+
+INSIGHTS_HIGHLIGHT = (
+    '<h4>Research and field perspectives</h4>'
+    '<ul><li>Playbooks on agentic AI and hyperautomation</li>'
+    '<li>Case studies across industries</li>'
+    '<li>Event series with delivery leaders</li></ul>'
+    '<p>Ideas you can act on this quarter, not next year.</p>'
+    '<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Insights">'
+)
+
+CAREERS_HIGHLIGHT = (
+    '<h4>Build your career with LESDK</h4>'
+    '<ul><li>Work on global transformation programs</li>'
+    '<li>Structured internship and referral programs</li>'
+    '<li>AI-first engineering culture</li></ul>'
+    '<p>We invest in people who want to own outcomes, not just tickets.</p>'
+    '<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80" alt="Careers">'
+)
+
+
+def build_nav(active=""):
+    def a(page, label):
+        cls = ' class="active"' if active == page else ""
+        return f'<a{cls} href="{page}">{label}</a>'
+
+    def dd(page_key, label, href, subitems, highlight):
+        active_cls = " active" if active == page_key else ""
+        left = "".join(
+            f'<a href="{h}">{l} <span>&rsaquo;</span></a>' for h, l in subitems
+        )
+        return (
+            f'<div class="nav-item dropdown">'
+            f'<a class="dd-top{active_cls}" href="{href}">{label}</a>'
+            f'<div class="mega-menu">'
+            f'<div class="mega-left">{left}</div>'
+            f'<div class="mega-right">{highlight}</div>'
+            f'</div>'
+            f'</div>'
+        )
+
+    parts = [
+        a("index.html", "Home"),
+        dd("about.html",     "About",             "about.html",              ABOUT_SUB,      ABOUT_HIGHLIGHT),
+        dd("services.html",  "Services",          "services.html",           SERVICES_SUB,   SERVICES_HIGHLIGHT),
+        a("talentmanagement.html", "Talent Management"),
+        dd("industries.html","Industries",        "industries.html",         INDUSTRIES,     INDUSTRIES_HIGHLIGHT),
+        dd("products.html",  "Products",          "products.html",           PRODUCTS_SUB,   PRODUCTS_HIGHLIGHT),
+        dd("insights.html",  "Insights",          "insights.html",           INSIGHTS_SUB,   INSIGHTS_HIGHLIGHT),
+        dd("careers.html",   "Careers",           "careers.html",            CAREERS_SUB,    CAREERS_HIGHLIGHT),
+        f'<a class="btn btn-sm{" active" if active=="contact.html" else ""}" href="contact.html">Contact</a>',
+    ]
+    return "\n        ".join(parts)
+
+
+def header(active=""):
+    return (
+        '<header class="site-header">\n'
+        '  <div class="container nav-row">\n'
+        '    <a class="brand" href="index.html"><img src="logo.png" alt="LESDK logo"></a>\n'
+        '    <nav class="nav">\n'
+        f'        {build_nav(active)}\n'
+        '    </nav>\n'
+        '  </div>\n'
+        '</header>'
+    )
+
+
+FOOTER = """<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <h4>LESDK</h4>
+      <p>Digital consulting, engineering, and talent. France-focused services delivered from India.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html#ai">AI and Agentic AI</a></li>
+        <li><a href="services.html#data">Data and Analytics</a></li>
+        <li><a href="services.html#cloud">Cloud</a></li>
+        <li><a href="services.html#automation">Hyperautomation</a></li>
+        <li><a href="services.html#managed">Managed Services</a></li>
+        <li><a href="services.html#cyber">Cybersecurity</a></li>
+        <li><a href="services.html#digital">Digital Services</a></li>
+        <li><a href="services.html#qe">Quality Engineering</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Industries</h4>
+      <ul>
+        <li><a href="industry-healthcare.html">Healthcare and Life Sciences</a></li>
+        <li><a href="industry-bfsi.html">Banking, Financial Services and Insurance</a></li>
+        <li><a href="industry-manufacturing.html">Manufacturing</a></li>
+        <li><a href="industry-automotive.html">Automotive and Mobility</a></li>
+        <li><a href="industry-energy.html">Energy and Utilities</a></li>
+        <li><a href="industry-aec.html">Architecture, Engineering and Construction</a></li>
+        <li><a href="industry-logistics.html">Logistics and Supply Chain</a></li>
+        <li><a href="industry-retail.html">Retail and Consumer</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="talentmanagement.html">Talent Management</a></li>
+        <li><a href="products.html">Products</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-row">
+    <p>&copy; LESDK 2026. All Rights Reserved.</p>
+    <div>
+      <a href="contact.html">Contact</a>
+      <a href="#">Disclaimer</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>"""
+
+
+def page(title, active, body):
+    return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LESDK | {title}</title>
+  <meta name="description" content="LESDK — digital consulting, hyperautomation, and talent. France-focused services delivered from India.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  {header(active)}
+  <main>
+{body}
+  </main>
+  {FOOTER}
+</body>
+</html>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# HOME
+# --------------------------------------------------------------------------------------
+
+HOME_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">DIGITAL CONSULTING, HYPERAUTOMATION AND TALENT</p>
+        <h1>Moving your future forward.</h1>
+        <p class="lead">LESDK helps organizations modernize operations, scale intelligent automation, and build high-performing teams for long-term growth — France-focused services delivered from India.</p>
+        <div class="actions">
+          <a class="btn" href="services.html">Explore Services</a>
+          <a class="btn btn-outline" href="industries.html">Industries We Serve</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>What We Do</h2>
+        <p class="sub">Strategy, engineering, automation and talent — designed for measurable outcomes.</p>
+        <div class="grid grid-3">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1000&q=80" alt="Digital technology">
+            <h3>Digital Technology Services</h3>
+            <p>Cloud modernization, product engineering, AI enablement, and enterprise integration programs.</p>
+            <a href="services.html">Discover Services</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1000&q=80" alt="Hyperautomation">
+            <h3>Hyperautomation and Agentic AI</h3>
+            <p>Industry-specific automation accelerators that cut cycle time and operating cost.</p>
+            <a href="services.html#automation">Automation Practice</a>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1000&q=80" alt="Talent management">
+            <h3>Staffing and Talent Management</h3>
+            <p>Specialized hiring and workforce planning across data, cloud, cybersecurity, and enterprise systems.</p>
+            <a href="talentmanagement.html">Talent Expertise</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Industries, with automation built-in</h2>
+        <p class="sub">Every LESDK industry practice has an automation-first operating model — not a bolt-on.</p>
+        <div class="grid grid-4">
+          <a class="tile tile-link" href="industry-healthcare.html"><h3>Healthcare &amp; Life Sciences</h3><p>Clinical ops, claims and intake automation.</p></a>
+          <a class="tile tile-link" href="industry-bfsi.html"><h3>Banking, Finance &amp; Insurance</h3><p>Underwriting, KYC and servicing automation.</p></a>
+          <a class="tile tile-link" href="industry-manufacturing.html"><h3>Manufacturing</h3><p>Smart factory, vision AI and MES automation.</p></a>
+          <a class="tile tile-link" href="industry-automotive.html"><h3>Automotive &amp; Mobility</h3><p>Fleet, aftersales and supply chain automation.</p></a>
+          <a class="tile tile-link" href="industry-energy.html"><h3>Energy &amp; Utilities</h3><p>Asset, outage and field service automation.</p></a>
+          <a class="tile tile-link" href="industry-aec.html"><h3>Engineering &amp; Construction</h3><p>BIM, compliance and project automation.</p></a>
+          <a class="tile tile-link" href="industry-logistics.html"><h3>Logistics &amp; Supply Chain</h3><p>Route, yard and warehouse automation.</p></a>
+          <a class="tile tile-link" href="industry-retail.html"><h3>Retail &amp; Consumer</h3><p>Store ops, pricing and CX automation.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div>
+          <h2>How We Can Help You</h2>
+          <p class="sub">We connect people, process, and technology to solve current challenges and prepare your business for what is next.</p>
+          <p>From advisory through execution, LESDK builds practical roadmaps and scalable solutions across your critical digital initiatives — with automation embedded at every layer.</p>
+          <a class="btn" href="contact.html">Talk to Our Team</a>
+        </div>
+        <img class="rounded" src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=1300&q=80" alt="Team meeting">
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Platforms and Accelerators</h2>
+        <p class="sub">Reusable IP that shortens transformation timelines.</p>
+        <div class="grid grid-3">
+          <article class="tile"><h3>VGO</h3><p>Mobility and fleet management platform for connected operations.</p><a href="products.html#vgo">Learn more</a></article>
+          <article class="tile"><h3>V-Validate</h3><p>AI-driven document authentication and KYC automation.</p><a href="products.html#vvalidate">Learn more</a></article>
+          <article class="tile"><h3>TestSamurAI</h3><p>Generative-AI quality engineering and test automation.</p><a href="products.html#testsamurai">Learn more</a></article>
+          <article class="tile"><h3>LendSmart AI</h3><p>Intelligent lending and decisioning for BFSI.</p><a href="products.html#lendsmart">Learn more</a></article>
+          <article class="tile"><h3>IDocLens</h3><p>Document intelligence for regulated industries.</p><a href="products.html#idoclens">Learn more</a></article>
+          <article class="tile"><h3>ForeC.AI</h3><p>Forecasting and planning for supply chain and ops.</p><a href="products.html#forecai">Learn more</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Case Studies</h2>
+        <div class="grid grid-3">
+          <article class="tile"><h3>ERP Hiring Cycle Reduced by 42%</h3><p>Built a focused talent pipeline for a global rollout and accelerated project onboarding timelines.</p></article>
+          <article class="tile"><h3>Service Levels Exceeded Across Programs</h3><p>Designed a managed support model with automation and proactive monitoring for consistent SLA performance.</p></article>
+          <article class="tile"><h3>Cloud Data Platform in 16 Weeks</h3><p>Delivered scalable architecture, data governance, and analytics dashboards for executive visibility.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta">
+      <div class="container center">
+        <h2>Ready to build with LESDK?</h2>
+        <p class="sub">Let&rsquo;s design a transformation roadmap tailored to your goals.</p>
+        <a class="btn" href="contact.html">Let's Talk</a>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# ABOUT
+# --------------------------------------------------------------------------------------
+
+ABOUT_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">ABOUT LESDK</p>
+        <h1>Built for transformation.</h1>
+        <p class="lead">LESDK is a consulting and technology partner helping organizations modernize systems, improve delivery performance, and build future-ready capabilities — with hyperautomation and agentic AI at the core.</p>
+      </div>
+    </section>
+
+    <section id="origin" class="section">
+      <div class="container split">
+        <div>
+          <h2>Our Origin Story</h2>
+          <p class="sub">We combine strategic thinking with practical execution.</p>
+          <p>LESDK was founded with a clear mission: deliver meaningful business outcomes through technology, talent, and operational excellence — bridging French enterprises with world-class delivery out of India.</p>
+          <p>Our teams work across advisory, engineering, and workforce transformation to help clients adapt faster and scale with confidence.</p>
+        </div>
+        <img class="rounded" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" alt="LESDK team">
+      </div>
+    </section>
+
+    <section id="culture" class="section alt">
+      <div class="container">
+        <h2>Our Culture</h2>
+        <p class="sub">Ownership, craft, and outcomes — in that order.</p>
+        <div class="grid grid-3">
+          <article class="tile"><h3>Ownership</h3><p>Every engagement has a single accountable lead who owns the result end-to-end.</p></article>
+          <article class="tile"><h3>Craft</h3><p>We favor small, senior teams over pyramids — and we invest in engineering excellence.</p></article>
+          <article class="tile"><h3>Outcomes</h3><p>We measure success by client KPIs, not by utilization.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="people" class="section">
+      <div class="container">
+        <h2>Our People</h2>
+        <p class="sub">Consultants, engineers and automation specialists across France and India.</p>
+        <p>We hire for curiosity and grit. Our bench is built around AI, data, cloud, cybersecurity and enterprise platforms — augmented with deep automation and QE capability.</p>
+      </div>
+    </section>
+
+    <section id="sustainability" class="section alt">
+      <div class="container">
+        <h2>Sustainability and ESG</h2>
+        <p class="sub">Responsibility embedded into delivery.</p>
+        <p>LESDK embeds ESG considerations into how we hire, how we deliver, and how we operate — including energy-aware cloud practices and responsible AI guardrails in every automation program.</p>
+      </div>
+    </section>
+
+    <section id="global" class="section">
+      <div class="container">
+        <h2>Global Connections</h2>
+        <p class="sub">France-focused, global-ready.</p>
+        <div class="grid grid-3">
+          <article class="tile"><h3>France</h3><p>Primary market and client footprint.</p></article>
+          <article class="tile"><h3>India</h3><p>Engineering, automation and QE delivery hubs.</p></article>
+          <article class="tile"><h3>Partners</h3><p>Select alliances with hyperscalers and platform vendors.</p></article>
+        </div>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# SERVICES
+# --------------------------------------------------------------------------------------
+
+SERVICES_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">OUR SERVICES</p>
+        <h1>Technology, automation and talent — unified.</h1>
+        <p class="lead">A complete portfolio of consulting, engineering, hyperautomation, and workforce solutions to power enterprise growth.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Service Portfolio</h2>
+        <p class="sub">Every capability is automation-aware and outcome-driven.</p>
+        <div class="grid grid-3">
+          <article id="ai" class="tile"><h3>AI and Agentic AI</h3><p>AI and NLP, Computer Vision, Speech, ML and MLOps, Agentic AI workflows and responsible AI guardrails.</p></article>
+          <article id="data" class="tile"><h3>Data and Analytics</h3><p>Data Science, Analytics, Reports, Big Data and Data Lake, Data Fabric and modern lakehouse.</p></article>
+          <article id="cloud" class="tile"><h3>Cloud</h3><p>Cloud Migration, Mainframe Modernization, SAP on Cloud, FinOps, Cloud Security and Platform Engineering.</p></article>
+          <article id="automation" class="tile"><h3>Hyperautomation</h3><p>RPA, intelligent document processing, DevSecOps automation, SRE and chaos engineering — wrapped with agentic AI.</p></article>
+          <article id="managed" class="tile"><h3>Managed Services</h3><p>Cloud Managed Services, Cloud Advisory, Network and Security Management, IT Operations and Service Management.</p></article>
+          <article id="cyber" class="tile"><h3>Cybersecurity</h3><p>CIAM, Workforce Identity, Security Engineering, Zero Trust Architecture, GRC, Cyber Defense and Resilience.</p></article>
+          <article id="digital" class="tile"><h3>Digital Services</h3><p>Full Stack Web, Mobile App Development, Apps Support, Back-End Development, Design and Architecture, UI/UX.</p></article>
+          <article id="qe" class="tile"><h3>Quality Engineering</h3><p>QA Consulting and Strategy, Agile Testing, Independent Certification, Managed Testing Services with AI-driven test automation.</p></article>
+          <article id="platforms" class="tile"><h3>Enterprise Platforms</h3><p>SAP, ServiceNow, Salesforce, Workday, Oracle, Adobe and Sitecore — implementation, integration and automation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container split">
+        <div>
+          <h2>Why LESDK</h2>
+          <p class="sub">Senior teams. Industry depth. Automation by default.</p>
+          <p>We plug in at the intersection of advisory and delivery, so you get a single partner responsible for shaping the roadmap and shipping the outcome.</p>
+          <a class="btn" href="contact.html">Start a Conversation</a>
+        </div>
+        <img class="rounded" src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1200&q=80" alt="Services">
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# TALENT MANAGEMENT
+# --------------------------------------------------------------------------------------
+
+TALENT_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">TALENT MANAGEMENT</p>
+        <h1>Specialized talent for digital growth.</h1>
+        <p class="lead">LESDK helps clients in France and global markets source, onboard, and scale high-performing teams from India — including AI, automation and QE specialists.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Talent Offerings</h2>
+        <div class="grid grid-3">
+          <article class="tile"><h3>Contract Staffing</h3><p>Fast access to skilled professionals for cloud, data, AI, automation and enterprise platform programs.</p></article>
+          <article class="tile"><h3>Permanent Hiring</h3><p>Targeted recruitment and role mapping for long-term capability building.</p></article>
+          <article class="tile"><h3>Project-based Teams</h3><p>Outcome-focused delivery squads aligned to project milestones and quality standards.</p></article>
+          <article class="tile"><h3>Managed Capacity</h3><p>Blended pods that combine engineering, QE and automation expertise under one SLA.</p></article>
+          <article class="tile"><h3>Executive Search</h3><p>Leadership placements for digital, data and transformation functions.</p></article>
+          <article class="tile"><h3>Workforce Advisory</h3><p>Skills planning, sourcing strategy and geographic delivery optimization.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container split">
+        <div>
+          <h2>Automation-ready talent bench</h2>
+          <p class="sub">Not just engineers — engineers who build with automation first.</p>
+          <p>Our talent pool is trained on hyperautomation, RPA, agentic AI workflows and AI-assisted coding, so programs ramp up faster and scale cleaner.</p>
+          <a class="btn" href="contact.html">Request Talent</a>
+        </div>
+        <img class="rounded" src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?auto=format&fit=crop&w=1200&q=80" alt="Talent bench">
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# INDUSTRIES OVERVIEW
+# --------------------------------------------------------------------------------------
+
+INDUSTRIES_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">INDUSTRIES</p>
+        <h1>Sector-specific expertise. Automation in every one.</h1>
+        <p class="lead">LESDK supports enterprise programs across key industries with tailored digital, automation and workforce solutions — each industry practice has an automation-first operating model baked in.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container grid grid-3">
+        <a class="tile tile-link" href="industry-healthcare.html"><h3>Healthcare and Life Sciences</h3><p>Interoperability, clinical operations and claims automation. Automation focus: intake, coding, prior-auth.</p></a>
+        <a class="tile tile-link" href="industry-bfsi.html"><h3>Banking, Financial Services and Insurance</h3><p>Digital onboarding, underwriting and servicing. Automation focus: KYC, underwriting, claims, reconciliation.</p></a>
+        <a class="tile tile-link" href="industry-manufacturing.html"><h3>Manufacturing</h3><p>Connected operations and smart factory. Automation focus: MES, vision AI, predictive maintenance.</p></a>
+        <a class="tile tile-link" href="industry-automotive.html"><h3>Automotive and Mobility</h3><p>Aftersales, fleet and supply chain. Automation focus: telematics, dealer ops, warranty.</p></a>
+        <a class="tile tile-link" href="industry-energy.html"><h3>Energy and Utilities</h3><p>Asset intelligence and reliability. Automation focus: outage, field service, meter-to-cash.</p></a>
+        <a class="tile tile-link" href="industry-aec.html"><h3>Architecture, Engineering and Construction</h3><p>BIM, project controls and compliance. Automation focus: document control, cost reporting, safety.</p></a>
+        <a class="tile tile-link" href="industry-logistics.html"><h3>Logistics and Supply Chain</h3><p>End-to-end supply chain visibility. Automation focus: yard, warehouse, last-mile.</p></a>
+        <a class="tile tile-link" href="industry-retail.html"><h3>Retail and Consumer</h3><p>Store ops, digital commerce and CX. Automation focus: pricing, inventory, service.</p></a>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container center">
+        <h2>Automation in every industry</h2>
+        <p class="sub">We embed automation accelerators, agentic AI workflows and measurable KPIs into every industry engagement.</p>
+        <a class="btn" href="services.html#automation">Explore our Hyperautomation practice</a>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# INDUSTRY SUB-PAGES (with automation focus)
+# --------------------------------------------------------------------------------------
+
+INDUSTRY_PAGES = {
+    "industry-healthcare.html": {
+        "title": "Healthcare and Life Sciences",
+        "kicker": "HEALTHCARE AND LIFE SCIENCES",
+        "hero_img": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1800&q=80",
+        "lead": "Patient-safe, compliance-ready digital transformation for providers, payers and life-sciences organizations.",
+        "what": [
+            ("Clinical and Operational Platforms", "EMR/EHR integration, interoperability (FHIR/HL7), and clinical workflow modernization."),
+            ("Payer Modernization", "Claims, benefits, and member experience platforms built on modern cloud stacks."),
+            ("Life Sciences R&amp;D", "Clinical data platforms, real-world evidence and regulatory analytics."),
+        ],
+        "automation": [
+            ("Intake and Prior Authorization", "Intelligent document processing + agentic AI to eliminate manual intake and prior-auth backlog."),
+            ("Medical Coding Assistance", "Generative-AI assistants to suggest, validate and audit codes at scale."),
+            ("Claims Processing", "Straight-through claims automation with exception triage and payer-specific rules."),
+            ("Pharmacovigilance", "Automated adverse-event intake, triage and reporting workflows."),
+        ],
+    },
+    "industry-bfsi.html": {
+        "title": "Banking, Financial Services and Insurance",
+        "kicker": "BANKING, FINANCIAL SERVICES AND INSURANCE",
+        "hero_img": "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?auto=format&fit=crop&w=1800&q=80",
+        "lead": "Digital core, risk and customer experience for banks, capital markets and insurers.",
+        "what": [
+            ("Digital Onboarding", "Omni-channel customer onboarding with AI-driven KYC and identity verification."),
+            ("Core Modernization", "Mainframe modernization, payments and ledger platforms on cloud."),
+            ("Risk and Compliance", "AML, fraud, GRC and regulatory reporting platforms."),
+        ],
+        "automation": [
+            ("KYC and AML", "Document AI + agentic workflows for onboarding, screening and ongoing due diligence."),
+            ("Underwriting", "AI-assisted underwriting for consumer lending, commercial and insurance."),
+            ("Claims and Servicing", "Touchless claims triage, settlement and customer servicing bots."),
+            ("Reconciliation and Close", "RPA + AI for nostro, inter-company and financial close cycles."),
+        ],
+    },
+    "industry-manufacturing.html": {
+        "title": "Manufacturing",
+        "kicker": "MANUFACTURING",
+        "hero_img": "https://images.unsplash.com/photo-1565043666747-69f6646db940?auto=format&fit=crop&w=1800&q=80",
+        "lead": "Smart factory, connected operations and AI-driven productivity for discrete and process manufacturing.",
+        "what": [
+            ("Smart Factory", "MES, IoT, and shop-floor analytics to increase OEE and quality."),
+            ("Connected Supply Chain", "Demand sensing, planning and supplier collaboration platforms."),
+            ("Engineering and Product", "PLM, product data and engineering workflow modernization."),
+        ],
+        "automation": [
+            ("Vision AI for Quality", "Defect detection, surface inspection and assembly verification at line speed."),
+            ("Predictive Maintenance", "Sensor-driven models to forecast failures and schedule interventions."),
+            ("MES Automation", "Line control, changeover and dispatch automation integrated with ERP."),
+            ("Supplier and PO Automation", "Touchless PO, invoice and goods-receipt processing."),
+        ],
+    },
+    "industry-automotive.html": {
+        "title": "Automotive and Mobility",
+        "kicker": "AUTOMOTIVE AND MOBILITY",
+        "hero_img": "https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1800&q=80",
+        "lead": "Connected vehicles, aftersales and fleet operations for OEMs, dealers and mobility operators.",
+        "what": [
+            ("Connected Vehicle", "Telematics, diagnostics and connected-services platforms."),
+            ("Dealer and Aftersales", "DMS, parts and service platforms modernized for digital CX."),
+            ("Fleet and Mobility", "Fleet management, EV charging and shared-mobility operations."),
+        ],
+        "automation": [
+            ("Fleet Operations", "Route, utilization and driver-score automation on platforms like VGO."),
+            ("Aftersales and Warranty", "Automated warranty claims, parts demand and service scheduling."),
+            ("Dealer Operations", "Lead triage, test-drive scheduling and service bay automation."),
+            ("Supply Chain", "Logistics visibility and exception-driven supplier actions."),
+        ],
+    },
+    "industry-energy.html": {
+        "title": "Energy and Utilities",
+        "kicker": "ENERGY AND UTILITIES",
+        "hero_img": "https://images.unsplash.com/photo-1548337138-e87d889cc369?auto=format&fit=crop&w=1800&q=80",
+        "lead": "Asset intelligence, reliability and customer platforms for power, gas, water and renewables.",
+        "what": [
+            ("Asset and Grid", "Asset performance management, grid analytics and renewables integration."),
+            ("Customer Operations", "Meter-to-cash, billing and digital customer platforms."),
+            ("Field and Safety", "Field workforce, HSE and compliance platforms."),
+        ],
+        "automation": [
+            ("Outage Management", "AI-driven outage prediction, dispatch and customer notification automation."),
+            ("Field Service", "Work-order routing, crew scheduling and mobile capture automation."),
+            ("Meter-to-Cash", "Exception-based billing, collections and dispute resolution automation."),
+            ("Asset Inspection", "Drone + computer-vision inspection for lines, pipes and substations."),
+        ],
+    },
+    "industry-aec.html": {
+        "title": "Architecture, Engineering and Construction",
+        "kicker": "ARCHITECTURE, ENGINEERING AND CONSTRUCTION",
+        "hero_img": "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1800&q=80",
+        "lead": "BIM, project controls and digital delivery for builders, owners and engineering firms.",
+        "what": [
+            ("Digital Delivery", "BIM, common data environments and digital twins."),
+            ("Project Controls", "Cost, schedule and risk platforms with real-time dashboards."),
+            ("Safety and Compliance", "HSE, permit-to-work and regulatory compliance platforms."),
+        ],
+        "automation": [
+            ("Document Control", "Automated document classification, review and distribution using AI."),
+            ("Quantity and Cost Reporting", "Automated cost reporting and variance narratives from ERP + BIM."),
+            ("Safety Monitoring", "Vision AI on site cameras for PPE and exclusion-zone compliance."),
+            ("RFI and Submittal Triage", "Agentic AI to triage, summarize and route RFIs and submittals."),
+        ],
+    },
+    "industry-logistics.html": {
+        "title": "Logistics and Supply Chain",
+        "kicker": "LOGISTICS AND SUPPLY CHAIN",
+        "hero_img": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1800&q=80",
+        "lead": "End-to-end visibility and AI-driven execution across transportation, warehouse and last-mile.",
+        "what": [
+            ("Transportation", "TMS modernization, carrier integration and visibility platforms."),
+            ("Warehouse", "WMS and yard platforms with robotics and analytics."),
+            ("Supply Chain Planning", "Demand, inventory and S&amp;OP platforms with AI forecasting."),
+        ],
+        "automation": [
+            ("Yard and Dock", "Vision AI and IoT to automate yard moves, dock scheduling and trailer tracking."),
+            ("Warehouse Operations", "Pick/pack optimization, exception handling and bot-orchestration."),
+            ("Last-Mile", "AI routing, ETA prediction and customer-notification automation."),
+            ("Control Tower", "Agentic AI control tower to triage disruptions and trigger playbooks."),
+        ],
+    },
+    "industry-retail.html": {
+        "title": "Retail and Consumer",
+        "kicker": "RETAIL AND CONSUMER",
+        "hero_img": "https://images.unsplash.com/photo-1515169067868-5387ec356754?auto=format&fit=crop&w=1800&q=80",
+        "lead": "Store, digital commerce and CX platforms for retailers, D2C brands and CPG manufacturers.",
+        "what": [
+            ("Digital Commerce", "Commerce, OMS and headless CX platforms."),
+            ("Store Operations", "In-store, POS and associate productivity platforms."),
+            ("Merchandising and Supply", "Assortment, pricing and supply chain platforms."),
+        ],
+        "automation": [
+            ("Pricing and Promotion", "AI-driven price and promo optimization with automated execution."),
+            ("Inventory and Replenishment", "Forecast-driven replenishment with exception-only human review."),
+            ("Customer Service", "Agentic AI contact center to automate tier-1 and assist tier-2 agents."),
+            ("Store Ops", "Task management and compliance automation on associate mobile apps."),
+        ],
+    },
+}
+
+
+def industry_body(spec):
+    what_tiles = "".join(
+        f'<article class="tile"><h3>{h}</h3><p>{p}</p></article>'
+        for h, p in spec["what"]
+    )
+    auto_tiles = "".join(
+        f'<article class="tile tile-accent"><h3>{h}</h3><p>{p}</p></article>'
+        for h, p in spec["automation"]
+    )
+    return f"""    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('{spec['hero_img']}')">
+      <div class="container">
+        <p class="kicker">{spec['kicker']}</p>
+        <h1>{spec['title']}</h1>
+        <p class="lead">{spec['lead']}</p>
+        <div class="actions">
+          <a class="btn" href="contact.html">Talk to an Industry Lead</a>
+          <a class="btn btn-outline" href="#automation">See Automation Focus</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>What We Do</h2>
+        <p class="sub">Industry-specific programs, delivered by senior teams.</p>
+        <div class="grid grid-3">{what_tiles}</div>
+      </div>
+    </section>
+
+    <section id="automation" class="section alt accent-band">
+      <div class="container">
+        <p class="kicker">AUTOMATION FOCUS</p>
+        <h2>Automation-first for {spec['title']}</h2>
+        <p class="sub">Every engagement is designed with agentic AI, hyperautomation and measurable KPIs baked in.</p>
+        <div class="grid grid-2">{auto_tiles}</div>
+        <p class="footnote">Typical outcomes: 30&ndash;60% cycle-time reduction, 20&ndash;40% cost-to-serve reduction, and double-digit NPS lift on automated journeys.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <div>
+          <h2>Why LESDK for {spec['title']}</h2>
+          <p class="sub">Industry depth, engineering craft and an automation-first delivery model.</p>
+          <p>We bring industry-specific accelerators, a senior delivery bench and productized automation IP — so programs ramp faster and compound value quarter after quarter.</p>
+          <a class="btn" href="contact.html">Start a Conversation</a>
+        </div>
+        <img class="rounded" src="{spec['hero_img']}" alt="{spec['title']}">
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# PRODUCTS
+# --------------------------------------------------------------------------------------
+
+PRODUCTS_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">PRODUCTS AND ACCELERATORS</p>
+        <h1>Productized IP that shortens transformation.</h1>
+        <p class="lead">A portfolio of platforms and accelerators focused on automation, AI and industry-specific workflows.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Our Platforms</h2>
+        <p class="sub">Reusable, industry-tuned products built to accelerate automation programs.</p>
+        <div class="grid grid-2">
+          <article id="vgo" class="tile"><h3>VGO&mdash;Mobility &amp; Fleet</h3><p>Connected-vehicle and fleet management platform for operators, OEMs and leasing companies.</p></article>
+          <article id="vvalidate" class="tile"><h3>V-Validate&mdash;Document AI</h3><p>AI-driven document authentication, KYC and identity verification.</p></article>
+          <article id="testsamurai" class="tile"><h3>TestSamurAI&mdash;QE Automation</h3><p>Generative-AI test authoring, execution and defect triage for modern QE.</p></article>
+          <article id="lendsmart" class="tile"><h3>LendSmart AI&mdash;Lending</h3><p>Intelligent lending decisioning and servicing for BFSI.</p></article>
+          <article id="idoclens" class="tile"><h3>IDocLens&mdash;Document Intelligence</h3><p>Document classification, extraction and validation for regulated industries.</p></article>
+          <article id="vaartax" class="tile"><h3>VaartaX&mdash;Conversational AI</h3><p>Enterprise-grade conversational and voice AI for service, sales and internal ops.</p></article>
+          <article id="forecai" class="tile"><h3>ForeC.AI&mdash;Forecasting</h3><p>AI forecasting for supply chain, demand and operations planning.</p></article>
+          <article id="vengage" class="tile"><h3>VEngage&mdash;Workforce Engagement</h3><p>Workforce engagement and productivity platform for distributed teams.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container center">
+        <h2>Looking for a custom accelerator?</h2>
+        <p class="sub">We build industry-specific accelerators on top of our platform IP.</p>
+        <a class="btn" href="contact.html">Request a Briefing</a>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# INSIGHTS
+# --------------------------------------------------------------------------------------
+
+INSIGHTS_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">INSIGHTS</p>
+        <h1>Ideas, research and client outcomes.</h1>
+        <p class="lead">Explore how LESDK helps enterprises innovate faster with practical digital transformation and automation strategies.</p>
+      </div>
+    </section>
+
+    <section id="blog" class="section">
+      <div class="container">
+        <h2>Blog</h2>
+        <div class="grid grid-3">
+          <article class="tile"><h3>Building Agentic AI Into Industry Workflows</h3><p>How to move from copilots to autonomous industry-specific agents.</p></article>
+          <article class="tile"><h3>Enterprise Hyperautomation Playbook</h3><p>Pragmatic sequencing of RPA, IDP and AI for measurable ROI.</p></article>
+          <article class="tile"><h3>Cloud Operating Models: Migration to Optimization</h3><p>Designing cloud governance and FinOps that sustain transformation ROI.</p></article>
+          <article class="tile"><h3>Modern Talent Models for High-Growth Tech Programs</h3><p>Blended teams that improve speed, quality and long-term capability building.</p></article>
+          <article class="tile"><h3>How to Build an Enterprise AI Roadmap</h3><p>A pragmatic framework to prioritize use cases, reduce delivery risk, and scale value.</p></article>
+          <article class="tile"><h3>Automation in Regulated Industries</h3><p>Controls, audit and explainability for AI and automation in BFSI and healthcare.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="media" class="section alt">
+      <div class="container">
+        <h2>Our Media</h2>
+        <p class="sub">Interviews, podcasts and long-form content with LESDK leadership.</p>
+      </div>
+    </section>
+
+    <section id="events" class="section">
+      <div class="container">
+        <h2>Events</h2>
+        <p class="sub">Roundtables and field events across France, India and beyond.</p>
+      </div>
+    </section>
+
+    <section id="partners" class="section alt">
+      <div class="container">
+        <h2>Partners</h2>
+        <p class="sub">Alliances with hyperscalers and platform vendors to accelerate outcomes.</p>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# CAREERS
+# --------------------------------------------------------------------------------------
+
+CAREERS_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">CAREERS</p>
+        <h1>Build your career with LESDK.</h1>
+        <p class="lead">Join a team focused on innovation, collaboration, and meaningful impact across enterprise programs.</p>
+      </div>
+    </section>
+
+    <section id="openings" class="section">
+      <div class="container">
+        <h2>Open Positions</h2>
+        <div class="grid grid-3">
+          <article class="tile"><h3>Senior Cloud Engineer</h3><p>Design and implement scalable cloud platforms for global enterprise clients.</p></article>
+          <article class="tile"><h3>Data Engineer</h3><p>Build resilient data pipelines and analytics platforms for advanced decision support.</p></article>
+          <article class="tile"><h3>Cybersecurity Analyst</h3><p>Strengthen security posture and risk controls across critical digital environments.</p></article>
+          <article class="tile"><h3>Automation Engineer (RPA + AI)</h3><p>Build agentic AI and hyperautomation workflows for regulated industries.</p></article>
+          <article class="tile"><h3>QE Engineer (TestSamurAI)</h3><p>AI-assisted test authoring, execution and defect triage at scale.</p></article>
+          <article class="tile"><h3>Industry Solution Consultant</h3><p>Partner with clients across BFSI, healthcare and manufacturing programs.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="internship" class="section alt">
+      <div class="container split">
+        <div>
+          <h2>Internship Program</h2>
+          <p class="sub">Structured program for engineering, data and consulting interns.</p>
+          <p>Rotate across live delivery teams in AI, automation and QE under senior mentorship.</p>
+        </div>
+        <img class="rounded" src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1200&q=80" alt="Internship">
+      </div>
+    </section>
+
+    <section id="referral" class="section">
+      <div class="container">
+        <h2>Referral Program</h2>
+        <p class="sub">Know someone great? Refer them and share in the outcome.</p>
+      </div>
+    </section>
+
+    <section id="life" class="section alt">
+      <div class="container">
+        <h2>Life at LESDK</h2>
+        <p class="sub">Ownership, craft and outcomes — across France and India.</p>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# CONTACT
+# --------------------------------------------------------------------------------------
+
+CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradient(rgba(255,255,255,.86),rgba(255,255,255,.86)),url('https://images.unsplash.com/photo-1485217988980-11786ced9454?auto=format&fit=crop&w=1800&q=80')">
+      <div class="container">
+        <p class="kicker">CONTACT</p>
+        <h1>Let's build your next transformation.</h1>
+        <p class="lead">Tell us your goals and our team will get back with a tailored approach.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container split">
+        <form>
+          <h2>Send Us a Message</h2>
+          <label for="name">Name</label>
+          <input id="name" type="text" placeholder="Your name">
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="you@company.com">
+          <label for="service">Area of Interest</label>
+          <select id="service">
+            <option>Digital Transformation</option>
+            <option>Hyperautomation &amp; Agentic AI</option>
+            <option>Talent Solutions</option>
+            <option>Managed Services</option>
+            <option>Industry-Specific Programs</option>
+          </select>
+          <label for="msg">Message</label>
+          <textarea id="msg" rows="5" placeholder="Tell us about your requirement"></textarea>
+          <p><a class="btn" href="mailto:lesdkofficial@gmail.com">Submit via Email</a></p>
+        </form>
+        <div>
+          <h2>Contact Details</h2>
+          <p class="sub">Email: lesdkofficial@gmail.com<br>India: +91 9894845222<br>France: +33 7 66 55 01 23<br>Operating Model: France-focused services delivered from India.</p>
+          <img class="rounded" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80" alt="Office workspace">
+        </div>
+      </div>
+    </section>
+"""
+
+
+# --------------------------------------------------------------------------------------
+# WRITE
+# --------------------------------------------------------------------------------------
+
+def write(filename, title, active, body):
+    (ROOT / filename).write_text(page(title, active, body))
+
+
+def main():
+    write("index.html",            "Home",                    "index.html",            HOME_BODY)
+    write("about.html",             "About",                   "about.html",            ABOUT_BODY)
+    write("services.html",          "Services",                "services.html",         SERVICES_BODY)
+    write("talentmanagement.html",  "Talent Management",       "talentmanagement.html", TALENT_BODY)
+    write("industries.html",        "Industries",              "industries.html",       INDUSTRIES_BODY)
+    write("products.html",          "Products",                "products.html",         PRODUCTS_BODY)
+    write("insights.html",          "Insights",                "insights.html",         INSIGHTS_BODY)
+    write("careers.html",           "Careers",                 "careers.html",          CAREERS_BODY)
+    write("contact.html",           "Contact",                 "contact.html",          CONTACT_BODY)
+    for fn, spec in INDUSTRY_PAGES.items():
+        write(fn, spec["title"], "industries.html", industry_body(spec))
+    print("OK — wrote", 9 + len(INDUSTRY_PAGES), "pages")
+
+
+if __name__ == "__main__":
+    main()

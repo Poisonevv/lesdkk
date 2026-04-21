@@ -50,7 +50,7 @@ a { color: inherit; }
   margin-left: -6px;
 }
 .brand img { height: 52px; width: auto; }
-.nav { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; position: relative; }
+.nav { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; position: relative; }
 .nav a {
   text-decoration: none;
   color: #444444;
@@ -58,6 +58,7 @@ a { color: inherit; }
   font-weight: 600;
   line-height: 1;
 }
+.nav .dd-top { display: inline-flex; align-items: center; }
 .nav a.active, .nav a:hover { color: #111111; }
 .nav-item {
   position: relative;
@@ -66,7 +67,7 @@ a { color: inherit; }
   min-height: 72px;
 }
 
-.dropdown > a::after {
+.dropdown > .dd-top::after {
   content: " \25BE";
   font-size: 11px;
   margin-left: 5px;
@@ -75,8 +76,9 @@ a { color: inherit; }
 .mega-menu {
   position: absolute;
   top: calc(100% - 1px);
-  left: -190px;
-  width: 620px;
+  left: 50%;
+  transform: translate(-50%, 8px);
+  width: min(640px, 92vw);
   background: #ffffff;
   border: 1px solid var(--line);
   box-shadow: 0 14px 40px rgba(0, 0, 0, 0.14);
@@ -86,15 +88,16 @@ a { color: inherit; }
   gap: 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
   transition: opacity 0.24s ease, transform 0.24s ease, visibility 0.24s ease;
   z-index: 100;
 }
+.nav-item:nth-last-child(-n+3) .mega-menu { left: auto; right: 0; transform: translate(0, 8px); }
+.nav-item:nth-last-child(-n+3):hover .mega-menu { transform: translate(0, 0); }
 
 .dropdown:hover .mega-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
 .mega-left, .mega-right { padding: 16px; }
@@ -196,7 +199,9 @@ h2 {
 .sub { margin: 0 0 24px; color: var(--muted); }
 
 .grid { display: grid; gap: 18px; }
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
 .card {
   background: var(--card);
@@ -216,9 +221,14 @@ h2 {
   border: 1px solid var(--line);
   border-radius: 12px;
   padding: 18px;
+  transition: box-shadow .18s ease, transform .18s ease, border-color .18s ease;
 }
 .tile h3 { margin-top: 0; font-size: 1.02rem; }
 .tile p { margin-bottom: 0; color: var(--muted); }
+.tile a { text-decoration: none; color: #111111; font-weight: 600; font-size: .92rem; display: inline-block; margin-top: 10px; }
+.tile-link { display: block; text-decoration: none; color: inherit; }
+.tile-link:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.08); transform: translateY(-2px); border-color: #c8c8c8; }
+.tile-accent { border-left: 3px solid #111111; background: #fafafa; }
 
 .split {
   display: grid;
@@ -246,9 +256,23 @@ h2 {
 
 .site-footer {
   background: #ffffff;
-  padding: 26px 0;
+  padding: 44px 0 22px;
   border-top: 1px solid var(--line);
 }
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 18px;
+}
+.footer-grid h4 { margin: 0 0 10px; font-size: 14px; letter-spacing: .4px; text-transform: uppercase; color: #111; }
+.footer-grid ul { list-style: none; padding: 0; margin: 0; }
+.footer-grid li { margin: 0 0 8px; font-size: 13.5px; }
+.footer-grid a { text-decoration: none; color: #444; }
+.footer-grid a:hover { color: #111; }
+.footer-grid p { margin: 0; color: var(--muted); font-size: 13.5px; }
 .footer-row {
   display: flex;
   justify-content: space-between;
@@ -276,8 +300,16 @@ input, textarea, select {
   padding: 10px;
 }
 
+.accent-band .kicker { color: #111; letter-spacing: .8px; }
+.footnote { margin-top: 16px; color: var(--muted); font-size: 13px; }
+
+@media (max-width: 1180px) {
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
 @media (max-width: 980px) {
   .nav a:not(.btn), .nav-item { display: none; }
-  .grid-3, .split { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4, .split { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
   .brand { margin-left: 0; }
 }
