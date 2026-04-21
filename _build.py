@@ -1088,7 +1088,7 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
     </section>
 
     <section class="section contact-section">
-      <div class="container contact-grid">
+      <div class="container">
         <div class="contact-form-col">
           <p class="kicker">Let's Talk</p>
           <h1 class="contact-title">Ready to elevate your business? Connect with us!</h1>
@@ -1154,40 +1154,52 @@ CONTACT_BODY = """    <section class="hero" style="background-image:linear-gradi
             <p class="form-status" data-form-status role="status" aria-live="polite"></p>
           </form>
         </div>
-
-        <aside class="contact-side">
-          <div class="contact-desk">
-            <h3>For General Queries, Escalations &amp; Business Enquiries</h3>
-            <p class="desk-sub">Speak with our Customer Service Associate</p>
-            <p class="desk-hours"><strong>Hours of Operations</strong><br>Monday to Friday<br>9:00 AM CET to 6:00 PM CET</p>
-            <p><strong>Phone</strong><br><a href="tel:+33766550123">+33 07 66 55 01 23</a></p>
-            <p><strong>Email</strong><br><a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
-          </div>
-          <div class="contact-desk">
-            <h3>Consultant Related Queries</h3>
-            <p class="desk-hours"><strong>Hours of Operations</strong><br>Monday to Friday<br>9:00 AM CET to 6:00 PM CET</p>
-            <p><strong>Phone</strong><br><a href="tel:+33745239760">+33 07 45 23 97 60</a></p>
-            <p><strong>Email</strong><br><a href="mailto:support@lesdk.com">support@lesdk.com</a></p>
-          </div>
-        </aside>
       </div>
     </section>
 
-    <section class="section contact-offices">
+    <section class="section contact-desks-section">
       <div class="container">
-        <p class="kicker">Our Offices</p>
-        <h2>Where to find us</h2>
-        <div class="offices-grid">
-          <article class="office-card">
-            <h3>Headquarters — France</h3>
-            <p>45 Avenue de Centre,<br>Montigny-le-Bretonneux, 78180</p>
-            <p><a class="office-link" href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Open in Google Maps ›</a></p>
-          </article>
-          <article class="office-card">
-            <h3>Office — India</h3>
+        <div class="contact-desks">
+          <div class="contact-desk">
+            <h3>For General Queries, Escalations &amp; Business Enquiries <span class="req">*</span></h3>
+            <p class="desk-sub">Speak with our Customer Service Associate</p>
+            <p class="desk-label"><strong>Hours of Operations <span class="req">*</span></strong></p>
+            <p class="desk-text">Monday to Friday</p>
+            <p class="desk-text">9:00 AM CET to 6:00 PM CET</p>
+            <p class="desk-text">Phone Number: <a href="tel:+33766550123">(+33) 07 66 55 01 23</a></p>
+            <p class="desk-text">Email: <a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
+          </div>
+          <div class="contact-desk">
+            <h3>Consultant Related Queries <span class="req">*</span></h3>
+            <p class="desk-label"><strong>Hours of Operations <span class="req">*</span></strong></p>
+            <p class="desk-text">Monday to Friday</p>
+            <p class="desk-text">9:00 AM CET to 6:00 PM CET</p>
+            <p class="desk-text">Phone Number: <a href="tel:+33745239760">(+33) 07 45 23 97 60</a></p>
+            <p class="desk-text">Email: <a href="mailto:support@lesdk.com">support@lesdk.com</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-locations">
+      <div class="container">
+        <p class="kicker">Locations</p>
+        <h2 class="loc-heading">Headquarters</h2>
+        <div class="loc-block">
+          <p class="loc-name"><strong>LESDK</strong></p>
+          <p>45 Avenue de Centre<br>Montigny-le-Bretonneux, 78180<br>France</p>
+          <p><a class="office-link" href="https://www.google.com/maps/place/45+Av.+du+Centre,+78180+Montigny-le-Bretonneux,+France/@48.7839251,2.0433386,19z" target="_blank" rel="noopener">Open in Google Maps ›</a></p>
+        </div>
+
+        <h2 class="loc-heading">Global offices</h2>
+        <div class="loc-grid">
+          <div class="loc-block">
+            <p class="loc-region">India</p>
+            <p class="loc-name"><strong>LESDK India Office</strong></p>
             <p>75, Thendral Nagar,<br>near SBIOA School, Airport Post,<br>Trichy — 620007</p>
+            <p>For general enquiries: <a href="tel:+919894845222">+91 98948 45222</a><br>Email: <a href="mailto:info@lesdk.com">info@lesdk.com</a></p>
             <p><a class="office-link" href="https://www.google.com/maps/place/10%C2%B044'35.9%22N+78%C2%B041'58.0%22E/@10.7433143,78.6988043,269m" target="_blank" rel="noopener">Open in Google Maps ›</a></p>
-          </article>
+          </div>
         </div>
       </div>
     </section>
