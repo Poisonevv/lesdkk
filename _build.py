@@ -181,25 +181,24 @@ def build_nav(active=""):
         dd("insights.html",  "Insights",          "insights.html",           INSIGHTS_SUB,   INSIGHTS_HIGHLIGHT),
         dd("about.html",     "About",             "about.html",              ABOUT_SUB,      ABOUT_HIGHLIGHT),
         dd("careers.html",   "Careers",           "careers.html",            CAREERS_SUB,    CAREERS_HIGHLIGHT),
-        f'<a class="btn btn-sm{" active" if active=="contact.html" else ""}" href="contact.html">Contact</a>',
+        f'<a class="btn btn-sm{" active" if active=="contact.html" else ""}" href="contact.html">Contact Us</a>',
     ]
     return "\n        ".join(parts)
 
 
 def header(active=""):
     return (
-        '<div class="top-bar">\n'
+        '<div class="top-bar" data-top-bar>\n'
         '  <div class="container top-bar-row">\n'
         '    <div class="top-bar-left">\n'
-        '      <a href="mailto:lesdkofficial@gmail.com" class="top-link">lesdkofficial@gmail.com</a>\n'
+        '      <a href="mailto:contact@lesdk.com" class="top-link">contact@lesdk.com</a>\n'
         '      <span class="top-sep">|</span>\n'
         '      <a href="tel:+33766550123" class="top-link">+33 7 66 55 01 23</a>\n'
         '    </div>\n'
         '    <div class="top-bar-right">\n'
-        '      <span class="top-link">Paris &bull; Bengaluru</span>\n'
+        '      <span class="top-link">Paris &bull; Trichy</span>\n'
         '      <span class="top-sep">|</span>\n'
         '      <a class="top-link" href="https://www.linkedin.com" aria-label="LinkedIn">LinkedIn</a>\n'
-        '      <a class="top-link" href="careers.html">Careers</a>\n'
         '    </div>\n'
         '  </div>\n'
         '</div>\n'

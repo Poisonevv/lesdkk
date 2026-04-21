@@ -3,6 +3,28 @@
 (function () {
   "use strict";
 
+  // --- Top-bar peek on cursor near top ----------------------------------
+  var topBar = document.querySelector("[data-top-bar]");
+  if (topBar) {
+    var hideTimer = null;
+    function show() {
+      clearTimeout(hideTimer);
+      topBar.classList.add("is-visible");
+    }
+    function scheduleHide() {
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(function () {
+        topBar.classList.remove("is-visible");
+      }, 250);
+    }
+    document.addEventListener("mousemove", function (e) {
+      if (e.clientY <= 10) show();
+      else if (e.clientY > (topBar.offsetHeight + 20)) scheduleHide();
+    });
+    topBar.addEventListener("mouseenter", show);
+    topBar.addEventListener("mouseleave", scheduleHide);
+  }
+
   // --- Mobile nav toggle -------------------------------------------------
   var toggle = document.querySelector("[data-nav-toggle]");
   var nav = document.getElementById("primary-nav");
