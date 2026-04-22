@@ -18,6 +18,8 @@ PAGE_SLUGS = {
     "industry-automotive", "industry-energy", "industry-aec",
     "industry-logistics", "industry-retail",
     "services-ai-nlp", "services-computer-vision", "services-speech", "services-ml-mlops",
+    "services-iot", "services-data-science", "services-analytics", "services-reports",
+    "services-big-data-data-lake", "services-data-fabric",
 }
 
 # Asset filenames that should be served from the site root with an absolute
@@ -107,8 +109,12 @@ SERVICES_CATEGORIES = [
     ("data", "Data & Analytics",
      "Drive Growth United by Data",
      "Turn data into actionable insights, and drive smarter decisions for strategic growth, keeping you ahead of your competition.",
-     ["Internet of Things (IoT)", "Data Science", "Analytics", "Reports",
-      "Big Data, Data Lake", "Data Fabric"]),
+     [("Internet of Things (IoT)", "services-iot.html"),
+      ("Data Science", "services-data-science.html"),
+      ("Analytics", "services-analytics.html"),
+      ("Reports", "services-reports.html"),
+      ("Big Data, Data Lake", "services-big-data-data-lake.html"),
+      ("Data Fabric", "services-data-fabric.html")]),
     ("cloud", "Cloud",
      "Seamless Cloud Solutions",
      "Cost-effective, flexible, & seamless cloud management for uninterrupted access.",
@@ -1176,6 +1182,261 @@ AI_CASES_VISION   = _ai_cases_carousel_html("Vision deployments where LESDK move
 AI_CASES_SPEECH   = _ai_cases_carousel_html("Speech deployments where LESDK moved real enterprise KPIs.")
 AI_CASES_MLOPS    = _ai_cases_carousel_html("ML and MLOps programs where LESDK moved real enterprise KPIs.")
 
+DATA_CASES_IOT        = _ai_cases_carousel_html("IoT and data-analytics programs where LESDK moved real enterprise KPIs.")
+DATA_CASES_DS         = _ai_cases_carousel_html("Data-science engagements where LESDK lifted real business KPIs.")
+DATA_CASES_ANALYTICS  = _ai_cases_carousel_html("Analytics deployments where LESDK sharpened enterprise decisions.")
+DATA_CASES_REPORTS    = _ai_cases_carousel_html("Reporting engagements where LESDK shortened the path to insight.")
+DATA_CASES_BIGDATA    = _ai_cases_carousel_html("Big-data and data-lake programs where LESDK unlocked enterprise value.")
+DATA_CASES_FABRIC     = _ai_cases_carousel_html("Data-fabric engagements where LESDK unified the enterprise data estate.")
+
+
+# --------------------------------------------------------------------------------------
+# SERVICES → DATA & ANALYTICS → (IoT, Data Science, Analytics, Reports,
+#                                Big Data/Data Lake, Data Fabric)
+# --------------------------------------------------------------------------------------
+
+def _data_page_body(breadcrumb_label, title, lead, bullets, hero_img, hero_alt,
+                    intro_h2, intro_p, intro_cta_label,
+                    features, cta_h2, cta_p, cta_btn_label, cases_marker):
+    bullets_html = "\n".join(f"            <li>{b}</li>" for b in bullets)
+    feat_ico_defaults = ["&#128202;", "&#128274;", "&#128421;", "&#128202;", "&#128187;", "&#128279;"]
+    feat_html = []
+    for i, (fh, fb) in enumerate(features):
+        ico = feat_ico_defaults[i % len(feat_ico_defaults)]
+        feat_html.append(
+            '          <article class="feature-card">\n'
+            f'            <div class="feature-ico">{ico}</div>\n'
+            f'            <h3>{fh}</h3>\n'
+            f'            <p>{fb}</p>\n'
+            '          </article>'
+        )
+    feat_block = "\n".join(feat_html)
+    return (
+        '    <section class="hero hero-dark">\n'
+        '      <div class="container hero-split">\n'
+        '        <div class="hero-copy">\n'
+        f'          <p class="crumbs"><a href="index.html">Home</a> &raquo; <a href="services.html">Services</a> &raquo; <a href="services.html#data">Data &amp; Analytics</a> &raquo; {breadcrumb_label}</p>\n'
+        f'          <h1>{title}</h1>\n'
+        f'          <p class="lead">{lead}</p>\n'
+        '          <ul class="feature-ticks">\n'
+        f'{bullets_html}\n'
+        '          </ul>\n'
+        '        </div>\n'
+        '        <div class="hero-illustration">\n'
+        f'          <img src="{hero_img}" alt="{hero_alt}">\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        '    <section class="section">\n'
+        '      <div class="container center narrow">\n'
+        f'        <h2>{intro_h2}</h2>\n'
+        f'        <p class="sub">{intro_p}</p>\n'
+        f'        <p><a class="btn btn-outline" href="contact.html">{intro_cta_label}</a></p>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        '    <section class="section alt">\n'
+        '      <div class="container">\n'
+        '        <h2 class="center">Support Features</h2>\n'
+        '        <div class="grid feature-grid">\n'
+        f'{feat_block}\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        f'{cases_marker}\n'
+        '\n'
+        '    <section class="section cta-band">\n'
+        '      <div class="container center">\n'
+        f'        <h2>{cta_h2}</h2>\n'
+        f'        <p class="sub">{cta_p}</p>\n'
+        f'        <p><a class="btn" href="contact.html">{cta_btn_label}</a></p>\n'
+        '      </div>\n'
+        '    </section>\n'
+    )
+
+
+SERVICES_IOT_BODY = _data_page_body(
+    "Internet of Things (IoT)",
+    "Connect Every Asset, Monetise Every Signal With IoT",
+    "Turn distributed devices into a secure, real-time data fabric &mdash; and monetise the insights that only connected operations can unlock.",
+    ["Edge-to-cloud connectivity", "End-to-end data integrity", "Unified device management"],
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+    "IoT circuit board with connected components",
+    "Edge-to-cloud intelligence, built on trusted data.",
+    "LESDK&rsquo;s IoT practice wires together sensors, gateways, streaming pipelines and cloud analytics into one governed platform. We pair device engineering and security specialists with data architects so every packet &mdash; from the shop floor to the boardroom &mdash; is protected, enriched and ready to drive decisions in near real time.",
+    "Talk to Our Experts",
+    [
+        ("Edge-to-Cloud Connectivity",
+         "We engineer reliable, low-latency links between field devices and the cloud so data keeps flowing even over patchy networks and hostile environments."),
+        ("End-to-End Security Approach",
+         "Device attestation, mutual TLS and hardware-rooted encryption guard every hop from sensor to data lake &mdash; without slowing operations down."),
+        ("Simplified Device Management",
+         "Zero-touch provisioning, remote firmware updates and configuration-as-code turn fleets of tens of thousands of devices into a single manageable estate."),
+        ("Safeguards for Data Integrity",
+         "Signed telemetry, tamper-evident storage and role-based access controls ensure the data feeding your dashboards is the data your devices actually sent."),
+        ("Advanced Analytics Capabilities",
+         "Streaming analytics, anomaly detection and digital-twin models turn raw telemetry into predictive, decision-grade insight for operations and finance."),
+        ("Standardised Communication Protocols",
+         "MQTT, OPC UA, LoRaWAN, Modbus and more &mdash; we bridge mixed-vendor device estates into one interoperable platform with predictable behaviour."),
+    ],
+    "Ready to turn your connected estate into a competitive advantage?",
+    "Tell us where your sensors live &mdash; factory floor, fleet, building, grid &mdash; and we&rsquo;ll scope an IoT blueprint that delivers measurable ROI, not just dashboards.",
+    "Schedule an IoT workshop",
+    "__DATA_CASES_IOT__",
+)
+
+SERVICES_DATA_SCIENCE_BODY = _data_page_body(
+    "Data Science",
+    "Turn Raw Data Into Confident Decisions",
+    "Go beyond reporting &mdash; use statistics, machine learning and causal analysis to explain what&rsquo;s happening, predict what&rsquo;s next and recommend the right move.",
+    ["Data-driven decisions", "Improved operational efficiency", "Predictive &amp; prescriptive analytics"],
+    "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+    "Analytics dashboard with colourful charts on a laptop",
+    "From hypothesis to hardened model &mdash; responsibly.",
+    "LESDK&rsquo;s Data Science team combines statistical rigour with modern ML tooling to solve problems you can&rsquo;t answer with SQL alone &mdash; forecasting demand, scoring risk, detecting fraud, recommending next-best-action. We build models your auditors trust, your engineers can ship and your business users actually use.",
+    "Book a Meeting",
+    [
+        ("Collaborating for Success",
+         "Cross-functional squads embed with your product, risk and operations teams so models are framed around real business questions &mdash; not lab experiments."),
+        ("Robust Measures to Safeguard Privacy",
+         "Differential privacy, data minimisation, encryption in transit and at rest, and strict access controls protect sensitive records at every stage of the pipeline."),
+        ("Understanding Complexity",
+         "Explainable models, SHAP values and fit-for-purpose surrogate models make complex systems transparent to regulators, auditors and business stakeholders."),
+        ("Maximising ROI",
+         "Every engagement starts with a clear success metric and economic model so each experiment is tied to a measurable business impact, not just F1 scores."),
+        ("Seamless Adoption &amp; Integration",
+         "We hand models off with production-grade APIs, monitoring dashboards and change-management playbooks so operational teams adopt them on day one."),
+        ("Ethical Data Governance",
+         "Model cards, bias testing and policy-driven guardrails ensure each model meets your internal risk framework and evolving regulatory requirements."),
+    ],
+    "Ready to turn data science into a business-critical capability?",
+    "Share the decision you want to sharpen &mdash; pricing, churn, credit, demand, quality &mdash; and we&rsquo;ll design a data-science pilot that proves value in weeks.",
+    "Book a data-science pilot",
+    "__DATA_CASES_DS__",
+)
+
+SERVICES_ANALYTICS_BODY = _data_page_body(
+    "Analytics",
+    "Make Every Decision Count With Advanced Analytics",
+    "Go beyond basic reporting &mdash; uncover hidden patterns, forecast future trends and surface actionable insights that optimise performance and hit your business targets.",
+    ["Actionable insights", "Data-driven decisions", "Optimised performance"],
+    "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80",
+    "Dark analytics dashboard with charts and KPIs",
+    "Turn dashboards into decisions, at every level of the business.",
+    "LESDK&rsquo;s Data Analytics practice combines advanced statistics, powerful visualisation and modern ML to translate raw enterprise data into the precise signals leaders need. Our analytics platforms support risk management, predictive planning and operational optimisation &mdash; ready for a world where the data landscape changes by the week.",
+    "Schedule a Meeting",
+    [
+        ("Data Quality &amp; Availability",
+         "We harden your pipelines with data-quality checks, cleansing and centralised access so every analyst starts from the same trusted, timely dataset."),
+        ("Data Security &amp; Privacy",
+         "Fine-grained access controls, authentication and auditable data lineage protect sensitive information and keep you aligned with privacy regulations."),
+        ("Integration of Data Sources",
+         "A centralised data landscape fuses ERP, CRM, CX, IoT and third-party feeds into one cross-departmental fabric &mdash; minimising silos and rework."),
+        ("Costs &amp; Infrastructure",
+         "Cloud-native architecture, elastic compute and a pragmatic mix of open-source tools give you scalable analytics capacity without runaway run-rates."),
+        ("Data Governance &amp; Compliance",
+         "Policy-driven governance, data stewardship and lineage tracking support regulatory reporting and make analytics changes safe to ship."),
+        ("Time Constraints",
+         "Automated data preparation, reusable metric layers and prioritised backlogs free analysts to focus on high-impact strategic questions rather than plumbing."),
+    ],
+    "Ready to make every decision count?",
+    "Tell us the metric you&rsquo;re trying to move &mdash; revenue, margin, customer risk, operational uptime &mdash; and we&rsquo;ll shape an analytics roadmap around it.",
+    "Book an analytics consultation",
+    "__DATA_CASES_ANALYTICS__",
+)
+
+SERVICES_REPORTS_BODY = _data_page_body(
+    "Reports",
+    "Streamline Reporting &amp; Gain Strategic Advantage",
+    "Simplify complex data workflows and unlock strategic insights with intelligent, self-service reporting built for executives, operators and auditors alike.",
+    ["Automated efficiency", "Customisable insights", "Real-time advantage"],
+    "https://images.unsplash.com/photo-1543286386-713bdd548da4?auto=format&fit=crop&w=1600&q=80",
+    "Dark financial dashboard with candlestick charts",
+    "From spreadsheets to strategic reporting &mdash; without the friction.",
+    "LESDK&rsquo;s reporting practice replaces fragile spreadsheets and static PDFs with governed, interactive reports that drive real business action. We help you standardise definitions, automate distribution and connect performance monitoring, business intelligence, risk management and forecasting into a single, trusted reporting layer.",
+    "Schedule a Consultation",
+    [
+        ("Performance &amp; Latency",
+         "Our database engineers tune queries, indexes and caching layers so reports render fast even across billion-row tables and complex multi-source joins."),
+        ("User Interface &amp; Experience",
+         "Customisable templates, interactive visualisations and role-based views let each audience self-serve the exact numbers they need, their way."),
+        ("Integration With Existing Systems",
+         "A rich library of connectors and APIs links seamlessly to your data warehouses, lakehouses and line-of-business apps &mdash; no fragile custom exports."),
+        ("Report Customisation",
+         "An intuitive report builder lets business users craft, clone and share custom reports without waiting on engineering tickets or dev cycles."),
+        ("Cost &amp; Licensing",
+         "Transparent pricing and tiered capacity models let you scale reporting coverage without surprise BI licence costs or locked-in vendor premiums."),
+        ("Report Performance Optimisation",
+         "Materialised views, incremental refreshes and query-optimisation strategies deliver consistently fast reports even at enterprise concurrency."),
+    ],
+    "Ready to make reporting a strategic asset, not a fire drill?",
+    "Share the reporting pain you want to fix &mdash; month-end close, regulatory submission, exec dashboards &mdash; and we&rsquo;ll design a streamlined, auditable solution.",
+    "Schedule a reporting review",
+    "__DATA_CASES_REPORTS__",
+)
+
+SERVICES_BIGDATA_BODY = _data_page_body(
+    "Big Data &amp; Data Lake",
+    "Unlock Valuable Insights From Big Data &amp; Data Lake",
+    "Consolidate structured, semi-structured and unstructured data assets into a single, governed lakehouse &mdash; and make confident, data-driven decisions at enterprise scale.",
+    ["Unified data management", "Actionable insights at scale", "Advanced analytics capabilities"],
+    "https://images.unsplash.com/photo-1544256718-3bcf237f3974?auto=format&fit=crop&w=1600&q=80",
+    "Data centre with server racks and fibre connections",
+    "One trusted lakehouse. Every data asset. Ready for analytics and AI.",
+    "LESDK&rsquo;s Big Data &amp; Data Lake practice helps you integrate, manage and analyse data at petabyte scale. We design lakehouse architectures that unify transactional, telemetry and unstructured content into a single governed foundation, so your analytics and AI workloads run on consistent, trustworthy data &mdash; and your teams stop arguing about which number is right.",
+    "Talk to Our Experts",
+    [
+        ("Data Quality Framework",
+         "Robust data-quality standards, validation processes and automated cleansing routines keep the lake trustworthy as sources change and volumes grow."),
+        ("Advanced Data Security Measures",
+         "Column-level encryption, access policies and regular security audits safeguard sensitive data against unauthorised access and insider risk."),
+        ("Centralised Access Control",
+         "Role-based access control (RBAC), attribute-based policies and SSO integration mean the right people &mdash; and only the right people &mdash; see each dataset."),
+        ("Robust Metadata Management",
+         "Advanced cataloguing, business glossaries and data lineage help users discover, understand and confidently reuse the data stored across the estate."),
+        ("Real-Time Data Ingestion",
+         "Streaming ingestion pipelines process event data efficiently, reducing latency and powering operational dashboards, alerting and real-time ML features."),
+        ("Optimised Data Lake Architecture",
+         "Partitioning, compression and indexing strategies &mdash; plus Iceberg/Delta table formats &mdash; optimise storage, cost and performance across workloads."),
+    ],
+    "Ready to turn your data lake into a strategic asset?",
+    "Tell us how much data you&rsquo;re sitting on and what you want to do with it, and we&rsquo;ll design a lakehouse blueprint that scales with your ambitions.",
+    "Book a lakehouse review",
+    "__DATA_CASES_BIGDATA__",
+)
+
+SERVICES_DATA_FABRIC_BODY = _data_page_body(
+    "Data Fabric",
+    "Connect Data &amp; Synchronise With Data Fabric",
+    "Data is challenging &mdash; it always has been. With our data-fabric solutions, unify access across systems so your teams make faster, more informed decisions and stay one step ahead of the competition.",
+    ["Data fabric architecture", "Scalable data solutions", "Enterprise data integration"],
+    "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?auto=format&fit=crop&w=1600&q=80",
+    "Abstract interconnected network nodes with glowing edges",
+    "One intelligent fabric across every data silo.",
+    "LESDK&rsquo;s data-fabric practice delivers a unified, governed view of data across every source &mdash; ERP, CRM, cloud warehouses, legacy systems and SaaS. We integrate and synchronise data in real time so your business analyses, acts and protects information from a single, reliable surface &mdash; without forcing a rip-and-replace of the platforms you already trust.",
+    "Book a Meeting",
+    [
+        ("Seamless Data Integration",
+         "Pre-built connectors and adaptive ingestion frameworks link transactional, analytical and external sources so every team sees the same unified data."),
+        ("Top-Tier Data Security",
+         "Strong encryption, strict access controls and regulatory compliance controls protect data in motion and at rest across the whole fabric."),
+        ("Scalability on Demand",
+         "Cloud-native services and elastic compute let the fabric grow with data volumes and new use cases, without re-architecture or downtime."),
+        ("Empowering Data Governance",
+         "Comprehensive data cataloguing, lineage and stewardship workflows give you trusted, audit-ready data governance at the speed your business moves."),
+        ("Reliable Data Quality",
+         "Automated profiling, deduplication and reconciliation keep datasets consistent across systems so downstream analytics and AI remain trustworthy."),
+        ("Legacy Systems Compatibility",
+         "Specialised adapters and event bridges integrate mainframe, ERP and bespoke legacy systems into modern data-fabric architectures without disruption."),
+    ],
+    "Ready to unify your enterprise data without ripping anything out?",
+    "Share the silos that are slowing you down &mdash; ERP, CRM, data marts, SaaS &mdash; and we&rsquo;ll design a data-fabric blueprint that lights up the whole estate.",
+    "Book a data-fabric review",
+    "__DATA_CASES_FABRIC__",
+)
+
 
 SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
       <div class="container hero-split">
@@ -1754,6 +2015,18 @@ def main():
        SERVICES_SPEECH_BODY.replace("__AI_CASES_SPEECH__", AI_CASES_SPEECH))
     wp("services-ml-mlops.html",        "ML & MLOps | Services",        "services.html",
        SERVICES_ML_MLOPS_BODY.replace("__AI_CASES_MLOPS__", AI_CASES_MLOPS))
+    wp("services-iot.html",                  "Internet of Things (IoT) | Services", "services.html",
+       SERVICES_IOT_BODY.replace("__DATA_CASES_IOT__", DATA_CASES_IOT))
+    wp("services-data-science.html",         "Data Science | Services",              "services.html",
+       SERVICES_DATA_SCIENCE_BODY.replace("__DATA_CASES_DS__", DATA_CASES_DS))
+    wp("services-analytics.html",            "Analytics | Services",                 "services.html",
+       SERVICES_ANALYTICS_BODY.replace("__DATA_CASES_ANALYTICS__", DATA_CASES_ANALYTICS))
+    wp("services-reports.html",              "Reports | Services",                   "services.html",
+       SERVICES_REPORTS_BODY.replace("__DATA_CASES_REPORTS__", DATA_CASES_REPORTS))
+    wp("services-big-data-data-lake.html",   "Big Data & Data Lake | Services",      "services.html",
+       SERVICES_BIGDATA_BODY.replace("__DATA_CASES_BIGDATA__", DATA_CASES_BIGDATA))
+    wp("services-data-fabric.html",          "Data Fabric | Services",               "services.html",
+       SERVICES_DATA_FABRIC_BODY.replace("__DATA_CASES_FABRIC__", DATA_CASES_FABRIC))
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)
