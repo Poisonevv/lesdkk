@@ -263,9 +263,9 @@ font[style*="vertical-align"], font[style*="background-color"] { vertical-align:
   width: min(1120px, 94vw);
   grid-template-columns: 280px 1fr;
   left: 50%;
-  transform: translate(calc(-50% + 220px), 8px);
+  transform: translate(calc(-50% + 420px), 8px);
 }
-.services-dd:hover .mega-services { transform: translate(calc(-50% + 220px), 0); }
+.services-dd:hover .mega-services { transform: translate(calc(-50% + 420px), 0); }
 .mega-cats {
   display: flex;
   flex-direction: column;
