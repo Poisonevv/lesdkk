@@ -1840,7 +1840,7 @@ def _cyber_page_body(breadcrumb_label, title, lead, bullets, intro_h2, intro_p, 
         '          </ul>\n'
         '        </div>\n'
         '        <div class="hero-illustration">\n'
-        '          <img src="/assets/cyber-hero.svg" alt="Cybersecurity shield illustration">\n'
+        '          <img src="/assets/cyber-hero.webp" alt="Cybersecurity shield illustration">\n'
         '        </div>\n'
         '      </div>\n'
         '    </section>\n'
