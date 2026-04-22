@@ -7,6 +7,8 @@
   --primary: #111111;
   --primary-2: #111111;
   --card: #ffffff;
+  --cloud-purple: #313bd8;
+  --cloud-strip: #eef1f7;
 }
 
 * { box-sizing: border-box; }
@@ -1167,6 +1169,46 @@ input, textarea, select {
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
 
+.provider-strip {
+  background: var(--cloud-strip);
+  border-bottom: 1px solid #dde3ee;
+  padding: 26px 0;
+}
+.provider-row {
+  display: grid;
+  grid-template-columns: 28px repeat(5, minmax(0, 1fr)) 28px;
+  gap: 28px;
+  align-items: center;
+}
+.provider-item {
+  text-align: center;
+  color: #6f778a;
+  font-size: clamp(1.1rem, 2vw, 1.65rem);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.provider-arrow {
+  text-align: center;
+  color: #aab1bf;
+  font-size: 3rem;
+  line-height: 1;
+}
+@media (max-width: 980px) {
+  .provider-row {
+    grid-template-columns: 28px repeat(3, minmax(0, 1fr)) 28px;
+    row-gap: 18px;
+  }
+  .provider-item:nth-of-type(n+4) { display: none; }
+}
+@media (max-width: 620px) {
+  .provider-row {
+    grid-template-columns: 24px repeat(2, minmax(0, 1fr)) 24px;
+    gap: 16px;
+  }
+  .provider-item:nth-of-type(n+3) { display: none; }
+  .provider-item { font-size: 1rem; }
+}
+
 /* Case-study rotating carousel (AI & Agentic AI sub-pages) */
 .case-carousel {
   position: relative;
@@ -1207,6 +1249,36 @@ input, textarea, select {
 }
 .case-dots button:hover { transform: scale(1.15); }
 .case-dots button.is-active { background: #0b0f3a; }
+.cloud-case-card {
+  padding-bottom: 18px;
+}
+.cloud-case-card img {
+  height: 250px;
+  margin-bottom: 18px;
+}
+.cloud-case-card h3 {
+  min-height: 52px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 18px;
+}
+.cloud-case-card a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 16px;
+  padding: 10px 18px;
+  border: 2px solid #123761;
+  border-radius: 12px;
+  color: #123761;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.cloud-case-card a:hover {
+  background: #123761;
+  color: #ffffff;
+}
 
 .cta-band {
   background: #0b0f3a;

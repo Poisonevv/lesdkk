@@ -20,6 +20,9 @@ PAGE_SLUGS = {
     "services-ai-nlp", "services-computer-vision", "services-speech", "services-ml-mlops",
     "services-iot", "services-data-science", "services-analytics", "services-reports",
     "services-big-data-data-lake", "services-data-fabric",
+    "services-cloud-migration", "services-mainframe-modernization", "services-sap-on-cloud",
+    "services-cloud-finops", "services-cloud-security", "services-platform-engineering",
+    "services-cloud-managed-services", "services-cloud-advisory-sme-services",
 }
 
 # Asset filenames that should be served from the site root with an absolute
@@ -118,9 +121,14 @@ SERVICES_CATEGORIES = [
     ("cloud", "Cloud",
      "Seamless Cloud Solutions",
      "Cost-effective, flexible, & seamless cloud management for uninterrupted access.",
-     ["Cloud Migration", "Mainframe Modernization", "SAP on Cloud", "Cloud FinOps",
-      "Cloud Security", "Platform Engineering", "Cloud Managed Services",
-      "Cloud Advisory & SME Services"]),
+     [("Cloud Migration", "services-cloud-migration.html"),
+      ("Mainframe Modernization", "services-mainframe-modernization.html"),
+      ("SAP on Cloud", "services-sap-on-cloud.html"),
+      ("Cloud FinOps", "services-cloud-finops.html"),
+      ("Cloud Security", "services-cloud-security.html"),
+      ("Platform Engineering", "services-platform-engineering.html"),
+      ("Cloud Managed Services", "services-cloud-managed-services.html"),
+      ("Cloud Advisory & SME Services", "services-cloud-advisory-sme-services.html")]),
     ("cyber", "Cybersecurity",
      "Boost Your Digital Defense",
      "Reliable, resilient cybersecurity solutions tailored to keep your system data safe & secure from advanced threats.",
@@ -1438,6 +1446,323 @@ SERVICES_DATA_FABRIC_BODY = _data_page_body(
 )
 
 
+def _cloud_provider_strip_html(providers):
+    items_html = "\n".join(f'          <span class="provider-item">{p}</span>' for p in providers)
+    return (
+        '    <section class="provider-strip">\n'
+        '      <div class="container provider-row">\n'
+        '        <span class="provider-arrow" aria-hidden="true">&lsaquo;</span>\n'
+        f'{items_html}\n'
+        '        <span class="provider-arrow" aria-hidden="true">&rsaquo;</span>\n'
+        '      </div>\n'
+        '    </section>\n'
+    )
+
+
+CLOUD_CASES = [
+    ("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1000&q=80",
+     "Sunset On-Premise Data Center With Location Change"),
+    ("https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1000&q=80",
+     "SAP Migration to AWS"),
+    ("https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=80",
+     "Data Driven Customer Churn Prevention"),
+    ("https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1000&q=80",
+     "Market Basket Analysis"),
+]
+
+
+def _cloud_cases_carousel_html() -> str:
+    cards = []
+    for img, title in CLOUD_CASES:
+        cards.append(
+            f'          <article class="card case-slide cloud-case-card">\n'
+            f'            <img src="{img}" alt="{title}">\n'
+            f'            <h3>{title}</h3>\n'
+            f'            <a href="contact.html">Read More</a>\n'
+            f'          </article>'
+        )
+    return (
+        '    <section class="section">\n'
+        '      <div class="container">\n'
+        '        <h2 class="center">Cloud Case Studies</h2>\n'
+        '        <div class="case-carousel" data-case-carousel>\n'
+        '          <div class="case-track">\n'
+        + "\n".join(cards) + "\n"
+        '          </div>\n'
+        '          <div class="case-dots" aria-hidden="true"></div>\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>'
+    )
+
+
+CLOUD_CASES_SHARED = _cloud_cases_carousel_html()
+
+
+def _cloud_page_body(breadcrumb_label, title, lead, bullets, providers,
+                     intro_h2, intro_p, intro_cta_label, features, cases_marker):
+    bullets_html = "\n".join(f"            <li>{b}</li>" for b in bullets)
+    feat_ico_defaults = ["&#9729;", "&#128200;", "&#128176;", "&#128260;", "&#128274;", "&#127919;"]
+    feat_html = []
+    for i, (fh, fb) in enumerate(features):
+        ico = feat_ico_defaults[i % len(feat_ico_defaults)]
+        feat_html.append(
+            '          <article class="feature-card">\n'
+            f'            <div class="feature-ico">{ico}</div>\n'
+            f'            <h3>{fh}</h3>\n'
+            f'            <p>{fb}</p>\n'
+            '          </article>'
+        )
+    feat_block = "\n".join(feat_html)
+    return (
+        '    <section class="hero hero-dark">\n'
+        '      <div class="container hero-split">\n'
+        '        <div class="hero-copy">\n'
+        f'          <p class="crumbs"><a href="index.html">Home</a> &raquo; <a href="services.html">Services</a> &raquo; <a href="services.html#cloud">Cloud</a> &raquo; {breadcrumb_label}</p>\n'
+        f'          <h1>{title}</h1>\n'
+        f'          <p class="lead">{lead}</p>\n'
+        '          <ul class="feature-ticks">\n'
+        f'{bullets_html}\n'
+        '          </ul>\n'
+        '        </div>\n'
+        '        <div class="hero-illustration">\n'
+        '          <img src="/assets/cloud-hero.svg" alt="Cloud services illustration">\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        f'{_cloud_provider_strip_html(providers)}'
+        '\n'
+        '    <section class="section">\n'
+        '      <div class="container center narrow">\n'
+        f'        <h2>{intro_h2}</h2>\n'
+        f'        <p class="sub">{intro_p}</p>\n'
+        f'        <p><a class="btn btn-outline" href="contact.html">{intro_cta_label}</a></p>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        '    <section class="section alt">\n'
+        '      <div class="container">\n'
+        '        <h2 class="center">Support Features</h2>\n'
+        '        <div class="grid feature-grid">\n'
+        f'{feat_block}\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        f'{cases_marker}\n'
+    )
+
+
+SERVICES_CLOUD_MIGRATION_BODY = _cloud_page_body(
+    "Cloud Migration",
+    "Simplify Your Cloud Migration Journey",
+    "Elevate your business and empower your team to drive productivity and growth.",
+    ["Migrate", "Maximize", "Modernize"],
+    ["Google Cloud", "Cloud Foundry", "AWS", "Azure", "VMware"],
+    "Move to the cloud with a transparent plan and measurable business value.",
+    "LESDK delivers predictable cloud-migration services across Azure, AWS and GCP, from lift-and-shift programs to complex platform relocations. We shape a tailored migration roadmap around your workloads, guardrails and operating model so your team can modernize confidently without expensive surprises or avoidable disruption.",
+    "Talk to Our Experts",
+    [
+        ("Legacy Systems",
+         "We assess legacy infrastructure in detail and map the right landing zones, dependencies and remediation paths so critical workloads move without losing essential capabilities."),
+        ("Performance &amp; Scalability",
+         "Our architects right-size target environments for performance, elasticity and future growth, giving your teams room to adapt as demand changes."),
+        ("Cost Management",
+         "Migration waves, rightsizing and usage policies are designed to reduce waste, control cloud spend and keep modernization commercially sustainable."),
+        ("Change Management",
+         "We support adoption with phased cutovers, runbooks, training and communication plans so operations teams stay aligned throughout the move."),
+        ("Security &amp; Compliance",
+         "Security baselines, identity controls and compliance checkpoints are embedded from day one so the new environment is protected before go-live."),
+        ("Clear Milestones, Deliverables &amp; Timelines",
+         "Every migration program is broken into transparent milestones, measurable deliverables and practical timelines that keep the work on schedule."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+SERVICES_MAINFRAME_MODERNIZATION_BODY = _cloud_page_body(
+    "Mainframe Modernization",
+    "Save Money With Mainframe Modernization on Outdated Infrastructure",
+    "Transform your mainframe environment for the hybrid cloud era by utilizing updated technologies.",
+    ["Develop", "Test", "Deploy &amp; Operate"],
+    ["Cloud Foundry", "AWS", "Azure", "VMware", "Alibaba Cloud"],
+    "Modernize core systems without losing the reliability your business depends on.",
+    "LESDK helps enterprises modernize legacy mainframe estates through structured iteration, pilot-backed migration and tight operational governance. We reduce interruption risk while managing data migration, application updates, compliance needs and the confidence required to move from legacy infrastructure into a resilient hybrid-cloud operating model.",
+    "Get a Free Consultation",
+    [
+        ("Updated Legacy Infrastructure",
+         "We guide a controlled move from aging mainframe environments into modern cloud and hybrid stacks that improve scalability, agility and long-term resilience."),
+        ("Navigating Application Modernization",
+         "Our teams assess legacy applications, preserve business logic and modernize surrounding services with current frameworks and integration patterns."),
+        ("Minimizing Business Outages",
+         "Testing, phased rollout plans and rollback controls are built into the program to keep disruption low while modernization work progresses."),
+        ("Streamlined Modernization Process",
+         "Sequenced migration waves, environment planning and compatibility checks create a clearer, faster route from mainframe dependency to cloud-ready operation."),
+        ("Data Migration",
+         "We protect data accuracy through replication, validation and controlled movement strategies so business-critical information remains intact throughout the transition."),
+        ("Regulatory Compliance",
+         "Encryption, auditability and policy controls are woven into the modernization roadmap to support sector-specific regulatory requirements."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+SERVICES_SAP_ON_CLOUD_BODY = _cloud_page_body(
+    "SAP on Cloud",
+    "Transform Your Business With SAP on the Cloud",
+    "Leverage the power of cloud capabilities to streamline operations, increase productivity, and grow effortlessly.",
+    ["SAP HANA", "SAP Business Suite", "SAP Cloud"],
+    ["Google Cloud", "Cloud Foundry", "AWS", "Azure", "VMware"],
+    "Run SAP in the cloud with stronger governance, flexibility and operational control.",
+    "LESDK delivers SAP-on-cloud migration and modernization services that cover planning, security, compliance, performance and multi-cloud flexibility. We help enterprises integrate SAP cleanly with their wider landscape while improving monitoring, cost control and operational support so the platform keeps delivering value after migration &mdash; not just during it.",
+    "Book a Free Consultation",
+    [
+        ("Seamless Transition",
+         "Assessment, data-transfer planning and post-migration validation help your SAP estate move to the cloud with less friction and fewer handoff gaps."),
+        ("Data Security &amp; Compliance",
+         "Access controls, encryption and regular security reviews protect SAP data while supporting internal governance and external compliance standards."),
+        ("Cost Management",
+         "We optimize compute, storage and licensing decisions so your SAP cloud footprint stays performant without overspending."),
+        ("Integration Challenges",
+         "Pre-built connectors, tested interface patterns and disciplined cutover planning reduce the integration complexity common to SAP transformations."),
+        ("Performance Monitoring &amp; Support",
+         "Proactive monitoring, SLA-backed support and fast incident response help keep SAP environments stable once they are live in the cloud."),
+        ("Connectivity &amp; Performance",
+         "We improve network design, redundancy and application tuning so SAP users experience stronger uptime and better end-to-end responsiveness."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+SERVICES_CLOUD_FINOPS_BODY = _cloud_page_body(
+    "Cloud FinOps",
+    "Achieve Instant Savings &amp; Cost Optimization in Cloud FinOps",
+    "Gain end-to-end visibility and optimize cost management with FinOps excellence.",
+    ["Cost Optimization", "Budget Management", "Financial Governance"],
+    ["Google Cloud", "Cloud Foundry", "AWS", "Azure", "VMware"],
+    "Turn cloud spend into a managed performance lever, not a monthly surprise.",
+    "LESDK&rsquo;s FinOps teams blend automation, cloud operations and financial governance to help enterprises track usage across subscriptions, adjust pricing models and optimize resource patterns responsibly. By aligning finance, IT and operations around one clear cost-management rhythm, we help teams capture savings without undermining platform reliability or growth.",
+    "Schedule a Consultation",
+    [
+        ("Automation &amp; Cloud Management Tools",
+         "Automation workflows and cloud-management tooling surface waste, enforce policy and generate the insights needed to optimize spending continuously."),
+        ("Regular Reviews &amp; Pricing Models",
+         "We compare on-demand, reserved and spot options against workload behavior so pricing choices stay aligned with business reality."),
+        ("Collaboration Between Finance &amp; IT",
+         "Shared reporting and governance routines connect financial targets with engineering decisions, helping both teams work from the same cost narrative."),
+        ("Optimized Cloud Resource Utilization",
+         "Rightsizing, autoscaling and schedule-based controls reduce idle capacity while protecting performance for production workloads."),
+        ("Centralized Cost Tracking System",
+         "A centralized cost view across accounts and subscriptions gives leaders cleaner visibility into who is spending what and why."),
+        ("Dedicated FinOps Team",
+         "Our cross-functional specialists manage cloud cost operations day to day, providing the discipline needed to sustain savings over time."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+SERVICES_CLOUD_SECURITY_BODY = _cloud_page_body(
+    "Cloud Security",
+    "Reduce Security Risk &amp; Protect Your Data With Cloud Security",
+    "Strengthen cloud resilience with practical protection across identities, workloads and data.",
+    ["Data Encryption", "Access Control", "Threat Detection"],
+    ["Google Cloud", "Cloud Foundry", "AWS", "Azure", "VMware"],
+    "Protect every cloud layer with security services designed for real operating risk.",
+    "LESDK delivers end-to-end cloud-security services spanning encryption, multi-factor authentication, threat monitoring, compliance controls and recovery planning. We help enterprises harden their cloud estates against external attacks, insider threats and configuration drift while keeping deployments dependable and aligned with regulatory obligations.",
+    "Get Your Free Cloud Security Assessment",
+    [
+        ("Multi-Factor Authentication",
+         "Cloud-native MFA strengthens access security, reduces credential abuse risk and helps protect sensitive systems from avoidable compromise."),
+        ("Advanced Threat Monitoring",
+         "Continuous monitoring and security analytics surface suspicious activity early so teams can respond before small incidents become large breaches."),
+        ("Protection Against Vulnerabilities",
+         "Vulnerability scanning, patch discipline and baseline hardening keep workloads and cloud services protected against known weaknesses."),
+        ("Compliance &amp; Regulations",
+         "Policy mapping, audit support and control evidence help maintain alignment with the regulatory standards your business must satisfy."),
+        ("Protection Against Insider Threats",
+         "Behavior monitoring and tighter access boundaries make it easier to identify risky internal actions and reduce their blast radius."),
+        ("Shared Responsibility Model",
+         "We help teams operationalize the cloud shared-responsibility model so identity, access and workload protections are owned clearly and executed consistently."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+SERVICES_PLATFORM_ENGINEERING_BODY = _cloud_page_body(
+    "Platform Engineering",
+    "Drive Consistency &amp; Expand Your Business With Platform Engineering",
+    "Utilize platform engineering resources to transform your visions into reality.",
+    ["DevOps Practices", "Scalable Architecture", "Infrastructure Automation"],
+    ["Google Cloud", "Cloud Foundry", "AWS", "Azure", "VMware"],
+    "Build internal platforms that make delivery faster, safer and easier to repeat.",
+    "LESDK provides platform-engineering services that bring DevOps, deployment standards, security controls and infrastructure patterns into one dependable operating layer. We help teams improve reliability, streamline delivery and optimize platform cost by balancing automation, governance and developer experience in a way that scales across the business.",
+    "Book a Meeting",
+    [
+        ("Automation Processes",
+         "We automate infrastructure setup, release workflows and recurring platform tasks so engineering teams can focus on shipping value instead of managing toil."),
+        ("Security &amp; Compliance Guidelines",
+         "Security policies and compliance guardrails are embedded in platform design so developers inherit safe defaults rather than rebuilding them repeatedly."),
+        ("Scaling &amp; Resource Optimization",
+         "Platform blueprints are designed to scale with workload demand while keeping resource use efficient and commercially sensible."),
+        ("Establishing Secure Infrastructure",
+         "We help create secure, standardized infrastructure foundations that teams can trust for both day-one deployment and long-term operations."),
+        ("Collaboration &amp; Uniformity",
+         "Shared tooling, reusable workflows and documented standards improve consistency across teams and reduce friction in day-to-day delivery."),
+        ("Cost-effective Strategies",
+         "Open tooling, reusable platform components and thoughtful resource allocation combine to improve ROI without sacrificing reliability."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+SERVICES_CLOUD_MANAGED_SERVICES_BODY = _cloud_page_body(
+    "Cloud Managed Services",
+    "Achieve Greater Gains With Cloud Managed Services",
+    "Automate, secure and optimize with confidence. Empower error-free and seamless services.",
+    ["Performance Optimization", "Cloud Investments", "Cloud Infrastructure"],
+    ["Google Cloud", "Cloud Foundry", "AWS", "Azure", "VMware"],
+    "Operate cloud environments with the right balance of flexibility, control and accountability.",
+    "LESDK offers cloud managed services built to improve operational efficiency, strengthen security and simplify communication across day-to-day cloud operations. Our teams help clients balance cost, service flexibility and dependable execution so internal teams can stay focused on core business priorities while cloud estates are managed with discipline.",
+    "Talk to Our Experts",
+    [
+        ("Cost Management",
+         "Transparent pricing, usage visibility and service options tailored to client needs help control spend without reducing service quality."),
+        ("Flexible Service Models",
+         "Managed, co-managed and customized service options let teams choose the support model that best matches internal capability and business demand."),
+        ("Security Protocols",
+         "Encryption, access protection and proactive monitoring strengthen cloud security while supporting compliance and risk reduction."),
+        ("Communication &amp; Coordination",
+         "Frequent updates, clear ownership and responsive collaboration keep stakeholders informed and issues moving quickly toward resolution."),
+        ("Scalability &amp; Performance",
+         "Monitoring, tuning and capacity planning ensure cloud services remain fast, reliable and ready to grow with business needs."),
+        ("Brand Reliability",
+         "Process discipline and service-level focus help maintain dependable operations across both standard infrastructure and custom cloud applications."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+SERVICES_CLOUD_ADVISORY_BODY = _cloud_page_body(
+    "Cloud Advisory &amp; SME Services",
+    "Transcend the Promise of Cloud Advisory &amp; SME Services for Longevity",
+    "Elevate your organization with cloud advisory insights and reliable expert support.",
+    ["Strategic Planning", "Cloud Integration", "Agility Operations"],
+    ["Google Cloud", "Cloud Foundry", "AWS", "Azure", "VMware"],
+    "Get expert guidance that keeps your cloud roadmap practical, current and resilient.",
+    "LESDK&rsquo;s cloud advisory and SME services help organizations stay current with fast-moving technology shifts while reducing the research burden on internal teams. We provide tailored insight, training and architecture guidance aligned to your business goals so cloud decisions are easier to make, easier to defend and easier to execute.",
+    "Book a Meeting",
+    [
+        ("Keeping Up With Technology Trends",
+         "Our specialists track cloud-market changes and emerging patterns so clients can make faster decisions with better technical context."),
+        ("Training Employees With New Technology",
+         "Targeted enablement helps teams understand new cloud tools and implementation models without needing to learn everything from scratch."),
+        ("Extensive Research",
+         "We turn broad market research into actionable recommendations that save organizations time while improving decision quality."),
+        ("An Agile Architectural Runway",
+         "Advisory support creates a more agile architecture path, helping teams adopt the right new capabilities without destabilizing existing systems."),
+        ("Customized Strategies",
+         "We shape cloud strategies around each client&rsquo;s goals, operating model and long-term priorities rather than pushing one-size-fits-all recommendations."),
+        ("Flexibility &amp; Adaptation",
+         "Roadmaps are designed to adapt as business needs evolve, giving leadership more room to respond to change with confidence."),
+    ],
+    "__CLOUD_CASES__",
+)
+
+
 SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
       <div class="container hero-split">
         <div class="hero-copy">
@@ -2027,6 +2352,22 @@ def main():
        SERVICES_BIGDATA_BODY.replace("__DATA_CASES_BIGDATA__", DATA_CASES_BIGDATA))
     wp("services-data-fabric.html",          "Data Fabric | Services",               "services.html",
        SERVICES_DATA_FABRIC_BODY.replace("__DATA_CASES_FABRIC__", DATA_CASES_FABRIC))
+    wp("services-cloud-migration.html",            "Cloud Migration | Services",            "services.html",
+       SERVICES_CLOUD_MIGRATION_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-mainframe-modernization.html",    "Mainframe Modernization | Services",    "services.html",
+       SERVICES_MAINFRAME_MODERNIZATION_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-sap-on-cloud.html",               "SAP on Cloud | Services",               "services.html",
+       SERVICES_SAP_ON_CLOUD_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-cloud-finops.html",               "Cloud FinOps | Services",               "services.html",
+       SERVICES_CLOUD_FINOPS_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-cloud-security.html",             "Cloud Security | Services",             "services.html",
+       SERVICES_CLOUD_SECURITY_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-platform-engineering.html",       "Platform Engineering | Services",       "services.html",
+       SERVICES_PLATFORM_ENGINEERING_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-cloud-managed-services.html",     "Cloud Managed Services | Services",     "services.html",
+       SERVICES_CLOUD_MANAGED_SERVICES_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-cloud-advisory-sme-services.html", "Cloud Advisory & SME Services | Services", "services.html",
+       SERVICES_CLOUD_ADVISORY_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)
