@@ -23,6 +23,9 @@ PAGE_SLUGS = {
     "services-cloud-migration", "services-mainframe-modernization", "services-sap-on-cloud",
     "services-cloud-finops", "services-cloud-security", "services-platform-engineering",
     "services-cloud-managed-services", "services-cloud-advisory-sme-services",
+    "services-ciam", "services-workforce-identity", "services-security-engineering",
+    "services-zero-trust-architecture", "services-governance-risk-management-compliance",
+    "services-cyber-defense-investigations", "services-cyber-advisory", "services-cyber-resilience",
 }
 
 # Asset filenames that should be served from the site root with an absolute
@@ -132,9 +135,14 @@ SERVICES_CATEGORIES = [
     ("cyber", "Cybersecurity",
      "Boost Your Digital Defense",
      "Reliable, resilient cybersecurity solutions tailored to keep your system data safe & secure from advanced threats.",
-     ["CIAM", "Workforce Identity", "Security Engineering", "Zero Trust Architecture",
-      "Governance, Risk Management & Compliance", "Cyber Defense & Investigation",
-      "Cyber Advisory", "Cyber Resilience"]),
+     [("CIAM", "services-ciam.html"),
+      ("Workforce Identity", "services-workforce-identity.html"),
+      ("Security Engineering", "services-security-engineering.html"),
+      ("Zero Trust Architecture", "services-zero-trust-architecture.html"),
+      ("Governance, Risk Management &amp; Compliance", "services-governance-risk-management-compliance.html"),
+      ("Cyber Defense &amp; Investigations", "services-cyber-defense-investigations.html"),
+      ("Cyber Advisory", "services-cyber-advisory.html"),
+      ("Cyber Resilience", "services-cyber-resilience.html")]),
     ("platforms", "Enterprise & SaaS Solutions",
      "Digitize Your Core Success",
      "Streamline operations, enhance collaboration, and drive innovation through integration and unmatched scalability.",
@@ -1763,6 +1771,304 @@ SERVICES_CLOUD_ADVISORY_BODY = _cloud_page_body(
 )
 
 
+CYBER_PROVIDERS = ["Fortinet", "ForgeRock", "CyberArk", "CrowdStrike", "Microsoft Sentinel"]
+
+
+CYBER_CASES = [
+    ("https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1000&q=80",
+     "Retail Threat Monitoring Program"),
+    ("https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=1000&q=80",
+     "Autonomous Device Hardening"),
+    ("https://images.unsplash.com/photo-1697316052164-6b832d49516c?auto=format&fit=crop&w=1000&q=80",
+     "EV Charging Risk Controls"),
+    ("https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1000&q=80",
+     "Connected Workshop Incident Diagnostics"),
+]
+
+
+def _cyber_cases_carousel_html() -> str:
+    cards = []
+    for img, title in CYBER_CASES:
+        cards.append(
+            f'          <article class="card case-slide cloud-case-card">\n'
+            f'            <img src="{img}" alt="{title}">\n'
+            f'            <h3>{title}</h3>\n'
+            f'            <a href="contact.html">Read More</a>\n'
+            f'          </article>'
+        )
+    return (
+        '    <section class="section">\n'
+        '      <div class="container">\n'
+        '        <h2 class="center">Cybersecurity Case Studies</h2>\n'
+        '        <div class="case-carousel" data-case-carousel>\n'
+        '          <div class="case-track">\n'
+        + "\n".join(cards) + "\n"
+        '          </div>\n'
+        '          <div class="case-dots" aria-hidden="true"></div>\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>'
+    )
+
+
+CYBER_CASES_SHARED = _cyber_cases_carousel_html()
+
+
+def _cyber_page_body(breadcrumb_label, title, lead, bullets, intro_h2, intro_p, intro_cta_label, features, cases_marker):
+    bullets_html = "\n".join(f"            <li>{b}</li>" for b in bullets)
+    feat_ico_defaults = ["&#128274;", "&#128737;", "&#128269;", "&#128101;", "&#9878;", "&#128221;"]
+    feat_html = []
+    for i, (fh, fb) in enumerate(features):
+        ico = feat_ico_defaults[i % len(feat_ico_defaults)]
+        feat_html.append(
+            '          <article class="feature-card">\n'
+            f'            <div class="feature-ico">{ico}</div>\n'
+            f'            <h3>{fh}</h3>\n'
+            f'            <p>{fb}</p>\n'
+            '          </article>'
+        )
+    feat_block = "\n".join(feat_html)
+    return (
+        '    <section class="hero hero-dark">\n'
+        '      <div class="container hero-split">\n'
+        '        <div class="hero-copy">\n'
+        f'          <p class="crumbs"><a href="index.html">Home</a> &raquo; <a href="services.html">Services</a> &raquo; <a href="services.html#cyber">Cybersecurity</a> &raquo; {breadcrumb_label}</p>\n'
+        f'          <h1>{title}</h1>\n'
+        f'          <p class="lead">{lead}</p>\n'
+        '          <ul class="feature-ticks">\n'
+        f'{bullets_html}\n'
+        '          </ul>\n'
+        '        </div>\n'
+        '        <div class="hero-illustration">\n'
+        '          <img src="/assets/cyber-hero.svg" alt="Cybersecurity shield illustration">\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        f'{_cloud_provider_strip_html(CYBER_PROVIDERS)}'
+        '\n'
+        '    <section class="section">\n'
+        '      <div class="container center narrow">\n'
+        f'        <h2>{intro_h2}</h2>\n'
+        f'        <p class="sub">{intro_p}</p>\n'
+        f'        <p><a class="btn btn-outline" href="contact.html">{intro_cta_label}</a></p>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        '    <section class="section alt">\n'
+        '      <div class="container">\n'
+        '        <h2 class="center">Support Features</h2>\n'
+        '        <div class="grid feature-grid">\n'
+        f'{feat_block}\n'
+        '        </div>\n'
+        '      </div>\n'
+        '    </section>\n'
+        '\n'
+        f'{cases_marker}\n'
+    )
+
+
+SERVICES_CIAM_BODY = _cyber_page_body(
+    "CIAM",
+    "Strengthen Customer Access With Cloud CIAM Services",
+    "Deliver secure sign-up and sign-in journeys without sacrificing simplicity, agility or scale.",
+    ["Simplicity", "Agility", "Scalability"],
+    "Protect customer identity flows with modern CIAM that stays usable and compliant.",
+    "LESDK designs CIAM programs that combine stronger customer authentication, connected consent management and practical privacy controls into one cloud-ready operating model. The result is a smoother front-end experience, cleaner integrations and a security posture that scales with every new customer touchpoint.",
+    "Book a Meeting",
+    [
+        ("Identity Verification",
+         "Adaptive authentication, identity proofing and verification workflows help confirm real users without creating unnecessary sign-up friction."),
+        ("Data Security",
+         "Encryption, access governance and policy-led protection keep customer data secure across identity stores, APIs and connected applications."),
+        ("User Experience",
+         "Registration, login and recovery journeys are designed to stay intuitive so security controls support growth rather than block it."),
+        ("Scalability",
+         "Cloud-native architecture and performance planning keep CIAM platforms responsive as customer volumes, channels and regions expand."),
+        ("User Consent &amp; Privacy",
+         "Preference centers, audit trails and privacy controls make consent handling clearer while supporting regulatory expectations."),
+        ("Maintenance &amp; Updates",
+         "Continuous monitoring, patching and lifecycle support keep the platform current, resilient and ready for evolving threat patterns."),
+    ],
+    "__CYBER_CASES__",
+)
+
+SERVICES_WORKFORCE_IDENTITY_BODY = _cyber_page_body(
+    "Workforce Identity",
+    "Secure Workforce Identity With Stronger Access Controls",
+    "Manage the full identity lifecycle so every employee, contractor and partner gets the right access at the right time.",
+    ["Authentication", "Authorization", "Access Control"],
+    "Centralize workforce identity so access decisions stay faster, safer and easier to govern.",
+    "LESDK helps organizations modernize workforce identity with adaptive authentication, role-aware access control and better visibility across remote work environments. We connect identity governance, privileged access and end-user protections so teams can reduce risk without slowing people down.",
+    "Talk to Our Experts",
+    [
+        ("Identity &amp; Access Management (IAM)",
+         "Policy-based identity administration keeps joiner, mover and leaver processes aligned with business roles and security expectations."),
+        ("Data Protection",
+         "Identity data, credentials and access events are protected with encryption, segmentation and strong operational controls."),
+        ("Threat Detection &amp; Response",
+         "Behavioral analytics and response workflows help identify abnormal access activity quickly and contain issues before they spread."),
+        ("User Awareness &amp; Training",
+         "Awareness programs help employees understand phishing, MFA hygiene and day-to-day access-security responsibilities."),
+        ("Privileged Access Management (PAM)",
+         "Privileged credentials, session controls and approval workflows reduce exposure around elevated accounts and sensitive systems."),
+        ("Compliance &amp; Regulatory Support",
+         "Audit-friendly controls, reporting and policy mapping support internal governance as well as external regulatory reviews."),
+    ],
+    "__CYBER_CASES__",
+)
+
+SERVICES_SECURITY_ENGINEERING_BODY = _cyber_page_body(
+    "Security Engineering",
+    "Build Trust With Security Engineering That Fits Real Operations",
+    "Shape resilient security architecture that balances awareness, compliance and compatibility across your environment.",
+    ["Awareness", "Compliance", "Compatibility"],
+    "Engineer security into the stack with practical design choices and steady modernization support.",
+    "LESDK delivers security engineering services that connect architecture, platform controls and day-to-day usability. We help teams modernize securely, improve documentation and align technical safeguards with business realities so protections hold up in production, not just on paper.",
+    "Schedule a Consultation",
+    [
+        ("Intuitive Security Solutions",
+         "Security controls are designed to be understandable and usable so adoption improves without weakening protection."),
+        ("Resource Pool for Security",
+         "Specialists across identity, cloud, endpoint and compliance domains provide flexible engineering support when client priorities change."),
+        ("Rapid Technology Advancements",
+         "Emerging tools and patterns are evaluated continuously so organizations can adopt relevant innovations with less implementation guesswork."),
+        ("Regulatory Compliance",
+         "Control designs, evidence collection and review checkpoints are aligned to the frameworks that matter to each operating environment."),
+        ("Legacy Systems &amp; Compatibility",
+         "Existing platforms are assessed for compatibility gaps so secure integrations and transition plans can be built without unnecessary disruption."),
+        ("Awareness &amp; Training",
+         "Security engineering is paired with enablement so internal teams understand the controls they are expected to run and maintain."),
+    ],
+    "__CYBER_CASES__",
+)
+
+SERVICES_ZERO_TRUST_BODY = _cyber_page_body(
+    "Zero Trust Architecture",
+    "Advance Zero Trust Architecture With Stronger Verification and Policy Control",
+    "Reduce attack surface by verifying identity continuously, controlling risk and enforcing policy across every interaction.",
+    ["Verify Identity", "Control Risk", "Enforce Policy"],
+    "Implement zero trust with a roadmap that fits legacy systems, operating culture and real user journeys.",
+    "LESDK turns zero-trust strategy into a workable delivery plan by addressing implementation sequencing, integration constraints and organizational change. We help clients modernize access patterns, improve visibility and build the communication needed to make zero trust stick beyond the architecture diagram.",
+    "Talk to Our Expert",
+    [
+        ("Comprehensive Implementation Strategy",
+         "A phased roadmap clarifies priorities, dependencies and technical guardrails so zero-trust work can move with less friction."),
+        ("Legacy Systems",
+         "We assess legacy applications and infrastructure to define secure integration patterns instead of forcing unrealistic rip-and-replace programs."),
+        ("User Experience",
+         "Authentication journeys, exception paths and device checks are shaped to preserve productivity while increasing assurance."),
+        ("Tackling Cultural Resistance",
+         "Change-management support helps teams understand why controls are changing and how new operating practices improve resilience."),
+        ("Visibility &amp; Monitoring",
+         "Monitoring design improves visibility into user, device and application behavior so policy decisions can be validated continuously."),
+        ("Change Management",
+         "Communication plans, training and rollout coordination help implementation progress without unnecessary disruption to business teams."),
+    ],
+    "__CYBER_CASES__",
+)
+
+SERVICES_GRC_BODY = _cyber_page_body(
+    "Governance, Risk Management &amp; Compliance",
+    "Streamline Governance, Risk Management and Compliance Across Operations",
+    "Improve decision-making, support compliance and keep cybersecurity investments tied to measurable business responsibility.",
+    ["Risk Management", "Compliance", "Strategy"],
+    "Strengthen governance and compliance with clearer risk visibility, better coordination and continuous improvement.",
+    "LESDK provides GRC services that connect governance frameworks, risk assessment and operational follow-through. We help organizations allocate resources intelligently, integrate control practices into real workflows and sustain a security-conscious culture that improves audit readiness over time.",
+    "Get a Free Consultation",
+    [
+        ("Unparalleled Expertise",
+         "Specialists with governance, regulatory and cyber-risk experience guide programs that need both technical and operational credibility."),
+        ("Optimal Resource Allocation",
+         "Risk-based prioritization helps direct budget and attention toward the controls and initiatives that matter most."),
+        ("Streamlined Integration",
+         "GRC activities are connected to existing processes and stakeholders so adoption feels operational instead of bolted on."),
+        ("Continuous Monitoring &amp; Improvement",
+         "Regular reviews, tracking and remediation loops help maintain compliance and improve control maturity over time."),
+        ("Promoting a Security-Conscious Culture",
+         "Awareness, accountability and leadership communication reinforce security behaviors across the organization."),
+        ("Technological Advancements",
+         "Automation and reporting tools reduce administrative overhead while making risk and compliance insights easier to act on."),
+    ],
+    "__CYBER_CASES__",
+)
+
+SERVICES_CYBER_DEFENSE_BODY = _cyber_page_body(
+    "Cyber Defense &amp; Investigations",
+    "Strengthen Cyber Defense and Investigations Against Malicious Activity",
+    "Detect, analyze and respond with disciplined cyber defense built around confidentiality, integrity and availability.",
+    ["Confidentiality", "Integrity", "Availability"],
+    "Coordinate defense and investigations with stronger evidence handling, faster collaboration and practical incident response support.",
+    "LESDK helps clients align investigative workflows, defense priorities and security investments so response programs stay effective under pressure. We support evidence preservation, collaborative analysis and modern detection practices while keeping compliance and business continuity in view.",
+    "Schedule a Consultation",
+    [
+        ("Threat Intelligence Network",
+         "Connected intelligence sources and specialist review improve awareness of emerging threats and speed up investigative triage."),
+        ("User-Centric Security Measures",
+         "Controls are designed with end-user behavior in mind so organizations can improve protection without creating unnecessary friction."),
+        ("Legacy System Risk Mitigation Plan",
+         "Older systems are assessed for exploitable gaps, then supported with containment, segmentation and modernization recommendations."),
+        ("Compliance Management Framework",
+         "Investigative processes and evidence handling are aligned with relevant compliance expectations from the outset."),
+        ("Strategic Budget Allocation",
+         "Defense spending is prioritized around the tools, skills and response capabilities that reduce the most meaningful risk."),
+        ("Cybersecurity Awareness Program",
+         "Awareness initiatives help employees spot suspicious activity early and feed stronger signals into defense operations."),
+    ],
+    "__CYBER_CASES__",
+)
+
+SERVICES_CYBER_ADVISORY_BODY = _cyber_page_body(
+    "Cyber Advisory",
+    "Take a More Risk-Conscious Approach With Cyber Advisory",
+    "Navigate evolving cyber threats with clearer communication, sharper decisions and stronger incident-response planning.",
+    ["Communication", "Decision", "Incident Response"],
+    "Use advisory support to balance security, usability and resilience across fast-changing cyber priorities.",
+    "LESDK provides cyber advisory services that help organizations assess risk, improve policy direction and respond to emerging threats with greater confidence. We combine practical recommendations with current market awareness so leadership teams can make informed decisions without losing sight of day-to-day operational constraints.",
+    "Schedule a Meeting",
+    [
+        ("Balancing Security &amp; Usability",
+         "Recommendations aim to improve protection while keeping workflows practical for employees, customers and partners."),
+        ("Regulatory Compliance",
+         "Policy alignment, audit guidance and framework mapping help programs stay consistent with evolving compliance demands."),
+        ("Stay Updated",
+         "Advisory input keeps stakeholders informed on new threat patterns, tooling shifts and relevant control changes."),
+        ("Scalable Solutions",
+         "Recommendations are shaped to fit different levels of maturity, budget and in-house operating capacity."),
+        ("Legacy Systems &amp; Infrastructure",
+         "Advisory reviews address inherited technology constraints so modernization and security decisions stay grounded in reality."),
+        ("Vendor Risk Management",
+         "Third-party relationships are evaluated for security gaps, governance needs and ongoing oversight expectations."),
+    ],
+    "__CYBER_CASES__",
+)
+
+SERVICES_CYBER_RESILIENCE_BODY = _cyber_page_body(
+    "Cyber Resilience",
+    "Build Cyber Resilience Around Preparedness, Response and Recovery",
+    "Keep critical operations running with a resilient cyber posture built to absorb disruption and recover faster.",
+    ["Preparedness", "Response", "Recovery"],
+    "Improve resilience with coordinated intelligence, simpler security operations and stronger recovery-minded planning.",
+    "LESDK supports cyber-resilience programs that connect detection, collaboration and recovery readiness into one operating model. We help teams optimize investments, manage third-party dependencies and modernize weak points so they can respond with more confidence when conditions change quickly.",
+    "Talk to Our Expert",
+    [
+        ("Resource Optimization",
+         "Risk-based planning helps teams direct time, tooling and budget toward the controls that improve resilience most."),
+        ("Threat Intelligence &amp; Collaboration",
+         "Shared intelligence and coordinated operating practices strengthen preparedness before major incidents develop."),
+        ("Simplified Security Solutions",
+         "Usable controls and centralized visibility make protection easier to run consistently across distributed environments."),
+        ("Legacy System Upgrades",
+         "Modernization plans reduce weak points in aging infrastructure while preserving continuity for essential workloads."),
+        ("Third-Party Risk Management",
+         "Dependencies on vendors and partners are reviewed so resilience planning extends beyond the internal network boundary."),
+        ("Awareness",
+         "Training and scenario readiness help teams recognize threats, escalate faster and support smoother recovery actions."),
+    ],
+    "__CYBER_CASES__",
+)
+
+
 SERVICES_AI_NLP_BODY = """    <section class="hero hero-dark">
       <div class="container hero-split">
         <div class="hero-copy">
@@ -2368,6 +2674,22 @@ def main():
        SERVICES_CLOUD_MANAGED_SERVICES_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
     wp("services-cloud-advisory-sme-services.html", "Cloud Advisory & SME Services | Services", "services.html",
        SERVICES_CLOUD_ADVISORY_BODY.replace("__CLOUD_CASES__", CLOUD_CASES_SHARED))
+    wp("services-ciam.html",                             "CIAM | Services",                                      "services.html",
+       SERVICES_CIAM_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
+    wp("services-workforce-identity.html",              "Workforce Identity | Services",                       "services.html",
+       SERVICES_WORKFORCE_IDENTITY_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
+    wp("services-security-engineering.html",            "Security Engineering | Services",                     "services.html",
+       SERVICES_SECURITY_ENGINEERING_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
+    wp("services-zero-trust-architecture.html",         "Zero Trust Architecture | Services",                  "services.html",
+       SERVICES_ZERO_TRUST_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
+    wp("services-governance-risk-management-compliance.html", "Governance, Risk Management & Compliance | Services", "services.html",
+       SERVICES_GRC_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
+    wp("services-cyber-defense-investigations.html",    "Cyber Defense & Investigations | Services",           "services.html",
+       SERVICES_CYBER_DEFENSE_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
+    wp("services-cyber-advisory.html",                  "Cyber Advisory | Services",                           "services.html",
+       SERVICES_CYBER_ADVISORY_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
+    wp("services-cyber-resilience.html",                "Cyber Resilience | Services",                         "services.html",
+       SERVICES_CYBER_RESILIENCE_BODY.replace("__CYBER_CASES__", CYBER_CASES_SHARED))
     for fn, spec in INDUSTRY_PAGES.items():
         write(fn, spec["title"], "industries.html", industry_body(spec))
         pages.append(fn)
