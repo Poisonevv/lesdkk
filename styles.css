@@ -260,12 +260,12 @@ font[style*="vertical-align"], font[style*="background-color"] { vertical-align:
 
 /* Services two-pane mega-menu */
 .services-dd .mega-services {
-  width: min(1120px, 96vw);
-  grid-template-columns: 300px 1fr;
-  left: 0;
-  transform: translate(0, 8px);
+  width: min(1120px, 94vw);
+  grid-template-columns: 280px 1fr;
+  left: 50%;
+  transform: translate(-50%, 8px);
 }
-.services-dd:hover .mega-services { transform: translate(0, 0); }
+.services-dd:hover .mega-services { transform: translate(-50%, 0); }
 .mega-cats {
   display: flex;
   flex-direction: column;
