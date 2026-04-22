@@ -99,15 +99,17 @@ SERVICES_SUB = [
     ("services.html#blockchain",  "Blockchain"),
 ]
 
-# (slug, label, headline, description, [sub-item labels])
+# (slug, label, headline, description, image, [sub-item labels])
 SERVICES_CATEGORIES = [
     ("ai", "AI & Agentic AI",
      "Next-Gen AI & Agentic Intelligence",
      "Intelligent, adaptive, & scalable AI solutions for smarter decision-making.",
+     "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=520&q=70",
      [("AI, NLP", "services-ai-nlp.html"), ("Computer Vision", "services-computer-vision.html"), ("Speech", "services-speech.html"), ("ML, MLOps", "services-ml-mlops.html")]),
     ("digital", "Digital Services",
      "Upskill Imperative Digital Transformation",
      "Boost your online visibility with creative solutions and strategies designed for web, mobile, front-end, back-end, and beyond.",
+     "https://images.unsplash.com/photo-1592478411213-6153e4ebc07d?auto=format&fit=crop&w=520&q=70",
      ["Full Stack \u2013 Web", "Mobile App Development", "Apps Support & Maintenance",
       "Hyperautomation", "DevSecOps & Automation", "SRE & Chaos Engineering",
       "Back-End Development", "Design & Architecture", "UI/UX & Front-End Dev",
@@ -115,6 +117,7 @@ SERVICES_CATEGORIES = [
     ("data", "Data & Analytics",
      "Drive Growth United by Data",
      "Turn data into actionable insights, and drive smarter decisions for strategic growth, keeping you ahead of your competition.",
+     "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=520&q=70",
      [("Internet of Things (IoT)", "services-iot.html"),
       ("Data Science", "services-data-science.html"),
       ("Analytics", "services-analytics.html"),
@@ -124,6 +127,7 @@ SERVICES_CATEGORIES = [
     ("cloud", "Cloud",
      "Seamless Cloud Solutions",
      "Cost-effective, flexible, & seamless cloud management for uninterrupted access.",
+     "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=520&q=70",
      [("Cloud Migration", "services-cloud-migration.html"),
       ("Mainframe Modernization", "services-mainframe-modernization.html"),
       ("SAP on Cloud", "services-sap-on-cloud.html"),
@@ -135,6 +139,7 @@ SERVICES_CATEGORIES = [
     ("cyber", "Cybersecurity",
      "Boost Your Digital Defense",
      "Reliable, resilient cybersecurity solutions tailored to keep your system data safe & secure from advanced threats.",
+     "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=520&q=70",
      [("CIAM", "services-ciam.html"),
       ("Workforce Identity", "services-workforce-identity.html"),
       ("Security Engineering", "services-security-engineering.html"),
@@ -146,26 +151,31 @@ SERVICES_CATEGORIES = [
     ("platforms", "Enterprise & SaaS Solutions",
      "Digitize Your Core Success",
      "Streamline operations, enhance collaboration, and drive innovation through integration and unmatched scalability.",
+     "https://images.unsplash.com/photo-1560264280-88b68371db39?auto=format&fit=crop&w=520&q=70",
      ["SAP", "ServiceNow", "Salesforce", "Workday", "Oracle", "Adobe", "Sitecore"]),
     ("managed", "Managed Services",
      "Strategic IT, Seamless Execution",
      "Drive business continuity with end-to-end managed IT and infrastructure services tailored to your industry.",
+     "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=520&q=70",
      ["Network & Security Management", "Strategic IT Consulting & Continuous Improvement",
       "Infrastructure & Data Center Management", "End-User Support & Device Management",
       "Cloud & Application Management", "IT Operations & Service Management"]),
     ("qe", "Quality Engineering",
      "Reinvent Quality, Reshape Workforce",
      "Powerful performance optimization services to ensure all products meet high-quality standards.",
+     "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=520&q=70",
      ["QA Consulting & Strategy", "Agile Testing", "Independent Certification",
       "Managed Testing Services"]),
     ("supply", "Supply Chain",
      "AI-Orchestrated. Cloud-Agnostic. Enterprise-Ready",
      "End-to-end, AI-driven supply chain execution with modular functional depth and differentiated technology.",
+     "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=520&q=70",
      ["End-to-End AI-Driven Supply Chain Execution", "Core Functional Modules",
       "Technology Stack Differentiators", "Operational Intelligence in Action"]),
     ("blockchain", "Blockchain",
      "Drive Resilience & Security",
      "Drive resiliency & facilitate trust across complex networks through biometrics and tokenization with a future-proof collaborative ecosystem.",
+     "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=520&q=70",
      ["Distributed Trust", "Ethereum", "Hyperledger", "dApps", "NFT", "IPFS"]),
 ]
 
@@ -312,7 +322,7 @@ def build_nav(active=""):
         active_cls = " active" if active == "services.html" else ""
         cats_html = ""
         panels_html = ""
-        for i, (slug, label, head, desc, items) in enumerate(SERVICES_CATEGORIES):
+        for i, (slug, label, head, desc, image, items) in enumerate(SERVICES_CATEGORIES):
             sel = " is-active" if i == 0 else ""
             cats_html += (
                 f'<a class="mega-cat{sel}" data-cat="{slug}" '
@@ -331,7 +341,10 @@ def build_nav(active=""):
                 f'<h4>{head}</h4>'
                 f'<ul class="mega-panel-list">{items_html}</ul>'
                 f'</div>'
+                f'<div class="mega-panel-side">'
                 f'<p class="mega-panel-desc">{desc}</p>'
+                f'<img class="mega-panel-img" src="{image}" alt="{label}" loading="lazy">'
+                f'</div>'
                 f'</div>'
             )
         return (
